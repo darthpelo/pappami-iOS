@@ -7,6 +7,7 @@
 //
 
 #import "LoginController.h"
+#import "AFNetworking.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface LoginController ()
@@ -28,8 +29,11 @@
 {
     [super viewDidLoad];
 	
-    UIColor* mainColor = [UIColor colorWithRed:28.0/255 green:158.0/255 blue:121.0/255 alpha:1.0f];
-    UIColor* darkColor = [UIColor colorWithRed:7.0/255 green:61.0/255 blue:48.0/255 alpha:1.0f];
+//    UIColor* mainColor = [UIColor colorWithRed:28.0/255 green:158.0/255 blue:121.0/255 alpha:1.0f];
+//    UIColor* darkColor = [UIColor colorWithRed:7.0/255 green:61.0/255 blue:48.0/255 alpha:1.0f];
+
+    UIColor *mainColor = UIColorFromRGB(0x00B2EE);
+    UIColor *darkColor = UIColorFromRGB(0x00688B);
     
     NSString* fontName = @"Avenir-Book";
     NSString* boldFontName = @"Avenir-Black";
@@ -89,11 +93,11 @@
     [self.forgotButton setTitleColor:darkColor forState:UIControlStateNormal];
     [self.forgotButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5] forState:UIControlStateHighlighted];
     
-    self.titleLabel.textColor =  [UIColor whiteColor];
+    self.titleLabel.textColor =  [UIColor yellowColor];
     self.titleLabel.font =  [UIFont fontWithName:boldFontName size:24.0f];
     self.titleLabel.text = @"Pappa-Mi";
     
-    self.subTitleLabel.textColor =  [UIColor whiteColor];
+    self.subTitleLabel.textColor =  [UIColor yellowColor];
     self.subTitleLabel.font =  [UIFont fontWithName:fontName size:14.0f];
     self.subTitleLabel.text = @"Bentornato, esegui il login o registrati";
 }
@@ -102,6 +106,44 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)loginPressed:(id)sender
+{
+    [self exec:@"POST" block:^(id responsedata){
+        PMNSLog("%@", responsedata);
+    }];
+}
+
+-(void)exec:(NSString *)method block:(void(^)(id responsedData))block
+{
+    NSURL *url = [NSURL URLWithString:@"http://test.pappa-mi.it/"];
+    AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+    
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"test001@pappa-mi.it", @"email",
+                            @"password01", @"password",
+                            nil];
+    [httpClient postPath:@"/auth/password" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        NSLog(@"Request Successful, response '%@'", responseStr);
+        
+        AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://test.pappa-mi.it/"]];
+        NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
+                                                                path:@"http://test.pappa-mi.it/api/user/current"
+                                                          parameters:nil];
+        AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+        [httpClient registerHTTPOperationClass:[AFHTTPRequestOperation class]];
+        [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            // Print the response body in text
+            NSLog(@"Response: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+        }];
+        [op start];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+    }];
 }
 
 @end

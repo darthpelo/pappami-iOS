@@ -25,5 +25,7 @@
 
 @property (nonatomic, weak) IBOutlet UILabel * subTitleLabel;
 
+- (IBAction)loginPressed:(id)sender;
+
 
 @end
