@@ -1,4 +1,4 @@
 pappami-iOS
 ===========
 
-Pappa-Mi native iOS application (only iPhone).
+[Pappa-Mi] (http://www.pappa-mi.it) native iOS application (only iPhone).
