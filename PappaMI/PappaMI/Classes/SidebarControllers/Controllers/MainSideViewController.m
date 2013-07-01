@@ -28,15 +28,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SidebarStoryboard" bundle:nil];
+    UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
     UIViewController *rearVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:self.controllerId];
     
     UIViewController* frontController = [[UIViewController alloc] init];
-    frontController.view.backgroundColor = [UIColor blackColor];
+    frontController.view.backgroundColor = [UIColor colorWithRed:47.0/255 green:168.0/255 blue:228.0/255 alpha:1.0f];
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:frontController];
     
-    [FlatTheme styleNavigationBarWithFontName:@"Avenir" andColor:[UIColor colorWithWhite:0.4f alpha:1.0f]];
+    [FlatTheme styleNavigationBarWithFontName:@"Avenir" andColor:[UIColor colorWithRed:10.0/255 green:78.0/255 blue:108.0/255 alpha:1.0f]];
     
     UIButton* menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 28, 20)];
     [menuButton setBackgroundImage:[UIImage imageNamed:@"menu.png"] forState:UIControlStateNormal];
@@ -48,6 +48,14 @@
 
     self.contentViewController = nav;
     self.sidebarViewController = rearVC;
+    __weak MainSideViewController *ms = self;
+    ((SidebarController *)self.sidebarViewController).closeViewController = ^(NSIndexPath *indexPath){
+        [ms revealToggle:nil];
+        if (indexPath.row == 3) {
+            if (self.closeViewController)
+                self.closeViewController();
+        }
+    };
 }
 
 - (void)viewDidUnload {

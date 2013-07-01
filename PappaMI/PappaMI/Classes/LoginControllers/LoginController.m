@@ -125,22 +125,49 @@
                             @"password01", @"password",
                             nil];
     [httpClient postPath:@"/auth/password" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        NSLog(@"Request Successful, response '%@'", responseStr);
-        
-        AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:@"http://test.pappa-mi.it/"]];
-        NSMutableURLRequest *request = [httpClient requestWithMethod:@"GET"
-                                                                path:@"http://test.pappa-mi.it/api/user/current"
-                                                          parameters:nil];
-        AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-        [httpClient registerHTTPOperationClass:[AFHTTPRequestOperation class]];
-        [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-            // Print the response body in text
-            NSLog(@"Response: %@", [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding]);
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error: %@", error);
-        }];
-        [op start];
+        //        NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+        //        NSLog(@"Request Successful, response '%@'", responseStr);
+        NSURL *url = [NSURL URLWithString:@"http://test.pappa-mi.it/api/user/current"];
+        NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        AFJSONRequestOperation *jsonRequest =
+        [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                            [[NSUserDefaults standardUserDefaults] setObject:JSON forKey:@"Current User"];
+                                                            
+                                                            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
+                                                            self.mainSideViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainSideViewController"];
+                                                            self.mainSideViewController.controllerId = @"SidebarController";
+                                                            UIViewController *vc = self.mainSideViewController;
+                                                            self.mainSideViewController.closeViewController = ^{
+                                                                CATransition *transition = [CATransition animation];
+                                                                transition.duration = 0.75;
+                                                                transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+                                                                transition.type = kCATransitionPush;
+                                                                transition.subtype =kCATransitionFromLeft;
+                                                                transition.delegate = self;
+                                                                [self.view.layer addAnimation:transition forKey:nil];
+                                                                [vc.view removeFromSuperview];
+                                                                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"Current User"];
+                                                            };
+                                                            
+                                                            vc.view.frame = CGRectMake(0, 0, vc.view.frame.size.width, vc.view.frame.size.height);
+                                                            CGFloat yOffset = [vc isKindOfClass:[UINavigationController class]] ? -20 : 0;
+                                                            vc.view.frame = CGRectMake(320, yOffset, vc.view.frame.size.width, vc.view.frame.size.height);
+                                                            [self.view addSubview:vc.view];
+                                                            
+                                                            [UIView animateWithDuration:1.0
+                                                                                  delay:0.0
+                                                                                options:UIViewAnimationOptionCurveEaseInOut
+                                                                             animations:^{
+                                                                                 vc.view.frame = CGRectMake(0, yOffset, vc.view.frame.size.width, vc.view.frame.size.height);
+                                                                             }
+                                                                             completion:^(BOOL finished) {
+                                                                                 PMNSLog("%d", finished);
+                                                                             }];
+                                                        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                            NSLog(@"Error: %@", error);
+                                                        }];
+        [jsonRequest start];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
     }];

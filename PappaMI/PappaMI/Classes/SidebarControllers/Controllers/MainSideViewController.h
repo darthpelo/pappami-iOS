@@ -13,4 +13,6 @@
 
 @property (nonatomic, strong) NSString* controllerId;
 
+@property (nonatomic, copy) void (^closeViewController)();
+
 @end

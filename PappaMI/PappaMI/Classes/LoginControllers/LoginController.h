@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseLoginController.h"
+#import "MainSideViewController.h"
 
 @interface LoginController : BaseLoginController <UITextFieldDelegate>
 
@@ -24,6 +25,8 @@
 @property (nonatomic, weak) IBOutlet UILabel * titleLabel;
 
 @property (nonatomic, weak) IBOutlet UILabel * subTitleLabel;
+
+@property (nonatomic, strong) MainSideViewController *mainSideViewController;
 
 - (IBAction)loginPressed:(id)sender;
 

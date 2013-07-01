@@ -17,6 +17,7 @@
 @end
 
 @implementation SidebarController
+@synthesize closeViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,11 +47,11 @@
     
     self.profileNameLabel.textColor = [UIColor whiteColor];
     self.profileNameLabel.font = [UIFont fontWithName:fontName size:14.0f];
-    self.profileNameLabel.text = @"Lena Llellywyngot";
+    self.profileNameLabel.text = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Current User"] objectForKey:@"fullname"];
     
     self.profileLocationLabel.textColor = mainColor;
     self.profileLocationLabel.font = [UIFont fontWithName:boldFontName size:12.0f];
-    self.profileLocationLabel.text = @"London, UK";
+    self.profileLocationLabel.text = @"Milano, IT";
     
     self.profileImageView.image = [UIImage imageNamed:@"profile.jpg"];
     self.profileImageView.clipsToBounds = YES;
@@ -59,13 +60,12 @@
     self.profileImageView.layer.cornerRadius = 35.0f;
     
     
-    NSDictionary* object1 = [NSDictionary dictionaryWithObjects:@[ @"Inbox", @"7", @"envelope" ] forKeys:@[ @"title", @"count", @"icon" ]];
-    NSDictionary* object2 = [NSDictionary dictionaryWithObjects:@[ @"Updates", @"7", @"check" ] forKeys:@[ @"title", @"count", @"icon" ]];
-    NSDictionary* object3 = [NSDictionary dictionaryWithObjects:@[ @"Account", @"0", @"account" ] forKeys:@[ @"title", @"count", @"icon" ]];
-    NSDictionary* object4 = [NSDictionary dictionaryWithObjects:@[ @"Settings", @"0", @"settings" ] forKeys:@[ @"title", @"count", @"icon" ]];
-    NSDictionary* object5 = [NSDictionary dictionaryWithObjects:@[ @"Logout", @"0", @"arrow" ] forKeys:@[ @"title", @"count", @"icon" ]];
+    NSDictionary* object1 = [NSDictionary dictionaryWithObjects:@[ @"Scuole", @"0", @"account" ] forKeys:@[ @"title", @"count", @"icon" ]];
+    NSDictionary* object2 = [NSDictionary dictionaryWithObjects:@[ @"Messaggi", @"0", @"envelope" ] forKeys:@[ @"title", @"count", @"icon" ]];
+    NSDictionary* object3 = [NSDictionary dictionaryWithObjects:@[ @"Settings", @"0", @"settings" ] forKeys:@[ @"title", @"count", @"icon" ]];
+    NSDictionary *object4 = [NSDictionary dictionaryWithObjects:@[ @"Logout", @"0", @"arrow" ] forKeys:@[ @"title", @"count", @"icon" ]];
     
-    self.items = @[object1, object2, object3, object4, object5];
+    self.items = @[object1, object2, object3, object4];
 	
 }
 
@@ -76,7 +76,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    SidebarCell* cell = [tableView dequeueReusableCellWithIdentifier:@"SidebarCell2"];
+    SidebarCell* cell = [tableView dequeueReusableCellWithIdentifier:@"SidebarCell"];
     
     NSDictionary* item = self.items[indexPath.row];
     
@@ -103,6 +103,13 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (self.closeViewController) {
+        self.closeViewController(indexPath);
+    }
 }
 
 @end

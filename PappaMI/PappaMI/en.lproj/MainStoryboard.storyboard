@@ -19,7 +19,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uyB-rV-7zJ">
-                                <rect key="frame" x="20" y="103" width="280" height="21"/>
+                                <rect key="frame" x="20" y="96" width="280" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -90,24 +90,6 @@
             <point key="canvasLocation" x="42" y="49"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="BaseLoginController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BaseLoginController.h"/>
-        </class>
-        <class className="LoginController" superclassName="BaseLoginController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/LoginController.h"/>
-            <relationships>
-                <relationship kind="action" name="loginPressed:"/>
-                <relationship kind="outlet" name="forgotButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="loginButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="singUpButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="subTitleLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="usernameField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
