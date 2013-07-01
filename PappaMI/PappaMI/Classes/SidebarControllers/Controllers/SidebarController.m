@@ -59,19 +59,19 @@
     self.profileImageView.layer.borderColor = [UIColor colorWithWhite:1.0f alpha:0.5f].CGColor;
     self.profileImageView.layer.cornerRadius = 35.0f;
     
-    
-    NSDictionary* object1 = [NSDictionary dictionaryWithObjects:@[ @"Scuole", @"0", @"account" ] forKeys:@[ @"title", @"count", @"icon" ]];
+    NSDictionary* object0 = [NSDictionary dictionaryWithObjects:@[ @"Home", @"0", @"account" ] forKeys:@[ @"title", @"count", @"icon" ]];
+    NSDictionary* object1 = [NSDictionary dictionaryWithObjects:@[ @"Elenco Scuole", @"0", @"check" ] forKeys:@[ @"title", @"count", @"icon" ]];
     NSDictionary* object2 = [NSDictionary dictionaryWithObjects:@[ @"Messaggi", @"0", @"envelope" ] forKeys:@[ @"title", @"count", @"icon" ]];
     NSDictionary* object3 = [NSDictionary dictionaryWithObjects:@[ @"Settings", @"0", @"settings" ] forKeys:@[ @"title", @"count", @"icon" ]];
     NSDictionary *object4 = [NSDictionary dictionaryWithObjects:@[ @"Logout", @"0", @"arrow" ] forKeys:@[ @"title", @"count", @"icon" ]];
     
-    self.items = @[object1, object2, object3, object4];
+    self.items = @[object0, object1, object2, object3, object4];
 	
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 4;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
