@@ -47,7 +47,7 @@
     
     self.profileNameLabel.textColor = [UIColor whiteColor];
     self.profileNameLabel.font = [UIFont fontWithName:fontName size:14.0f];
-    self.profileNameLabel.text = [[[NSUserDefaults standardUserDefaults] objectForKey:@"Current User"] objectForKey:@"fullname"];
+    self.profileNameLabel.text = [[[NSUserDefaults standardUserDefaults] objectForKey:CURRENTUSER] objectForKey:@"fullname"];
     
     self.profileLocationLabel.textColor = mainColor;
     self.profileLocationLabel.font = [UIFont fontWithName:boldFontName size:12.0f];

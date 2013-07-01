@@ -132,22 +132,23 @@
         AFJSONRequestOperation *jsonRequest =
         [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                            [[NSUserDefaults standardUserDefaults] setObject:JSON forKey:@"Current User"];
+                                                            [[NSUserDefaults standardUserDefaults] setObject:JSON forKey:CURRENTUSER];
                                                             
                                                             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
                                                             self.mainSideViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainSideViewController"];
                                                             self.mainSideViewController.controllerId = @"SidebarController";
                                                             UIViewController *vc = self.mainSideViewController;
+                                                            __weak LoginController *lc = self;
                                                             self.mainSideViewController.closeViewController = ^{
                                                                 CATransition *transition = [CATransition animation];
                                                                 transition.duration = 0.75;
                                                                 transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
                                                                 transition.type = kCATransitionPush;
                                                                 transition.subtype =kCATransitionFromLeft;
-                                                                transition.delegate = self;
-                                                                [self.view.layer addAnimation:transition forKey:nil];
+                                                                transition.delegate = lc;
+                                                                [lc.view.layer addAnimation:transition forKey:nil];
                                                                 [vc.view removeFromSuperview];
-                                                                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"Current User"];
+                                                                [[NSUserDefaults standardUserDefaults] removeObjectForKey:CURRENTUSER];
                                                             };
                                                             
                                                             vc.view.frame = CGRectMake(0, 0, vc.view.frame.size.width, vc.view.frame.size.height);
