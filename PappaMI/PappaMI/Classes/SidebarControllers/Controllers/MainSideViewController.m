@@ -48,12 +48,13 @@
 
     self.contentViewController = nav;
     self.sidebarViewController = rearVC;
+    self.contentViewController.title = @"Home";
     __weak MainSideViewController *ms = self;
     ((SidebarController *)self.sidebarViewController).closeViewController = ^(NSIndexPath *indexPath){
         [ms revealToggle:nil];
         if (indexPath.row == 3) {
-            if (self.closeViewController)
-                self.closeViewController();
+            if (ms.closeViewController)
+                ms.closeViewController();
         }
     };
 }
@@ -64,7 +65,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
+
     self.title = self.contentViewController.title;
 }
 
