@@ -16,4 +16,8 @@
 
 +(UIBarButtonItem*)getMenuItem;
 
++(CGRect)getNavigableContentFrame;
+
++(CGRect)getApplicationFrame;
+
 @end

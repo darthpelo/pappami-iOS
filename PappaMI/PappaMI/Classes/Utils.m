@@ -10,6 +10,25 @@
 
 @implementation Utils
 
+const float kDefaultRowHeight = 44.0f;
+
+const float kDefaultPortraitToolbarHeight   = 44.0f;
+const float kDefaultLandscapeToolbarHeight  = 33.0f;
+const float kDefaultPortraitKeyboardHeight      = 216.0f;
+const float kDefaultLandscapeKeyboardHeight     = 160.0f;
+const float kDefaultPadPortraitKeyboardHeight   = 264.0f;
+const float kDefaultPadLandscapeKeyboardHeight  = 352.0f;
+
++(CGRect)getApplicationFrame {
+    CGRect frame = [UIScreen mainScreen].applicationFrame;
+    return CGRectMake(0, 0, frame.size.width, frame.size.height);
+}
+
++(CGRect)getNavigableContentFrame {
+    CGRect frame = [UIScreen mainScreen].applicationFrame;
+    return CGRectMake(0, 0, frame.size.width, frame.size.height - kDefaultPortraitToolbarHeight);
+}
+
 +(UIImage*)drawImageOfSize:(CGSize)size andColor:(UIColor*)color{
     
     UIGraphicsBeginImageContext(size);
@@ -26,8 +45,6 @@
 }
 
 +(UIImage*)drawRoundedImageOfSize:(CGSize)size andColor:(UIColor*)color{
-
-    
     
     CGRect rect = CGRectMake(0,0,size.width,size.height);
     CGFloat radius = 3.0f;

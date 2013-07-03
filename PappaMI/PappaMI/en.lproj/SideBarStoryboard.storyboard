@@ -118,34 +118,6 @@
             <point key="canvasLocation" x="555" y="100"/>
         </scene>
     </scenes>
-    <classes>
-        <class className="GHRevealViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GHRevealViewController.h"/>
-        </class>
-        <class className="MainSideViewController" superclassName="GHRevealViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainSideViewController.h"/>
-        </class>
-        <class className="SidebarCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SidebarCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="bgView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="bottomSeparator" candidateClass="UIView"/>
-                <relationship kind="outlet" name="countLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="iconImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="topSeparator" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="SidebarController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SidebarController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="profileImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="profileLocationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="profileNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

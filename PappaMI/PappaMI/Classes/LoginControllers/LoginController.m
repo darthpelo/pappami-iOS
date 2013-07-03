@@ -8,6 +8,7 @@
 
 #import "LoginController.h"
 #import "AFNetworking.h"
+#import "MBProgressHUD.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface LoginController ()
@@ -44,16 +45,7 @@
     self.usernameField.layer.cornerRadius = 3.0f;
     self.usernameField.placeholder = @"Indirizzo E-Mail";
     self.usernameField.font = [UIFont fontWithName:fontName size:16.0f];
-    
-    
-    UIImageView* usernameIconImage = [[UIImageView alloc] initWithFrame:CGRectMake(9, 9, 24, 24)];
-    usernameIconImage.image = [UIImage imageNamed:@"mail"];
-    UIView* usernameIconContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 41, 41)];
-    usernameIconContainer.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
-    [usernameIconContainer addSubview:usernameIconImage];
-
     self.usernameField.leftViewMode = UITextFieldViewModeAlways;
-    self.usernameField.leftView = usernameIconContainer;
     self.usernameField.delegate = self;
 
     
@@ -62,16 +54,7 @@
     self.passwordField.placeholder = @"Password";
     self.passwordField.font = [UIFont fontWithName:fontName size:16.0f];
     self.passwordField.delegate = self;
-    
-    
-    UIImageView* passwordIconImage = [[UIImageView alloc] initWithFrame:CGRectMake(9, 9, 24, 24)];
-    passwordIconImage.image = [UIImage imageNamed:@"lock"];
-    UIView* passwordIconContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 41, 41)];
-    passwordIconContainer.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
-    [passwordIconContainer addSubview:passwordIconImage];
-    
     self.passwordField.leftViewMode = UITextFieldViewModeAlways;
-    self.passwordField.leftView = passwordIconContainer;
     
     self.loginButton.backgroundColor = darkColor;
     self.loginButton.layer.cornerRadius = 3.0f;
@@ -89,7 +72,7 @@
     
     self.forgotButton.backgroundColor = [UIColor clearColor];
     self.forgotButton.titleLabel.font = [UIFont fontWithName:fontName size:12.0f];
-    [self.forgotButton setTitle:@"Password dimenticata?" forState:UIControlStateNormal];
+    [self.forgotButton setTitle:@"Vuoi provare l'applicazione senza registrarti?" forState:UIControlStateNormal];
     [self.forgotButton setTitleColor:darkColor forState:UIControlStateNormal];
     [self.forgotButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5] forState:UIControlStateHighlighted];
     
@@ -110,12 +93,13 @@
 
 - (IBAction)loginPressed:(id)sender
 {
-    [self exec:@"POST" block:^(id responsedata){
-        PMNSLog("%@", responsedata);
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self exec:@"POST" block:^(BOOL responsedata){
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 
--(void)exec:(NSString *)method block:(void(^)(id responsedData))block
+-(void)exec:(NSString *)method block:(void(^)(BOOL responsedData))block
 {
     NSURL *url = [NSURL URLWithString:@"http://test.pappa-mi.it/"];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
@@ -125,8 +109,6 @@
                             @"password01", @"password",
                             nil];
     [httpClient postPath:@"/auth/password" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        //        NSString *responseStr = [[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
-        //        NSLog(@"Request Successful, response '%@'", responseStr);
         NSURL *url = [NSURL URLWithString:@"http://test.pappa-mi.it/api/user/current"];
         NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         AFJSONRequestOperation *jsonRequest =
@@ -163,7 +145,7 @@
                                                                                  vc.view.frame = CGRectMake(0, yOffset, vc.view.frame.size.width, vc.view.frame.size.height);
                                                                              }
                                                                              completion:^(BOOL finished) {
-                                                                                 PMNSLog("%d", finished);
+                                                                                 block(finished);
                                                                              }];
                                                         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
                                                             NSLog(@"Error: %@", error);
