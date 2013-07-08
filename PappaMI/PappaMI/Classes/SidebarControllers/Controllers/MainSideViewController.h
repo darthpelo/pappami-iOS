@@ -13,6 +13,8 @@
 
 @property (nonatomic, strong) NSString* controllerId;
 
+@property (nonatomic, strong) NSString *userMode;
+
 @property (nonatomic, copy) void (^closeViewController)();
 
 @end

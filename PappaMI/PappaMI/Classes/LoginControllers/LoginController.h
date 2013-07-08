@@ -20,7 +20,7 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *singUpButton;
 
-@property (nonatomic, weak) IBOutlet UIButton * forgotButton;
+@property (nonatomic, weak) IBOutlet UIButton *anonymousButton;
 
 @property (nonatomic, weak) IBOutlet UILabel * titleLabel;
 
@@ -30,5 +30,8 @@
 
 - (IBAction)loginPressed:(id)sender;
 
+- (IBAction)anonymousPressed:(id)sender;
+
+- (IBAction)singUpPressed:(id)sender;
 
 @end

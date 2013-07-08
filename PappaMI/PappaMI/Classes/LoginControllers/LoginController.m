@@ -70,11 +70,11 @@
     [self.singUpButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.singUpButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     
-    self.forgotButton.backgroundColor = [UIColor clearColor];
-    self.forgotButton.titleLabel.font = [UIFont fontWithName:fontName size:12.0f];
-    [self.forgotButton setTitle:@"Vuoi provare l'applicazione senza registrarti?" forState:UIControlStateNormal];
-    [self.forgotButton setTitleColor:darkColor forState:UIControlStateNormal];
-    [self.forgotButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5] forState:UIControlStateHighlighted];
+    self.anonymousButton.backgroundColor = [UIColor clearColor];
+    self.anonymousButton.titleLabel.font = [UIFont fontWithName:fontName size:14.0f];
+    [self.anonymousButton setTitle:@"Vuoi provare l'applicazione senza registrarti?" forState:UIControlStateNormal];
+    [self.anonymousButton setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
+    [self.anonymousButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5] forState:UIControlStateHighlighted];
     
     self.titleLabel.textColor =  [UIColor yellowColor];
     self.titleLabel.font =  [UIFont fontWithName:boldFontName size:24.0f];
@@ -96,6 +96,14 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self exec:@"POST" block:^(BOOL responsedata){
         [MBProgressHUD hideHUDForView:self.view animated:YES];
+        // unregister for keyboard notifications while not visible.
+        [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                        name:UIKeyboardWillShowNotification
+                                                      object:nil];
+        
+        [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                        name:UIKeyboardWillHideNotification
+                                                      object:nil];
     }];
 }
 
@@ -114,14 +122,18 @@
         AFJSONRequestOperation *jsonRequest =
         [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                            [[NSUserDefaults standardUserDefaults] setObject:JSON forKey:CURRENTUSER];
+                                                            [[NSUserDefaults standardUserDefaults] setObject:JSON forKey:LOGGEDUSER];
                                                             
                                                             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
                                                             self.mainSideViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainSideViewController"];
                                                             self.mainSideViewController.controllerId = @"SidebarController";
+                                                            self.mainSideViewController.userMode = LOGGEDUSER;
                                                             UIViewController *vc = self.mainSideViewController;
                                                             __weak LoginController *lc = self;
+                                                            
+                                                            // Logout function
                                                             self.mainSideViewController.closeViewController = ^{
+                                                                [httpClient clearAuthorizationHeader];
                                                                 CATransition *transition = [CATransition animation];
                                                                 transition.duration = 0.75;
                                                                 transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
@@ -130,7 +142,7 @@
                                                                 transition.delegate = lc;
                                                                 [lc.view.layer addAnimation:transition forKey:nil];
                                                                 [vc.view removeFromSuperview];
-                                                                [[NSUserDefaults standardUserDefaults] removeObjectForKey:CURRENTUSER];
+                                                                [[NSUserDefaults standardUserDefaults] removeObjectForKey:LOGGEDUSER];
                                                             };
                                                             
                                                             vc.view.frame = CGRectMake(0, 0, vc.view.frame.size.width, vc.view.frame.size.height);
@@ -154,6 +166,69 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
     }];
+}
+
+- (IBAction)anonymousPressed:(id)sender
+{
+    //Creare DEFAULTUSER
+    NSURL *url = [NSURL URLWithString:@"http://test.pappa-mi.it/api/user/current"];
+    NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                        [[NSUserDefaults standardUserDefaults] setObject:JSON forKey:GUESTUSER];
+                                                        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
+                                                        self.mainSideViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainSideViewController"];
+                                                        self.mainSideViewController.controllerId = @"SidebarController";
+                                                        self.mainSideViewController.userMode = GUESTUSER;
+                                                        UIViewController *vc = self.mainSideViewController;
+                                                        __weak LoginController *lc = self;
+                                                        
+                                                        // Logout function
+                                                        self.mainSideViewController.closeViewController = ^{
+                                                            CATransition *transition = [CATransition animation];
+                                                            transition.duration = 0.75;
+                                                            transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+                                                            transition.type = kCATransitionPush;
+                                                            transition.subtype =kCATransitionFromLeft;
+                                                            transition.delegate = lc;
+                                                            [lc.view.layer addAnimation:transition forKey:nil];
+                                                            [vc.view removeFromSuperview];
+                                                        };
+                                                        vc.view.frame = CGRectMake(0, 0, vc.view.frame.size.width, vc.view.frame.size.height);
+                                                        CGFloat yOffset = [vc isKindOfClass:[UINavigationController class]] ? -20 : 0;
+                                                        vc.view.frame = CGRectMake(320, yOffset, vc.view.frame.size.width, vc.view.frame.size.height);
+                                                        [self.view addSubview:vc.view];
+                                                        
+                                                        [UIView animateWithDuration:1.0
+                                                                              delay:0.0
+                                                                            options:UIViewAnimationOptionCurveEaseInOut
+                                                                         animations:^{
+                                                                             vc.view.frame = CGRectMake(0, yOffset, vc.view.frame.size.width, vc.view.frame.size.height);
+                                                                         }
+                                                                         completion:^(BOOL finished) {
+                                                                             // unregister for keyboard notifications while not visible.
+                                                                             [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                                                                                             name:UIKeyboardWillShowNotification
+                                                                                                                           object:nil];
+                                                                             
+                                                                             [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                                                                                             name:UIKeyboardWillHideNotification
+                                                                                                                           object:nil];
+                                                                         }];
+                                                    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                        PMNSLog("%@", error.debugDescription);
+                                                    }];
+    [jsonRequest start];
+}
+
+- (IBAction)singUpPressed:(id)sender
+{
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Attenzione!"
+                                                      message:@"Per il momento la registrazione a Pappa-MI è possibile solo tramite il nostro sito www.pappa-mi.it.\nDopo che ti sarai registrato, apri nuovamente l'app ed inserisci la tua e-mail e la tua password per cominciare ad utilizzare Pappa-MI!"
+                                                     delegate:nil
+                                            cancelButtonTitle:@"OK"
+                                            otherButtonTitles:nil];
+    [message show];
 }
 
 @end

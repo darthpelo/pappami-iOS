@@ -18,6 +18,8 @@
 
 @property (nonatomic, weak) IBOutlet UIImageView* profileImageView;
 
+@property (nonatomic, strong) NSString *userMode;
+
 @property (nonatomic, copy) void (^closeViewController)(NSIndexPath *indexPath);
 
 @end

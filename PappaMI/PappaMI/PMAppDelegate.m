@@ -13,6 +13,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [Veespo initUser:@"TEST-PAPPAMI" apiKey:@"" userName:nil language:@"it" veespoGroup:nil fileConfig:nil urlConfig:nil andTestUrl:YES];
     [NSUserDefaults resetStandardUserDefaults];
     NSString *dateKey = @"Data Key";
     NSDate *lastRead = (NSDate *)[[NSUserDefaults standardUserDefaults] objectForKey:dateKey];

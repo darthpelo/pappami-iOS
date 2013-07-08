@@ -11,8 +11,11 @@
 #import "FlatTheme.h"
 #import "Utils.h"
 #import "PMHomeView.h"
+#import "PMMenuViewController.h"
 
-@interface MainSideViewController ()
+@interface MainSideViewController () {
+    UIViewController *frontController;
+}
 
 @end
 
@@ -32,7 +35,7 @@
     UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
     UIViewController *rearVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:self.controllerId];
     
-    UIViewController* frontController = [[UIViewController alloc] init];
+    frontController = [[UIViewController alloc] init];
     frontController.view.backgroundColor = [UIColor colorWithRed:47.0/255 green:168.0/255 blue:228.0/255 alpha:1.0f];
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:frontController];
@@ -51,36 +54,47 @@
     self.contentViewController = nav;
     self.contentViewController.view.tag = 0;
     self.sidebarViewController = rearVC;
-
+    
+    // Gestione callback selezione elementi da menu sidebar
     __weak MainSideViewController *ms = self;
+    __block UIViewController *bFrontController = frontController;
     ((SidebarController *)self.sidebarViewController).closeViewController = ^(NSIndexPath *indexPath){
         [ms revealToggle:nil];
+        // logout
         if (indexPath.row == 2) {
             if (ms.closeViewController)
                 ms.closeViewController();
         } else {
             switch (indexPath.row) {
                 case 0:{
-                    frontController.title = @"Home";
+                    bFrontController.title = @"Home";
                     ms.contentViewController.view.tag = 0;
-                    [ms listSubviewsOfView:ms.contentViewController.view];
+                    [ms listSubviewsOfView:bFrontController.view];
                     CGRect frame = [Utils getNavigableContentFrame];
-                    frame.origin.y = 22.5;
-                    PMHomeView *hv = [[PMHomeView alloc] initWithFrame:frame];
-                    [ms.contentViewController.view addSubview:hv];
+                    if ([ms.userMode isEqualToString:LOGGEDUSER]) {
+                        PMHomeView *hv = [[PMHomeView alloc] initWithFrame:frame];
+                        [bFrontController.view addSubview:hv];
+                        hv.schoolSelected = ^(NSDictionary *school) {
+                            UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
+                            PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
+                            [menuVC setSchoolData:school];
+                            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:menuVC];
+                            [ms presentViewController:nav animated:YES completion:nil];
+                        };
+                    }
                     break;
                 }
                 case 1:{
-                    frontController.title = @"Elenco scuole";
+                    bFrontController.title = @"News";
                     ms.contentViewController.view.tag = 1;
-                    [ms listSubviewsOfView:ms.contentViewController.view];
+                    [ms listSubviewsOfView:bFrontController.view];
                     UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(10, 120, 300, 80)];
                     lbl.numberOfLines = 4;
                     [lbl setBackgroundColor:[UIColor clearColor]];
                     lbl.textColor = [UIColor whiteColor];
                     lbl.font = [UIFont fontWithName:@"Avenir" size:16];
-                    lbl.text = @"Pagina in cui gli utenti possono guardare la lista delle scuole (senza votare)";
-                    [ms.contentViewController.view addSubview:lbl];
+                    lbl.text = @"Pagina in cui gli utenti possono visionare le news di Pappa-MI";
+                    [bFrontController.view addSubview:lbl];
                     break;
                 }
                 default:
@@ -98,9 +112,17 @@
     [super viewDidAppear:animated];
     if (self.contentViewController.view.tag == 0) {
         CGRect frame = [Utils getNavigableContentFrame];
-        frame.origin.y = 22.5;
-        PMHomeView *hv = [[PMHomeView alloc] initWithFrame:frame];
-        [self.contentViewController.view addSubview:hv];
+        if ([self.userMode isEqualToString:LOGGEDUSER]) {
+            PMHomeView *hv = [[PMHomeView alloc] initWithFrame:frame];
+            [frontController.view addSubview:hv];
+            hv.schoolSelected = ^(NSDictionary *school) {
+                UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
+                PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:menuVC];
+                [menuVC setSchoolData:school];
+                [self presentViewController:nav animated:YES completion:nil];
+            };
+        }
     }
 }
 
@@ -128,7 +150,7 @@
     
     for (UIView *subview in subviews) {
         
-        NSLog(@"%@", subview);
+//        NSLog(@"%@", subview);
         if ([subview isKindOfClass:[PMHomeView class]] || [subview isKindOfClass:[UILabel class]]) {
             [subview removeFromSuperview];
         }
