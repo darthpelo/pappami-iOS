@@ -9,6 +9,7 @@
 #import "PMMenuViewController.h"
 #import "PMMenuCell.h"
 #import "PMDishViewController.h"
+#import "AFNetworking.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface PMMenuViewController ()
@@ -44,13 +45,7 @@
 //    [self.dateButton setTitle:@"Seleziona la data" forState:UIControlStateNormal];
     [self.dateButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.dateButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
-    
-    NSDictionary *object0 = [NSDictionary dictionaryWithObjects:@[ @"Pasta integrale biologica al pomodoro", @"aaaa" ] forKeys:@[ @"title", @"targetId"]];
-    NSDictionary *object1 = [NSDictionary dictionaryWithObjects:@[ @"Frittata con zucchine", @"bbbb" ] forKeys:@[ @"title", @"targetId"]];
-    NSDictionary *object2 = [NSDictionary dictionaryWithObjects:@[ @"Insalata di stagione", @"bbbb" ] forKeys:@[ @"title", @"targetId"]];
-    NSDictionary *object3 = [NSDictionary dictionaryWithObjects:@[ @"Frutta fresca di stagione", @"aaaa" ] forKeys:@[ @"title", @"targetId"]];
-    
-    self.items = @[object0, object1, object2, object3];
+    [self loadData];
     
     UIButton* menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
     [menuButton setBackgroundImage:[UIImage imageNamed:@"button-close.png"] forState:UIControlStateNormal];
@@ -60,6 +55,26 @@
     self.navigationItem.rightBarButtonItem = menuItem;
     self.title = [self.schoolData objectForKey:@"name"];
 	
+}
+
+- (void)loadData
+{
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat: @"yyyy-MM-dd"];
+    NSString *dateString = [dateFormat stringFromDate:[NSDate date]];
+    
+    NSString *api = [NSString stringWithFormat:@"http://test.pappa-mi.it/api/menu/%@/%@",
+                     [self.schoolData objectForKey:@"id"],
+                     dateString];
+    NSURL *url = [NSURL URLWithString:api];
+    NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        self.items = [NSArray arrayWithArray:JSON];
+        [self.tableView reloadData];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        PMNSLog("failure");
+    }];
+    [jsonRequest start];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -73,7 +88,7 @@
     
     NSDictionary* item = self.items[indexPath.row];
     
-    cell.titleLabel.text = item[@"title"];
+    cell.titleLabel.text = item[@"desc1"];
     
     cell.feedbackSelected = ^(NSString *targetId){
         VEVeespoViewController *veespo = [[VEVeespoViewController alloc] init];
@@ -91,9 +106,18 @@
 
 #pragma mark UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
-    PMDishViewController *dishVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"DishViewController"];
-    [self.navigationController pushViewController:dishVC animated:YES];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://test.pappa-mi.it/api/dish/%@/%@",self.items[indexPath.row][@"id"],[self.schoolData objectForKey:@"id"]]];
+    NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
+        PMDishViewController *dishVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"DishViewController"];
+        dishVC.dishData = JSON;
+        dishVC.dishId = self.items[indexPath.row][@"id"];
+        [self.navigationController pushViewController:dishVC animated:YES];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        PMNSLog("failure");
+    }];
+    [jsonRequest start];
 }
 
 - (void)closeViewController
@@ -116,22 +140,25 @@
     [self presentSemiModalViewController:datePicker];
 }
 
-//- (void)changeMenuDate
-//{
-//    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-//    [dateFormat setDateFormat: @"dd-MM-yyyy"];
-//    NSString *dateString = [dateFormat stringFromDate:datePicker.date];
-//    self.label.text = [NSString stringWithFormat:@"%@", dateString];
-//}
-
 #pragma mark Date Picker Delegate
 
 -(void)datePickerSetDate:(TDDatePickerController*)viewController {
 	[self dismissSemiModalViewController:datePicker];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat: @"dd-MM-yyyy"];
+    [dateFormat setDateFormat: @"yyyy-MM-dd"];
+    NSString *api = [NSString stringWithFormat:@"http://test.pappa-mi.it/api/menu/%@/%@",
+                     [self.schoolData objectForKey:@"id"],
+                     [dateFormat stringFromDate:viewController.datePicker.date]];
+    NSURL *url = [NSURL URLWithString:api];
+    NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        self.items = [NSArray arrayWithArray:JSON];
+        [self.tableView reloadData];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        PMNSLog("failure");
+    }];
+    [jsonRequest start];
     self.label.text = [NSString stringWithFormat:@"Menù del %@",[dateFormat stringFromDate:viewController.datePicker.date]];
-    PMNSLog("%@", viewController.datePicker.date);
 }
 
 -(void)datePickerClearDate:(TDDatePickerController*)viewController {

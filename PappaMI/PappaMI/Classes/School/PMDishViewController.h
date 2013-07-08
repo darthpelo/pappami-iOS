@@ -10,4 +10,8 @@
 
 @interface PMDishViewController : UIViewController
 
+@property (nonatomic, strong) NSDictionary *dishData;
+
+@property (nonatomic, strong) NSString *dishId;
+
 @end

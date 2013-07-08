@@ -51,6 +51,7 @@
 {
     [super viewDidLoad];
 	[self setNavigationBar];
+    self.title = self.dishData[@"dish"];
 }
 
 - (void)back

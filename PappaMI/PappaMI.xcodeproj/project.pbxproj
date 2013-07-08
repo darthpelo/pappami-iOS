@@ -22,6 +22,7 @@
 		BE5F9B0F177B51F500B74182 /* PMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5F9B0E177B51F500B74182 /* PMViewController.m */; };
 		BE5F9B1A177B549C00B74182 /* BaseLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5F9B17177B549C00B74182 /* BaseLoginController.m */; };
 		BE5F9B1B177B549C00B74182 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5F9B19177B549C00B74182 /* LoginController.m */; };
+		BE8142AD178B6288005E75A9 /* PMNewsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8142AC178B6288005E75A9 /* PMNewsView.m */; };
 		BE8ED7D017863569006AA9A6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8ED7CF17863569006AA9A6 /* SystemConfiguration.framework */; };
 		BE8ED7D217863587006AA9A6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8ED7D117863587006AA9A6 /* CoreText.framework */; };
 		BEA567E21788511A0061AE11 /* arrow-back.png in Resources */ = {isa = PBXBuildFile; fileRef = BEA567E11788511A0061AE11 /* arrow-back.png */; };
@@ -119,6 +120,8 @@
 		BE5F9B17177B549C00B74182 /* BaseLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseLoginController.m; path = Classes/LoginControllers/BaseLoginController.m; sourceTree = "<group>"; };
 		BE5F9B18177B549C00B74182 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginController.h; path = Classes/LoginControllers/LoginController.h; sourceTree = "<group>"; };
 		BE5F9B19177B549C00B74182 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginController.m; path = Classes/LoginControllers/LoginController.m; sourceTree = "<group>"; };
+		BE8142AB178B6288005E75A9 /* PMNewsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMNewsView.h; path = Classes/PMNewsView.h; sourceTree = "<group>"; };
+		BE8142AC178B6288005E75A9 /* PMNewsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PMNewsView.m; path = Classes/PMNewsView.m; sourceTree = "<group>"; };
 		BE8ED7CF17863569006AA9A6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BE8ED7D117863587006AA9A6 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		BEA567E11788511A0061AE11 /* arrow-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arrow-back.png"; path = "Resources/arrow-back.png"; sourceTree = "<group>"; };
@@ -274,8 +277,10 @@
 				BEADD6F3177C3E4500B63A10 /* AFNetworking */,
 				BEC29D8A177DCED000036BD4 /* GHSidebarNav */,
 				BE5F9B15177B533200B74182 /* LoginControllers */,
+				BE8142AA178B5E43005E75A9 /* News */,
 				BEB49AFE17847FFB00274DC7 /* MBProgressHUD */,
 				BEC29DE5177DE3B300036BD4 /* Resources */,
+				BEB0CA82178565EB0070CF49 /* School */,
 				BEC29D7E177DCE3C00036BD4 /* SidebarControllers */,
 				BEADD719177C9CBE00B63A10 /* Storyboards */,
 				BEC29DA0177DD07600036BD4 /* Utils.h */,
@@ -289,7 +294,6 @@
 				BE5F9B0D177B51F500B74182 /* PMViewController.h */,
 				BE5F9B0E177B51F500B74182 /* PMViewController.m */,
 				BE5F9AF9177B51F500B74182 /* Supporting Files */,
-				BEB0CA82178565EB0070CF49 /* School */,
 			);
 			path = PappaMI;
 			sourceTree = "<group>";
@@ -317,6 +321,15 @@
 				BE5F9B19177B549C00B74182 /* LoginController.m */,
 			);
 			name = LoginControllers;
+			sourceTree = "<group>";
+		};
+		BE8142AA178B5E43005E75A9 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				BE8142AB178B6288005E75A9 /* PMNewsView.h */,
+				BE8142AC178B6288005E75A9 /* PMNewsView.m */,
+			);
+			name = News;
 			sourceTree = "<group>";
 		};
 		BEADD6F3177C3E4500B63A10 /* AFNetworking */ = {
@@ -661,6 +674,7 @@
 				BEB6AD3117873023002433FE /* PMMenuViewController.m in Sources */,
 				BEB6AD34178733F1002433FE /* PMMenuCell.m in Sources */,
 				BEB6AD371787348F002433FE /* PMDishViewController.m in Sources */,
+				BE8142AD178B6288005E75A9 /* PMNewsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

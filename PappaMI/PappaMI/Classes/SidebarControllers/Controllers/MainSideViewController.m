@@ -12,6 +12,7 @@
 #import "Utils.h"
 #import "PMHomeView.h"
 #import "PMMenuViewController.h"
+#import "PMNewsView.h"
 
 @interface MainSideViewController () {
     UIViewController *frontController;
@@ -88,13 +89,9 @@
                     bFrontController.title = @"News";
                     ms.contentViewController.view.tag = 1;
                     [ms listSubviewsOfView:bFrontController.view];
-                    UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(10, 120, 300, 80)];
-                    lbl.numberOfLines = 4;
-                    [lbl setBackgroundColor:[UIColor clearColor]];
-                    lbl.textColor = [UIColor whiteColor];
-                    lbl.font = [UIFont fontWithName:@"Avenir" size:16];
-                    lbl.text = @"Pagina in cui gli utenti possono visionare le news di Pappa-MI";
-                    [bFrontController.view addSubview:lbl];
+                    CGRect frame = [Utils getNavigableContentFrame];
+                    PMNewsView *nv = [[PMNewsView alloc] initWithFrame:frame];
+                    [bFrontController.view addSubview:nv];
                     break;
                 }
                 default:
