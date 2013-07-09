@@ -10,6 +10,7 @@
 #import "PMDishViewController.h"
 #import "AFNetworking.h"
 #import "Utils.h"
+#import "MBProgressHUD.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface PMMenuViewController ()
@@ -65,6 +66,7 @@
 
 - (void)loadData
 {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat: @"yyyy-MM-dd"];
     NSString *dateString = [dateFormat stringFromDate:[NSDate date]];
@@ -77,8 +79,10 @@
     AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         self.items = [NSArray arrayWithArray:JSON];
         [self.tableView reloadData];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         PMNSLog("failure");
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
     [jsonRequest start];
 }
@@ -101,6 +105,7 @@
 
 #pragma mark UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://test.pappa-mi.it/api/dish/%@/%@",self.items[indexPath.row][@"id"],[self.schoolData objectForKey:@"id"]]];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
@@ -110,8 +115,10 @@
         dishVC.dishData = JSON;
         dishVC.dishId = self.items[indexPath.row][@"id"];
         [self.navigationController pushViewController:dishVC animated:YES];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         PMNSLog("failure");
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
     [jsonRequest start];
 }
@@ -139,6 +146,7 @@
 #pragma mark Date Picker Delegate
 
 -(void)datePickerSetDate:(TDDatePickerController*)viewController {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 	[self dismissSemiModalViewController:datePicker];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat: @"yyyy-MM-dd"];
@@ -150,8 +158,10 @@
     AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         self.items = [NSArray arrayWithArray:JSON];
         [self.tableView reloadData];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         PMNSLog("failure");
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
     [jsonRequest start];
     self.label.text = [NSString stringWithFormat:@"Menù del %@",[dateFormat stringFromDate:viewController.datePicker.date]];
