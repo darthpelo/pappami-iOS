@@ -149,9 +149,7 @@
     if ([subviews count] == 0) return;
     
     for (UIView *subview in subviews) {
-        
-//        NSLog(@"%@", subview);
-        if ([subview isKindOfClass:[PMHomeView class]] || [subview isKindOfClass:[UILabel class]]) {
+        if ([subview isKindOfClass:[PMHomeView class]] || [subview isKindOfClass:[PMNewsView class]]) {
             [subview removeFromSuperview];
         }
         // List the subviews of subview
