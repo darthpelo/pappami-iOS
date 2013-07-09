@@ -63,17 +63,13 @@
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER]) {
         NSDictionary* object0 = [NSDictionary dictionaryWithObjects:@[ @"Tue scuole", @"0", @"account" ] forKeys:@[ @"title", @"count", @"icon" ]];
-//        NSDictionary* object1 = [NSDictionary dictionaryWithObjects:@[ @"Elenco Scuole", @"0", @"check" ] forKeys:@[ @"title", @"count", @"icon" ]];
         NSDictionary* object2 = [NSDictionary dictionaryWithObjects:@[ @"News", @"0", @"envelope" ] forKeys:@[ @"title", @"count", @"icon" ]];
-        //    NSDictionary* object3 = [NSDictionary dictionaryWithObjects:@[ @"Settings", @"0", @"settings" ] forKeys:@[ @"title", @"count", @"icon" ]];
         NSDictionary *object4 = [NSDictionary dictionaryWithObjects:@[ @"Logout", @"0", @"arrow" ] forKeys:@[ @"title", @"count", @"icon" ]];
         
         self.items = @[object0, object2, object4];
     } else {
         NSDictionary* object0 = [NSDictionary dictionaryWithObjects:@[ @"Home", @"0", @"account" ] forKeys:@[ @"title", @"count", @"icon" ]];
-//        NSDictionary* object1 = [NSDictionary dictionaryWithObjects:@[ @"Elenco Scuole", @"0", @"check" ] forKeys:@[ @"title", @"count", @"icon" ]];
         NSDictionary* object2 = [NSDictionary dictionaryWithObjects:@[ @"News", @"0", @"envelope" ] forKeys:@[ @"title", @"count", @"icon" ]];
-        //    NSDictionary* object3 = [NSDictionary dictionaryWithObjects:@[ @"Settings", @"0", @"settings" ] forKeys:@[ @"title", @"count", @"icon" ]];
         NSDictionary *object4 = [NSDictionary dictionaryWithObjects:@[ @"Logout", @"0", @"arrow" ] forKeys:@[ @"title", @"count", @"icon" ]];
         
         self.items = @[object0, object2, object4];

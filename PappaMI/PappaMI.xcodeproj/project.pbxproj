@@ -22,6 +22,8 @@
 		BE5F9B0F177B51F500B74182 /* PMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5F9B0E177B51F500B74182 /* PMViewController.m */; };
 		BE5F9B1A177B549C00B74182 /* BaseLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5F9B17177B549C00B74182 /* BaseLoginController.m */; };
 		BE5F9B1B177B549C00B74182 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5F9B19177B549C00B74182 /* LoginController.m */; };
+		BE65FB62178C0A3200D9CB40 /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BE65FB60178C0A3200D9CB40 /* Resources.bundle */; };
+		BE65FB63178C0A3200D9CB40 /* VeespoFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE65FB61178C0A3200D9CB40 /* VeespoFramework.framework */; };
 		BE8142AD178B6288005E75A9 /* PMNewsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8142AC178B6288005E75A9 /* PMNewsView.m */; };
 		BE8ED7D017863569006AA9A6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8ED7CF17863569006AA9A6 /* SystemConfiguration.framework */; };
 		BE8ED7D217863587006AA9A6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8ED7D117863587006AA9A6 /* CoreText.framework */; };
@@ -42,8 +44,6 @@
 		BEB0CAA21785D4460070CF49 /* TDSemiModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0CA9D1785D4460070CF49 /* TDSemiModalViewController.m */; };
 		BEB0CAA31785D4460070CF49 /* UIViewController+TDSemiModalExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0CA9F1785D4460070CF49 /* UIViewController+TDSemiModalExtension.m */; };
 		BEB49B0117847FFB00274DC7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB49B0017847FFB00274DC7 /* MBProgressHUD.m */; };
-		BEB6AD291786CD44002433FE /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BEB6AD271786CD44002433FE /* Resources.bundle */; };
-		BEB6AD2A1786CD44002433FE /* VeespoFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEB6AD281786CD44002433FE /* VeespoFramework.framework */; };
 		BEB6AD2C17872897002433FE /* pappa-mi-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB6AD2B17872897002433FE /* pappa-mi-logo.png */; };
 		BEB6AD2E1787289D002433FE /* pappa-mi-logo-text_32.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB6AD2D1787289D002433FE /* pappa-mi-logo-text_32.png */; };
 		BEB6AD3117873023002433FE /* PMMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB6AD3017873023002433FE /* PMMenuViewController.m */; };
@@ -120,6 +120,8 @@
 		BE5F9B17177B549C00B74182 /* BaseLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseLoginController.m; path = Classes/LoginControllers/BaseLoginController.m; sourceTree = "<group>"; };
 		BE5F9B18177B549C00B74182 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginController.h; path = Classes/LoginControllers/LoginController.h; sourceTree = "<group>"; };
 		BE5F9B19177B549C00B74182 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginController.m; path = Classes/LoginControllers/LoginController.m; sourceTree = "<group>"; };
+		BE65FB60178C0A3200D9CB40 /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
+		BE65FB61178C0A3200D9CB40 /* VeespoFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VeespoFramework.framework; sourceTree = "<group>"; };
 		BE8142AB178B6288005E75A9 /* PMNewsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMNewsView.h; path = Classes/PMNewsView.h; sourceTree = "<group>"; };
 		BE8142AC178B6288005E75A9 /* PMNewsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PMNewsView.m; path = Classes/PMNewsView.m; sourceTree = "<group>"; };
 		BE8ED7CF17863569006AA9A6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -156,8 +158,6 @@
 		BEB0CA9F1785D4460070CF49 /* UIViewController+TDSemiModalExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TDSemiModalExtension.m"; sourceTree = "<group>"; };
 		BEB49AFF17847FFB00274DC7 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		BEB49B0017847FFB00274DC7 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		BEB6AD271786CD44002433FE /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
-		BEB6AD281786CD44002433FE /* VeespoFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VeespoFramework.framework; sourceTree = "<group>"; };
 		BEB6AD2B17872897002433FE /* pappa-mi-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pappa-mi-logo.png"; sourceTree = "<group>"; };
 		BEB6AD2D1787289D002433FE /* pappa-mi-logo-text_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pappa-mi-logo-text_32.png"; sourceTree = "<group>"; };
 		BEB6AD2F17873023002433FE /* PMMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMMenuViewController.h; path = Classes/School/PMMenuViewController.h; sourceTree = "<group>"; };
@@ -232,7 +232,7 @@
 				BE5F9AF3177B51F500B74182 /* UIKit.framework in Frameworks */,
 				BE5F9AF5177B51F500B74182 /* Foundation.framework in Frameworks */,
 				BE5F9AF7177B51F500B74182 /* CoreGraphics.framework in Frameworks */,
-				BEB6AD2A1786CD44002433FE /* VeespoFramework.framework in Frameworks */,
+				BE65FB63178C0A3200D9CB40 /* VeespoFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,7 +242,7 @@
 		BE5F9AE6177B51F500B74182 = {
 			isa = PBXGroup;
 			children = (
-				BEB6AD251786CD44002433FE /* VeespoFramework.embeddedframework */,
+				BE65FB5E178C0A3200D9CB40 /* VeespoFramework.embeddedframework */,
 				BE5F9AF8177B51F500B74182 /* PappaMI */,
 				BE5F9AF1177B51F500B74182 /* Frameworks */,
 				BE5F9AF0177B51F500B74182 /* Products */,
@@ -321,6 +321,23 @@
 				BE5F9B19177B549C00B74182 /* LoginController.m */,
 			);
 			name = LoginControllers;
+			sourceTree = "<group>";
+		};
+		BE65FB5E178C0A3200D9CB40 /* VeespoFramework.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				BE65FB5F178C0A3200D9CB40 /* Resources */,
+				BE65FB61178C0A3200D9CB40 /* VeespoFramework.framework */,
+			);
+			path = VeespoFramework.embeddedframework;
+			sourceTree = "<group>";
+		};
+		BE65FB5F178C0A3200D9CB40 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BE65FB60178C0A3200D9CB40 /* Resources.bundle */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		BE8142AA178B5E43005E75A9 /* News */ = {
@@ -413,24 +430,6 @@
 			);
 			name = MBProgressHUD;
 			path = Classes/MBProgressHUD;
-			sourceTree = "<group>";
-		};
-		BEB6AD251786CD44002433FE /* VeespoFramework.embeddedframework */ = {
-			isa = PBXGroup;
-			children = (
-				BEB6AD261786CD44002433FE /* Resources */,
-				BEB6AD281786CD44002433FE /* VeespoFramework.framework */,
-			);
-			name = VeespoFramework.embeddedframework;
-			path = "../../../../Library/Developer/Xcode/DerivedData/VeespoFramework-eldtvhdwpsteoudgvebpfjvbcvhm/Build/Products/Debug-iphoneos/VeespoFramework.embeddedframework";
-			sourceTree = "<group>";
-		};
-		BEB6AD261786CD44002433FE /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				BEB6AD271786CD44002433FE /* Resources.bundle */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		BEC29D7E177DCE3C00036BD4 /* SidebarControllers */ = {
@@ -631,10 +630,10 @@
 				BEC29DE4177DDFEA00036BD4 /* check@2x.png in Resources */,
 				BEB0CA961785A6BC0070CF49 /* button-close.png in Resources */,
 				BEB0CAA11785D4460070CF49 /* TDDatePickerController.xib in Resources */,
-				BEB6AD291786CD44002433FE /* Resources.bundle in Resources */,
 				BEB6AD2C17872897002433FE /* pappa-mi-logo.png in Resources */,
 				BEB6AD2E1787289D002433FE /* pappa-mi-logo-text_32.png in Resources */,
 				BEA567E21788511A0061AE11 /* arrow-back.png in Resources */,
+				BE65FB62178C0A3200D9CB40 /* Resources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -3,7 +3,6 @@
 //  PappaMI
 //
 //  Created by Alessio Roberto on 03/07/13.
-//  Copyright (c) 2013 Veespo Ltd. All rights reserved.
 //
 
 #import "PMHomeView.h"
@@ -16,9 +15,17 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self loadData];
-        homeTableView = [[UITableView alloc] initWithFrame:frame];
+        UILabel *titolo = [[UILabel alloc] initWithFrame:CGRectMake(20, 6, 280, 21)];
+        titolo.font = [UIFont fontWithName:@"Avenir-Black" size:14];
+        [titolo setBackgroundColor:[UIColor clearColor]];
+        titolo.textAlignment = NSTextAlignmentCenter;
+        titolo.text = @"Le scuole dei tuoi figli";
+        [self addSubview:titolo];
+        CGRect tFrame = CGRectMake(frame.origin.x, titolo.frame.origin.y + titolo.frame.size.height, frame.size.width, frame.size.height - (titolo.frame.origin.y + titolo.frame.size.height) + 3);
+        homeTableView = [[UITableView alloc] initWithFrame:tFrame];
         homeTableView.delegate = self;
         homeTableView.dataSource = self;
+        [homeTableView setBackgroundColor:[UIColor clearColor]];
         [self addSubview:homeTableView];
     }
     return self;
@@ -43,6 +50,7 @@
     //[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     cell.textLabel.textAlignment = NSTextAlignmentCenter;
     cell.textLabel.text = [[personalSchollsList objectAtIndex:indexPath.row] objectForKey:@"name"];
+    cell.textLabel.font = [UIFont fontWithName:@"Avenir" size:17];
     return cell;
 }
 

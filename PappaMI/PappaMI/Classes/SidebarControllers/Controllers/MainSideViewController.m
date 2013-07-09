@@ -50,7 +50,7 @@
     UIBarButtonItem* menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
 
     frontController.navigationItem.leftBarButtonItem = menuItem;
-    frontController.title = @"Home";
+//    frontController.title = @"Home";
 
     self.contentViewController = nav;
     self.contentViewController.view.tag = 0;
@@ -75,6 +75,7 @@
                     if ([ms.userMode isEqualToString:LOGGEDUSER]) {
                         PMHomeView *hv = [[PMHomeView alloc] initWithFrame:frame];
                         [bFrontController.view addSubview:hv];
+                        bFrontController.title = @"Tue Scuole";
                         hv.schoolSelected = ^(NSDictionary *school) {
                             UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
                             PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
@@ -109,7 +110,9 @@
     [super viewDidAppear:animated];
     if (self.contentViewController.view.tag == 0) {
         CGRect frame = [Utils getNavigableContentFrame];
+        frontController.title = @"Home";
         if ([self.userMode isEqualToString:LOGGEDUSER]) {
+            frontController.title = @"Tue Scuole";
             PMHomeView *hv = [[PMHomeView alloc] initWithFrame:frame];
             [frontController.view addSubview:hv];
             hv.schoolSelected = ^(NSDictionary *school) {

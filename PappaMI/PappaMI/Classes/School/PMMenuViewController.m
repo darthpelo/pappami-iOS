@@ -3,13 +3,13 @@
 //  PappaMI
 //
 //  Created by Alessio Roberto on 04/07/13.
-//  Copyright (c) 2013 Veespo Ltd. All rights reserved.
 //
 
 #import "PMMenuViewController.h"
 #import "PMMenuCell.h"
 #import "PMDishViewController.h"
 #import "AFNetworking.h"
+#import "Utils.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface PMMenuViewController ()
@@ -35,16 +35,22 @@
     self.view.backgroundColor = UIColorFromRGB(0x00B2EE);
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    CGRect frame = [Utils getNavigableContentFrame];
+    [self.tableView setFrame:CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, 320, frame.size.height - self.tableView.frame.origin.y - 44)];
+    
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat: @"dd-MM-yyyy"];
+    [dateFormat setDateFormat: @"yyyy-dd-MM"];
     NSString *dateString = [dateFormat stringFromDate:[NSDate date]];
     self.label.text = [NSString stringWithFormat:@"Menù del %@", dateString];
     self.dateButton.backgroundColor = UIColorFromRGB(0x00688B);
     self.dateButton.layer.cornerRadius = 3.0f;
     self.dateButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Black" size:18.0f];
-//    [self.dateButton setTitle:@"Seleziona la data" forState:UIControlStateNormal];
     [self.dateButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.dateButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    [self.dateButton setFrame:CGRectMake(self.dateButton.frame.origin.x,
+                                         (self.tableView.frame.origin.y + self.tableView.frame.size.height) - 10,
+                                         self.dateButton.frame.size.width,
+                                         self.dateButton.frame.size.height)];
     [self loadData];
     
     UIButton* menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
@@ -90,17 +96,6 @@
     
     cell.titleLabel.text = item[@"desc1"];
     
-    cell.feedbackSelected = ^(NSString *targetId){
-        VEVeespoViewController *veespo = [[VEVeespoViewController alloc] init];
-        veespo.closeVeespoViewController = ^(NSDictionary *data){
-            [self dismissViewControllerAnimated:YES completion:nil];
-        };
-        [self presentViewController:veespo animated:YES completion:nil];
-        [veespo loadDataFor:targetId
-                      title:item[@"title"]
-                detailsView:nil];
-    };
-    
     return cell;
 }
 
@@ -108,6 +103,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://test.pappa-mi.it/api/dish/%@/%@",self.items[indexPath.row][@"id"],[self.schoolData objectForKey:@"id"]]];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
     AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
         PMDishViewController *dishVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"DishViewController"];
