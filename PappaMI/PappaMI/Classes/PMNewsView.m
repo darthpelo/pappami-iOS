@@ -8,13 +8,18 @@
 
 #import "PMNewsView.h"
 #import "AFNetworking.h"
+#import "MBProgressHUD.h"
 
 @implementation PMNewsView
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame allnews:(BOOL)flag
 {
     self = [super initWithFrame:frame];
     if (self) {
+        if (!flag)
+            urlSrt = [NSString stringWithFormat:@"http://%@/api/node/all/stream/", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]];
+        else
+            urlSrt = [NSString stringWithFormat:@"http://%@/api/node/news/stream/", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]];
         [self loadData];
         newsTableView = [[UITableView alloc] initWithFrame:frame];
         newsTableView.delegate = self;
@@ -26,19 +31,22 @@
 
 - (void)loadData
 {
+    [MBProgressHUD showHUDAddedTo:self animated:YES];
     NSURL *url = nil;
     if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER])
-        url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/node/news/stream/", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]]];
+        url = [NSURL URLWithString:urlSrt];
     else
-        url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/node/all/stream/", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]]];
+        url = [NSURL URLWithString:urlSrt];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     AFJSONRequestOperation *jsonRequest =
     [AFJSONRequestOperation JSONRequestOperationWithRequest:request
      success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
          newsList = [NSMutableArray arrayWithArray:JSON[@"posts"]];
          [newsTableView reloadData];
+         [MBProgressHUD hideAllHUDsForView:self animated:YES];
      } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
          PMNSLog("failure");
+         [MBProgressHUD hideAllHUDsForView:self animated:YES];
      }];
     [jsonRequest start];
 }

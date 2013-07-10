@@ -51,8 +51,7 @@
     UIBarButtonItem* menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
 
     frontController.navigationItem.leftBarButtonItem = menuItem;
-//    frontController.title = @"Home";
-
+    
     self.contentViewController = nav;
     self.contentViewController.view.tag = 0;
     self.sidebarViewController = rearVC;
@@ -60,38 +59,38 @@
     // Gestione callback selezione elementi da menu sidebar
     __weak MainSideViewController *ms = self;
     __block UIViewController *bFrontController = frontController;
-    ((SidebarController *)self.sidebarViewController).closeViewController = ^(NSIndexPath *indexPath){
+    ((SidebarController *)self.sidebarViewController).closeViewController = ^(NSInteger sectionId){
         [ms revealToggle:nil];
         // logout
-        if (indexPath.row == 2) {
+        if (sectionId == 0) {
             if (ms.closeViewController)
                 ms.closeViewController();
         } else {
-            switch (indexPath.row) {
-                case 0:{
-                    bFrontController.title = @"Home";
+            switch (sectionId) {
+                case 1:{
+                    bFrontController.title = @"Scuole";
                     ms.contentViewController.view.tag = 0;
                     [ms listSubviewsOfView:bFrontController.view];
                     CGRect frame = [Utils getNavigableContentFrame];
-                    if ([ms.userMode isEqualToString:LOGGEDUSER]) {
+//                    if ([ms.userMode isEqualToString:LOGGEDUSER]) {
                         PMHomeView *hv = [[PMHomeView alloc] initWithFrame:frame];
                         [bFrontController.view addSubview:hv];
-                        bFrontController.title = @"Tue Scuole";
+                        bFrontController.title = @"Scuole";
                         hv.schoolSelected = ^(NSDictionary *school) {
                             UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
                             PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
                             [menuVC setSchoolData:school];
                             [((UINavigationController *)ms.contentViewController) pushViewController:menuVC animated:YES];
                         };
-                    }
+//                    }
                     break;
                 }
-                case 1:{
+                case 2:{
                     bFrontController.title = @"News";
                     ms.contentViewController.view.tag = 1;
                     [ms listSubviewsOfView:bFrontController.view];
                     CGRect frame = [Utils getNavigableContentFrame];
-                    PMNewsView *nv = [[PMNewsView alloc] initWithFrame:frame];
+                    PMNewsView *nv = [[PMNewsView alloc] initWithFrame:frame allnews:YES];
                     nv.newsSelected = ^(NSString *content){
                         PMNewsDetailViewController *newsVC = [[PMNewsDetailViewController alloc] initWithNibName:nil bundle:nil];
                         [newsVC setWebContent:content];
@@ -100,8 +99,20 @@
                     [bFrontController.view addSubview:nv];
                     break;
                 }
-                default:
+                case 3:{
+                    bFrontController.title = @"News Dedicate";
+                    ms.contentViewController.view.tag = 1;
+                    [ms listSubviewsOfView:bFrontController.view];
+                    CGRect frame = [Utils getNavigableContentFrame];
+                    PMNewsView *nv = [[PMNewsView alloc] initWithFrame:frame allnews:NO];
+                    nv.newsSelected = ^(NSString *content){
+                        PMNewsDetailViewController *newsVC = [[PMNewsDetailViewController alloc] initWithNibName:nil bundle:nil];
+                        [newsVC setWebContent:content];
+                        [((UINavigationController *)ms.contentViewController) pushViewController:newsVC animated:YES];
+                    };
+                    [bFrontController.view addSubview:nv];
                     break;
+                }
             }
         }
     };
@@ -116,18 +127,17 @@
     if (self.contentViewController.view.tag == 0) {
         CGRect frame = [Utils getNavigableContentFrame];
         frontController.title = @"Home";
-        if ([self.userMode isEqualToString:LOGGEDUSER]) {
+//        if ([self.userMode isEqualToString:LOGGEDUSER]) {
             frontController.title = @"Tue Scuole";
             PMHomeView *hv = [[PMHomeView alloc] initWithFrame:frame];
             [frontController.view addSubview:hv];
             hv.schoolSelected = ^(NSDictionary *school) {
                 UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
                 PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
-                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:menuVC];
                 [menuVC setSchoolData:school];
                 [((UINavigationController *)self.contentViewController) pushViewController:menuVC animated:YES];
             };
-        }
+//        }
     }
 }
 

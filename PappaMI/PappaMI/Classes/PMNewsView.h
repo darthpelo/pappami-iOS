@@ -11,8 +11,11 @@
 @interface PMNewsView : UIView <UITableViewDelegate, UITableViewDataSource> {
     UITableView *newsTableView;
     NSMutableArray *newsList;
+    NSString *urlSrt;
 }
 
 @property (nonatomic, copy) void (^newsSelected)(NSString *content);
+
+- (id)initWithFrame:(CGRect)frame allnews:(BOOL)flag;
 
 @end

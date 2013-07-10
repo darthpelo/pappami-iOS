@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		BE286A8F1784CD65001B9E8A /* PMHomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE286A8E1784CD65001B9E8A /* PMHomeView.m */; };
 		BE3C51F91780CD1500062143 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3C51F81780CD1500062143 /* QuartzCore.framework */; };
+		BE49F149178DFC8D00C2C3AB /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BE49F147178DFC8D00C2C3AB /* Resources.bundle */; };
+		BE49F14A178DFC8D00C2C3AB /* VeespoFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE49F148178DFC8D00C2C3AB /* VeespoFramework.framework */; };
+		BE49F14C178E02DC00C2C3AB /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE49F14B178E02DC00C2C3AB /* Icon@2x.png */; };
+		BE4BE2DF178E0FCB00A84B8F /* libCrittercism_v4_0_0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4BE2DE178E0FCB00A84B8F /* libCrittercism_v4_0_0.a */; };
 		BE5F9AF3177B51F500B74182 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5F9AF2177B51F500B74182 /* UIKit.framework */; };
 		BE5F9AF5177B51F500B74182 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5F9AF4177B51F500B74182 /* Foundation.framework */; };
 		BE5F9AF7177B51F500B74182 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5F9AF6177B51F500B74182 /* CoreGraphics.framework */; };
@@ -23,8 +27,6 @@
 		BE5F9B1A177B549C00B74182 /* BaseLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5F9B17177B549C00B74182 /* BaseLoginController.m */; };
 		BE5F9B1B177B549C00B74182 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5F9B19177B549C00B74182 /* LoginController.m */; };
 		BE8142AD178B6288005E75A9 /* PMNewsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8142AC178B6288005E75A9 /* PMNewsView.m */; };
-		BE8142B2178D4E66005E75A9 /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BE8142B0178D4E66005E75A9 /* Resources.bundle */; };
-		BE8142B3178D4E66005E75A9 /* VeespoFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8142B1178D4E66005E75A9 /* VeespoFramework.framework */; };
 		BE8142B6178D9A15005E75A9 /* PMNewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8142B5178D9A15005E75A9 /* PMNewsDetailViewController.m */; };
 		BE8ED7D017863569006AA9A6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8ED7CF17863569006AA9A6 /* SystemConfiguration.framework */; };
 		BE8ED7D217863587006AA9A6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8ED7D117863587006AA9A6 /* CoreText.framework */; };
@@ -45,7 +47,6 @@
 		BEB0CAA21785D4460070CF49 /* TDSemiModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0CA9D1785D4460070CF49 /* TDSemiModalViewController.m */; };
 		BEB0CAA31785D4460070CF49 /* UIViewController+TDSemiModalExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0CA9F1785D4460070CF49 /* UIViewController+TDSemiModalExtension.m */; };
 		BEB49B0117847FFB00274DC7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB49B0017847FFB00274DC7 /* MBProgressHUD.m */; };
-		BEB6AD2C17872897002433FE /* pappa-mi-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB6AD2B17872897002433FE /* pappa-mi-logo.png */; };
 		BEB6AD2E1787289D002433FE /* pappa-mi-logo-text_32.png in Resources */ = {isa = PBXBuildFile; fileRef = BEB6AD2D1787289D002433FE /* pappa-mi-logo-text_32.png */; };
 		BEB6AD3117873023002433FE /* PMMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB6AD3017873023002433FE /* PMMenuViewController.m */; };
 		BEB6AD34178733F1002433FE /* PMMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB6AD33178733F1002433FE /* PMMenuCell.m */; };
@@ -96,7 +97,6 @@
 		BEC29DE3177DDFEA00036BD4 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = BEC29DC2177DDFEA00036BD4 /* check.png */; };
 		BEC29DE4177DDFEA00036BD4 /* check@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BEC29DC3177DDFEA00036BD4 /* check@2x.png */; };
 		BED0F310178C76CA00C984B4 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BED0F30F178C76CA00C984B4 /* Icon.png */; };
-		BED0F312178C770000C984B4 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BED0F311178C770000C984B4 /* Icon@2x.png */; };
 		BED0F314178C7D9200C984B4 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED0F313178C7D9200C984B4 /* NewRelicAgent.framework */; };
 		BED0F316178C7DA600C984B4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED0F315178C7DA600C984B4 /* CoreTelephony.framework */; };
 		BED0F318178C7DB200C984B4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BED0F317178C7DB100C984B4 /* libz.dylib */; };
@@ -106,6 +106,12 @@
 		BE286A8D1784CD65001B9E8A /* PMHomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMHomeView.h; path = Classes/PMHomeView.h; sourceTree = "<group>"; };
 		BE286A8E1784CD65001B9E8A /* PMHomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PMHomeView.m; path = Classes/PMHomeView.m; sourceTree = "<group>"; };
 		BE3C51F81780CD1500062143 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		BE49F147178DFC8D00C2C3AB /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
+		BE49F148178DFC8D00C2C3AB /* VeespoFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VeespoFramework.framework; sourceTree = "<group>"; };
+		BE49F14B178E02DC00C2C3AB /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		BE4BE2DC178E0FCB00A84B8F /* Crittercism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crittercism.h; sourceTree = "<group>"; };
+		BE4BE2DD178E0FCB00A84B8F /* CrittercismDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrittercismDelegate.h; sourceTree = "<group>"; };
+		BE4BE2DE178E0FCB00A84B8F /* libCrittercism_v4_0_0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCrittercism_v4_0_0.a; sourceTree = "<group>"; };
 		BE5F9AEF177B51F500B74182 /* PappaMI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PappaMI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE5F9AF2177B51F500B74182 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BE5F9AF4177B51F500B74182 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -128,8 +134,6 @@
 		BE5F9B19177B549C00B74182 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginController.m; path = Classes/LoginControllers/LoginController.m; sourceTree = "<group>"; };
 		BE8142AB178B6288005E75A9 /* PMNewsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMNewsView.h; path = Classes/PMNewsView.h; sourceTree = "<group>"; };
 		BE8142AC178B6288005E75A9 /* PMNewsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PMNewsView.m; path = Classes/PMNewsView.m; sourceTree = "<group>"; };
-		BE8142B0178D4E66005E75A9 /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
-		BE8142B1178D4E66005E75A9 /* VeespoFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VeespoFramework.framework; sourceTree = "<group>"; };
 		BE8142B4178D9A15005E75A9 /* PMNewsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMNewsDetailViewController.h; path = Classes/News/PMNewsDetailViewController.h; sourceTree = "<group>"; };
 		BE8142B5178D9A15005E75A9 /* PMNewsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PMNewsDetailViewController.m; path = Classes/News/PMNewsDetailViewController.m; sourceTree = "<group>"; };
 		BE8ED7CF17863569006AA9A6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -166,7 +170,6 @@
 		BEB0CA9F1785D4460070CF49 /* UIViewController+TDSemiModalExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TDSemiModalExtension.m"; sourceTree = "<group>"; };
 		BEB49AFF17847FFB00274DC7 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		BEB49B0017847FFB00274DC7 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		BEB6AD2B17872897002433FE /* pappa-mi-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pappa-mi-logo.png"; sourceTree = "<group>"; };
 		BEB6AD2D1787289D002433FE /* pappa-mi-logo-text_32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pappa-mi-logo-text_32.png"; sourceTree = "<group>"; };
 		BEB6AD2F17873023002433FE /* PMMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMMenuViewController.h; path = Classes/School/PMMenuViewController.h; sourceTree = "<group>"; };
 		BEB6AD3017873023002433FE /* PMMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PMMenuViewController.m; path = Classes/School/PMMenuViewController.m; sourceTree = "<group>"; };
@@ -228,7 +231,6 @@
 		BEC29DC2177DDFEA00036BD4 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = check.png; sourceTree = "<group>"; };
 		BEC29DC3177DDFEA00036BD4 /* check@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "check@2x.png"; sourceTree = "<group>"; };
 		BED0F30F178C76CA00C984B4 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		BED0F311178C770000C984B4 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		BED0F313178C7D9200C984B4 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		BED0F315178C7DA600C984B4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		BED0F317178C7DB100C984B4 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -248,18 +250,47 @@
 				BE5F9AF5177B51F500B74182 /* Foundation.framework in Frameworks */,
 				BE5F9AF7177B51F500B74182 /* CoreGraphics.framework in Frameworks */,
 				BED0F314178C7D9200C984B4 /* NewRelicAgent.framework in Frameworks */,
-				BE8142B3178D4E66005E75A9 /* VeespoFramework.framework in Frameworks */,
+				BE49F14A178DFC8D00C2C3AB /* VeespoFramework.framework in Frameworks */,
+				BE4BE2DF178E0FCB00A84B8F /* libCrittercism_v4_0_0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE49F145178DFC8D00C2C3AB /* VeespoFramework.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				BE49F146178DFC8D00C2C3AB /* Resources */,
+				BE49F148178DFC8D00C2C3AB /* VeespoFramework.framework */,
+			);
+			path = VeespoFramework.embeddedframework;
+			sourceTree = "<group>";
+		};
+		BE49F146178DFC8D00C2C3AB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BE49F147178DFC8D00C2C3AB /* Resources.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		BE4BE2DB178E0FCB00A84B8F /* CrittercismSDK */ = {
+			isa = PBXGroup;
+			children = (
+				BE4BE2DC178E0FCB00A84B8F /* Crittercism.h */,
+				BE4BE2DD178E0FCB00A84B8F /* CrittercismDelegate.h */,
+				BE4BE2DE178E0FCB00A84B8F /* libCrittercism_v4_0_0.a */,
+			);
+			path = CrittercismSDK;
+			sourceTree = "<group>";
+		};
 		BE5F9AE6177B51F500B74182 = {
 			isa = PBXGroup;
 			children = (
-				BED0F311178C770000C984B4 /* Icon@2x.png */,
+				BE49F145178DFC8D00C2C3AB /* VeespoFramework.embeddedframework */,
 				BED0F30F178C76CA00C984B4 /* Icon.png */,
+				BE49F14B178E02DC00C2C3AB /* Icon@2x.png */,
 				BE5F9AF8177B51F500B74182 /* PappaMI */,
 				BE5F9AF1177B51F500B74182 /* Frameworks */,
 				BE5F9AF0177B51F500B74182 /* Products */,
@@ -277,7 +308,7 @@
 		BE5F9AF1177B51F500B74182 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BE8142AE178D4E66005E75A9 /* VeespoFramework.embeddedframework */,
+				BE4BE2DB178E0FCB00A84B8F /* CrittercismSDK */,
 				BED0F313178C7D9200C984B4 /* NewRelicAgent.framework */,
 				BED0F317178C7DB100C984B4 /* libz.dylib */,
 				BED0F315178C7DA600C984B4 /* CoreTelephony.framework */,
@@ -353,23 +384,6 @@
 				BE8142B5178D9A15005E75A9 /* PMNewsDetailViewController.m */,
 			);
 			name = News;
-			sourceTree = "<group>";
-		};
-		BE8142AE178D4E66005E75A9 /* VeespoFramework.embeddedframework */ = {
-			isa = PBXGroup;
-			children = (
-				BE8142AF178D4E66005E75A9 /* Resources */,
-				BE8142B1178D4E66005E75A9 /* VeespoFramework.framework */,
-			);
-			path = VeespoFramework.embeddedframework;
-			sourceTree = "<group>";
-		};
-		BE8142AF178D4E66005E75A9 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				BE8142B0178D4E66005E75A9 /* Resources.bundle */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		BEADD6F3177C3E4500B63A10 /* AFNetworking */ = {
@@ -515,7 +529,6 @@
 			isa = PBXGroup;
 			children = (
 				BEA567E11788511A0061AE11 /* arrow-back.png */,
-				BEB6AD2B17872897002433FE /* pappa-mi-logo.png */,
 				BEB6AD2D1787289D002433FE /* pappa-mi-logo-text_32.png */,
 				BEB0CA951785A6BC0070CF49 /* button-close.png */,
 				BEC29DA3177DDFE700036BD4 /* account.png */,
@@ -653,12 +666,11 @@
 				BEC29DE4177DDFEA00036BD4 /* check@2x.png in Resources */,
 				BEB0CA961785A6BC0070CF49 /* button-close.png in Resources */,
 				BEB0CAA11785D4460070CF49 /* TDDatePickerController.xib in Resources */,
-				BEB6AD2C17872897002433FE /* pappa-mi-logo.png in Resources */,
 				BEB6AD2E1787289D002433FE /* pappa-mi-logo-text_32.png in Resources */,
 				BEA567E21788511A0061AE11 /* arrow-back.png in Resources */,
 				BED0F310178C76CA00C984B4 /* Icon.png in Resources */,
-				BED0F312178C770000C984B4 /* Icon@2x.png in Resources */,
-				BE8142B2178D4E66005E75A9 /* Resources.bundle in Resources */,
+				BE49F149178DFC8D00C2C3AB /* Resources.bundle in Resources */,
+				BE49F14C178E02DC00C2C3AB /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -807,6 +819,10 @@
 				GCC_PREFIX_HEADER = "PappaMI/PappaMI-Prefix.pch";
 				INFOPLIST_FILE = "PappaMI/PappaMI-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/CrittercismSDK\"",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -829,6 +845,10 @@
 				GCC_PREFIX_HEADER = "PappaMI/PappaMI-Prefix.pch";
 				INFOPLIST_FILE = "PappaMI/PappaMI-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/CrittercismSDK\"",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "173166CB-7205-4323-9970-F4E37A947657";

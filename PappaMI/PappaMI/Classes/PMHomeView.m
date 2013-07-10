@@ -33,7 +33,10 @@
 
 - (void)loadData
 {
-    personalSchollsList = [NSArray arrayWithArray:[[[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER] objectForKey:@"schools"]];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER])
+        personalSchollsList = [NSArray arrayWithArray:[[[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER] objectForKey:@"schools"]];
+    else
+        personalSchollsList = [NSArray arrayWithArray:[[[NSUserDefaults standardUserDefaults] objectForKey:GUESTUSER] objectForKey:@"schools"]];
     PMNSLog("%@", personalSchollsList);
 }
 

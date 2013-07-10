@@ -84,6 +84,8 @@
                                          (self.compTableView.frame.origin.y + self.compTableView.frame.size.height) - 10,
                                          self.veespoButton.frame.size.width,
                                          self.veespoButton.frame.size.height)];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:GUESTUSER])
+        self.veespoButton.enabled = NO;
     
     int components = ((NSArray*)[self.dishData objectForKey:@"components"]).count;
     if (components == 0) {

@@ -20,6 +20,6 @@
 
 @property (nonatomic, strong) NSString *userMode;
 
-@property (nonatomic, copy) void (^closeViewController)(NSIndexPath *indexPath);
+@property (nonatomic, copy) void (^closeViewController)(NSInteger sectionId);
 
 @end

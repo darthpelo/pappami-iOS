@@ -7,6 +7,7 @@
 
 #import "PMAppDelegate.h"
 #import <NewRelicAgent/NewRelicAgent.h>
+#import "Crittercism.h"
 
 @implementation PMAppDelegate
 
@@ -14,6 +15,8 @@
 {
     // Override point for customization after application launch.
     [NewRelicAgent startWithApplicationToken:@"AA81a1033ff6ed41d73d6697305c1a3731db9ec945"];
+    [Crittercism enableWithAppID:@"51ddd7b1c463c24d70000005"];
+    
     [Veespo initUser:@"TEST-PAPPAMI" apiKey:@"" userName:nil language:@"it" veespoGroup:nil fileConfig:nil urlConfig:nil andTestUrl:YES];
     [NSUserDefaults resetStandardUserDefaults];
     NSString *dateKey = @"Data Key";

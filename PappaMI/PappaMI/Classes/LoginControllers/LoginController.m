@@ -124,8 +124,8 @@ static int delta = 70;
     AFJSONRequestOperation *operation =
     [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSDictionary *host = [NSDictionary dictionaryWithDictionary:JSON];
-//        [[NSUserDefaults standardUserDefaults] setObject:host[@"apihost"] forKey:@"apihost"];
-        [[NSUserDefaults standardUserDefaults] setObject:@"test-m.pappa-mi.it" forKey:@"apihost"];
+        [[NSUserDefaults standardUserDefaults] setObject:host[@"apihost"] forKey:@"apihost"];
+//        [[NSUserDefaults standardUserDefaults] setObject:@"test-m.pappa-mi.it" forKey:@"apihost"];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -141,11 +141,14 @@ static int delta = 70;
 
 - (IBAction)loginPressed:(id)sender
 {
-    [self resignFirstResponder];
-    if (![self.usernameField.text isEqualToString:@""] || ![self.passwordField.text isEqualToString:@""]) {
+    if (![self.usernameField.text isEqualToString:@""] && ![self.passwordField.text isEqualToString:@""]) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [self exec:@"POST" block:^(BOOL responsedata){
             [MBProgressHUD hideHUDForView:self.view animated:YES];
+            self.usernameField.text = @"";
+            self.usernameField.placeholder = @"Indirizzo E-Mail";
+            self.passwordField.text = @"";
+            self.passwordField.placeholder = @"Password";
             // unregister for keyboard notifications while not visible.
             [[NSNotificationCenter defaultCenter] removeObserver:self
                                                             name:UIKeyboardWillShowNotification
@@ -170,6 +173,10 @@ static int delta = 70;
                                                 cancelButtonTitle:@"OK"
                                                 otherButtonTitles:nil];
         [message show];
+        self.usernameField.text = @"";
+        self.usernameField.placeholder = @"Indirizzo E-Mail";
+        self.passwordField.text = @"";
+        self.passwordField.placeholder = @"Password";
     }
 }
 
@@ -177,10 +184,13 @@ static int delta = 70;
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]]];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-    
+//    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+//                            @"test001@pappa-mi.it", @"email",
+//                            @"password01", @"password",
+//                            nil];
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            @"test001@pappa-mi.it", @"email",
-                            @"password01", @"password",
+                            self.usernameField.text, @"email",
+                            self.passwordField.text, @"password",
                             nil];
     [httpClient postPath:@"/auth/password" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSURL *url = [NSURL URLWithString:
@@ -207,14 +217,18 @@ static int delta = 70;
                                                             
                                                             // Logout function
                                                             self.mainSideViewController.closeViewController = ^{
-                                                                [httpClient clearAuthorizationHeader];
-                                                                NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]]];
-                                                                AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-                                                                [httpClient postPath:@"/auth/logout" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                                                                    PMNSLog("Log out: OK");
-                                                                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                                                                    PMNSLog("Log out: KO");
-                                                                }];
+                                                                NSHTTPCookie *cookie;
+                                                                NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+                                                                for (cookie in [storage cookies])
+                                                                {
+                                                                    [storage deleteCookie:cookie];
+                                                                }
+                                                                [[NSURLCache sharedURLCache] removeAllCachedResponses];                                                                
+                                                                lc.usernameField.text = @"";
+                                                                lc.usernameField.placeholder = @"Indirizzo E-Mail";
+                                                                lc.passwordField.text = @"";
+                                                                lc.passwordField.placeholder = @"Password";
+                                                                
                                                                 CATransition *transition = [CATransition animation];
                                                                 transition.duration = 0.75;
                                                                 transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
@@ -269,6 +283,10 @@ static int delta = 70;
                                                         
                                                         // Logout function
                                                         self.mainSideViewController.closeViewController = ^{
+                                                            lc.usernameField.text = @"";
+                                                            lc.usernameField.placeholder = @"Indirizzo E-Mail";
+                                                            lc.passwordField.text = @"";
+                                                            lc.passwordField.placeholder = @"Password";
                                                             CATransition *transition = [CATransition animation];
                                                             transition.duration = 0.75;
                                                             transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
