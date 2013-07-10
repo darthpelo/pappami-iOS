@@ -13,6 +13,30 @@
 #import "MBProgressHUD.h"
 #import <QuartzCore/QuartzCore.h>
 
+@implementation UIViewController (CustomFeatures)
+-(void)setNavigationBar{
+    // Set the custom back button
+    UIImage *buttonImage = [UIImage imageNamed:@"arrow-back.png"];
+    
+    //create the button and assign the image
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:buttonImage forState:UIControlStateNormal];
+    //    [button setImage:[UIImage imageNamed:@"selback.png"] forState:UIControlStateHighlighted];
+    button.adjustsImageWhenDisabled = NO;
+    
+    
+    //set the frame of the button to the size of the image (see note below)
+    button.frame = CGRectMake(0, 0, 38*0.4, 32*0.4);
+    
+    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    
+    //create a UIBarButtonItem with the button as a custom view
+    UIBarButtonItem *customBarItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    self.navigationItem.leftBarButtonItem = customBarItem;
+    self.navigationItem.hidesBackButton = YES;
+}
+@end
+
 @interface PMMenuViewController ()
 
 @property (nonatomic, strong) NSArray* items;
@@ -33,6 +57,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setNavigationBar];
+    
     self.view.backgroundColor = UIColorFromRGB(0x00B2EE);
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -71,13 +97,22 @@
     [dateFormat setDateFormat: @"yyyy-MM-dd"];
     NSString *dateString = [dateFormat stringFromDate:[NSDate date]];
     
-    NSString *api = [NSString stringWithFormat:@"http://test.pappa-mi.it/api/menu/%@/%@",
+    NSString *api = [NSString stringWithFormat:@"http://%@/api/menu/%@/%@",
+                     [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"],
                      [self.schoolData objectForKey:@"id"],
                      dateString];
     NSURL *url = [NSURL URLWithString:api];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         self.items = [NSArray arrayWithArray:JSON];
+        if (self.items.count == 0) {
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Attenzione!"
+                                                              message:@"I menù sono disponibili solo per i giorni feriali.\nNon ci sono menù per i giorni festivi."
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"OK"
+                                                    otherButtonTitles:nil];
+            [message show];
+        }
         [self.tableView reloadData];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
@@ -85,6 +120,12 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
     [jsonRequest start];
+}
+
+- (void)back
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    self.schoolData = nil;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -106,7 +147,10 @@
 #pragma mark UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://test.pappa-mi.it/api/dish/%@/%@",self.items[indexPath.row][@"id"],[self.schoolData objectForKey:@"id"]]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/dish/%@/%@",
+                                       [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"],
+                                       self.items[indexPath.row][@"id"],
+                                       [self.schoolData objectForKey:@"id"]]];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
     AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
@@ -150,13 +194,22 @@
 	[self dismissSemiModalViewController:datePicker];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat: @"yyyy-MM-dd"];
-    NSString *api = [NSString stringWithFormat:@"http://test.pappa-mi.it/api/menu/%@/%@",
+    NSString *api = [NSString stringWithFormat:@"http://%@/api/menu/%@/%@",
+                     [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"],
                      [self.schoolData objectForKey:@"id"],
                      [dateFormat stringFromDate:viewController.datePicker.date]];
     NSURL *url = [NSURL URLWithString:api];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         self.items = [NSArray arrayWithArray:JSON];
+        if (self.items.count == 0) {
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Attenzione!"
+                                                              message:@"I menù sono disponibili solo per i giorni feriali.\nNon ci sono menù per i giorni festivi."
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"OK"
+                                                    otherButtonTitles:nil];
+            [message show];
+        }
         [self.tableView reloadData];
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {

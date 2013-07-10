@@ -15,6 +15,8 @@
 
 @end
 
+static int delta = 70;
+
 @implementation LoginController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -38,20 +40,31 @@
     
     self.view.backgroundColor = mainColor;
     
+    BOOL iP5 = ([UIScreen mainScreen].bounds.size.height == 568.0f) ? YES : NO;
+    
     self.usernameField.backgroundColor = [UIColor whiteColor];
     self.usernameField.layer.cornerRadius = 3.0f;
     self.usernameField.placeholder = @"Indirizzo E-Mail";
     self.usernameField.font = [UIFont fontWithName:fontName size:16.0f];
     self.usernameField.leftViewMode = UITextFieldViewModeAlways;
     self.usernameField.delegate = self;
-
     
+    if (iP5) [self.usernameField setFrame:CGRectMake(self.usernameField.frame.origin.x,
+                                                   self.usernameField.frame.origin.y + delta,
+                                                   self.usernameField.frame.size.width,
+                                                   self.usernameField.frame.size.height)];
+
     self.passwordField.backgroundColor = [UIColor whiteColor];
     self.passwordField.layer.cornerRadius = 3.0f;
     self.passwordField.placeholder = @"Password";
     self.passwordField.font = [UIFont fontWithName:fontName size:16.0f];
     self.passwordField.delegate = self;
     self.passwordField.leftViewMode = UITextFieldViewModeAlways;
+    
+    if (iP5) [self.passwordField setFrame:CGRectMake(self.passwordField.frame.origin.x,
+                                                     self.passwordField.frame.origin.y + delta,
+                                                     self.passwordField.frame.size.width,
+                                                     self.passwordField.frame.size.height)];
     
     self.loginButton.backgroundColor = darkColor;
     self.loginButton.layer.cornerRadius = 3.0f;
@@ -60,6 +73,11 @@
     [self.loginButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.loginButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     
+    if (iP5) [self.loginButton setFrame:CGRectMake(self.loginButton.frame.origin.x,
+                                                   self.loginButton.frame.origin.y + delta,
+                                                   self.loginButton.frame.size.width,
+                                                   self.loginButton.frame.size.height)];
+    
     self.singUpButton.backgroundColor = darkColor;
     self.singUpButton.layer.cornerRadius = 3.0f;
     self.singUpButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
@@ -67,11 +85,21 @@
     [self.singUpButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.singUpButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     
+    if (iP5) [self.singUpButton setFrame:CGRectMake(self.singUpButton.frame.origin.x,
+                                                   self.singUpButton.frame.origin.y + delta,
+                                                   self.singUpButton.frame.size.width,
+                                                   self.singUpButton.frame.size.height)];
+    
     self.anonymousButton.backgroundColor = [UIColor clearColor];
     self.anonymousButton.titleLabel.font = [UIFont fontWithName:fontName size:14.0f];
     [self.anonymousButton setTitle:@"Vuoi provare l'applicazione senza registrarti?" forState:UIControlStateNormal];
     [self.anonymousButton setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
     [self.anonymousButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5] forState:UIControlStateHighlighted];
+    
+    if (iP5) [self.anonymousButton setFrame:CGRectMake(self.anonymousButton.frame.origin.x,
+                                                   self.anonymousButton.frame.origin.y + delta,
+                                                   self.anonymousButton.frame.size.width,
+                                                   self.anonymousButton.frame.size.height)];
     
     self.titleLabel.textColor =  [UIColor yellowColor];
     self.titleLabel.font =  [UIFont fontWithName:boldFontName size:24.0f];
@@ -80,6 +108,29 @@
     self.subTitleLabel.textColor =  [UIColor yellowColor];
     self.subTitleLabel.font =  [UIFont fontWithName:fontName size:14.0f];
     self.subTitleLabel.text = @"Bentornato, esegui il login o registrati";
+    
+    if (iP5) [self.subTitleLabel setFrame:CGRectMake(self.subTitleLabel.frame.origin.x,
+                                                       self.subTitleLabel.frame.origin.y + 20,
+                                                       self.subTitleLabel.frame.size.width,
+                                                       self.subTitleLabel.frame.size.height)];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSURL *url = [NSURL URLWithString:@"http://api.pappa-mi.it/api/config"];
+    NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    AFJSONRequestOperation *operation =
+    [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSDictionary *host = [NSDictionary dictionaryWithDictionary:JSON];
+//        [[NSUserDefaults standardUserDefaults] setObject:host[@"apihost"] forKey:@"apihost"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"test-m.pappa-mi.it" forKey:@"apihost"];
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+    }];
+    [operation start];
 }
 
 - (void)didReceiveMemoryWarning
@@ -90,23 +141,41 @@
 
 - (IBAction)loginPressed:(id)sender
 {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [self exec:@"POST" block:^(BOOL responsedata){
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-        // unregister for keyboard notifications while not visible.
-        [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                        name:UIKeyboardWillShowNotification
-                                                      object:nil];
-        
-        [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                        name:UIKeyboardWillHideNotification
-                                                      object:nil];
-    }];
+    [self resignFirstResponder];
+    if (![self.usernameField.text isEqualToString:@""] || ![self.passwordField.text isEqualToString:@""]) {
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [self exec:@"POST" block:^(BOOL responsedata){
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+            // unregister for keyboard notifications while not visible.
+            [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                            name:UIKeyboardWillShowNotification
+                                                          object:nil];
+            
+            [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                            name:UIKeyboardWillHideNotification
+                                                          object:nil];
+            if (!responsedata) {
+                UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Attenzione!"
+                                                                  message:@"E' stato riscontrato un errore di comunicazione."
+                                                                 delegate:nil
+                                                        cancelButtonTitle:@"OK"
+                                                        otherButtonTitles:nil];
+                [message show];
+            }
+        }];
+    } else {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Attenzione!"
+                                                          message:@"Devi inserire indirizzo mail e password!"
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        [message show];
+    }
 }
 
 -(void)exec:(NSString *)method block:(void(^)(BOOL responsedData))block
 {
-    NSURL *url = [NSURL URLWithString:@"http://test.pappa-mi.it/"];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]]];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
     
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -114,23 +183,38 @@
                             @"password01", @"password",
                             nil];
     [httpClient postPath:@"/auth/password" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSURL *url = [NSURL URLWithString:@"http://test.pappa-mi.it/api/user/current"];
+        NSURL *url = [NSURL URLWithString:
+                      [NSString stringWithFormat:@"http://%@/api/user/current", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]]];
         NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         AFJSONRequestOperation *jsonRequest =
         [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                         success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                            [[NSUserDefaults standardUserDefaults] setObject:JSON forKey:LOGGEDUSER];
+                                                            // Workaround per problemi con il sistema di login lato server
+                                                            if ([JSON[@"type"] isEqualToString:@"O"])
+                                                                [[NSUserDefaults standardUserDefaults] setObject:JSON forKey:GUESTUSER];
+                                                            else
+                                                                [[NSUserDefaults standardUserDefaults] setObject:JSON forKey:LOGGEDUSER];
                                                             
                                                             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
                                                             self.mainSideViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainSideViewController"];
                                                             self.mainSideViewController.controllerId = @"SidebarController";
-                                                            self.mainSideViewController.userMode = LOGGEDUSER;
+                                                            if ([JSON[@"type"] isEqualToString:@"O"])
+                                                                self.mainSideViewController.userMode = GUESTUSER;
+                                                            else
+                                                                self.mainSideViewController.userMode = LOGGEDUSER;
                                                             UIViewController *vc = self.mainSideViewController;
                                                             __weak LoginController *lc = self;
                                                             
                                                             // Logout function
                                                             self.mainSideViewController.closeViewController = ^{
                                                                 [httpClient clearAuthorizationHeader];
+                                                                NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]]];
+                                                                AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
+                                                                [httpClient postPath:@"/auth/logout" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                                                                    PMNSLog("Log out: OK");
+                                                                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                                                                    PMNSLog("Log out: KO");
+                                                                }];
                                                                 CATransition *transition = [CATransition animation];
                                                                 transition.duration = 0.75;
                                                                 transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
@@ -139,7 +223,8 @@
                                                                 transition.delegate = lc;
                                                                 [lc.view.layer addAnimation:transition forKey:nil];
                                                                 [vc.view removeFromSuperview];
-                                                                [[NSUserDefaults standardUserDefaults] removeObjectForKey:LOGGEDUSER];
+                                                                if (![JSON[@"type"] isEqualToString:@"O"])
+                                                                    [[NSUserDefaults standardUserDefaults] removeObjectForKey:LOGGEDUSER];
                                                             };
                                                             
                                                             vc.view.frame = CGRectMake(0, 0, vc.view.frame.size.width, vc.view.frame.size.height);
@@ -158,17 +243,19 @@
                                                                              }];
                                                         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
                                                             NSLog(@"Error: %@", error);
+                                                            block(NO);
                                                         }];
         [jsonRequest start];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"[HTTPClient Error]: %@", error.localizedDescription);
+        block(NO);
     }];
 }
 
 - (IBAction)anonymousPressed:(id)sender
 {
-    //Creare DEFAULTUSER
-    NSURL *url = [NSURL URLWithString:@"http://test.pappa-mi.it/api/user/current"];
+    NSURL *url = [NSURL URLWithString:
+                  [NSString stringWithFormat:@"http://%@/api/user/current", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]]];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                     success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {

@@ -13,4 +13,6 @@
     NSMutableArray *newsList;
 }
 
+@property (nonatomic, copy) void (^newsSelected)(NSString *content);
+
 @end

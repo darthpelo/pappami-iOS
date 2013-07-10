@@ -22,7 +22,7 @@
     
     
     //set the frame of the button to the size of the image (see note below)
-    button.frame = CGRectMake(0, 0, 38*0.6, 32*0.6);
+    button.frame = CGRectMake(0, 0, 38*0.4, 32*0.4);
     
     [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
     
@@ -84,6 +84,16 @@
                                          (self.compTableView.frame.origin.y + self.compTableView.frame.size.height) - 10,
                                          self.veespoButton.frame.size.width,
                                          self.veespoButton.frame.size.height)];
+    
+    int components = ((NSArray*)[self.dishData objectForKey:@"components"]).count;
+    if (components == 0) {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Attenzione!"
+                                                          message:@"Non sono disponibili gli ingredienti di questo piatto."
+                                                         delegate:nil
+                                                cancelButtonTitle:@"OK"
+                                                otherButtonTitles:nil];
+        [message show];
+    }
 }
 
 - (void)back

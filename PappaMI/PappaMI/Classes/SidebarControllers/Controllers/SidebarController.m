@@ -8,6 +8,7 @@
 
 #import "SidebarController.h"
 #import "SidebarCell.h"
+#import "AFNetworking.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface SidebarController ()
@@ -55,7 +56,14 @@
     self.profileLocationLabel.font = [UIFont fontWithName:boldFontName size:12.0f];
     self.profileLocationLabel.text = @"Milano, IT";
     
-    self.profileImageView.image = [UIImage imageNamed:@"profile.jpg"];
+    NSString *avatar = nil;
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER])
+        avatar = [NSString stringWithString:[[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER][@"avatar"]];
+    else
+        avatar = [NSString stringWithString:[[NSUserDefaults standardUserDefaults] objectForKey:GUESTUSER][@"avatar"]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"], avatar]];
+    [self.profileImageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"profile.jpg"]];
+//    self.profileImageView.image = [UIImage imageNamed:@"profile.jpg"];
     self.profileImageView.clipsToBounds = YES;
     self.profileImageView.layer.borderWidth = 4.0f;
     self.profileImageView.layer.borderColor = [UIColor colorWithWhite:1.0f alpha:0.5f].CGColor;
@@ -104,7 +112,6 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 46;
 }
-
 
 - (void)didReceiveMemoryWarning
 {

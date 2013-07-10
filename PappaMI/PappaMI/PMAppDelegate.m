@@ -6,12 +6,14 @@
 //
 
 #import "PMAppDelegate.h"
+#import <NewRelicAgent/NewRelicAgent.h>
 
 @implementation PMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [NewRelicAgent startWithApplicationToken:@"AA81a1033ff6ed41d73d6697305c1a3731db9ec945"];
     [Veespo initUser:@"TEST-PAPPAMI" apiKey:@"" userName:nil language:@"it" veespoGroup:nil fileConfig:nil urlConfig:nil andTestUrl:YES];
     [NSUserDefaults resetStandardUserDefaults];
     NSString *dateKey = @"Data Key";

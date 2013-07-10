@@ -13,6 +13,7 @@
 #import "PMHomeView.h"
 #import "PMMenuViewController.h"
 #import "PMNewsView.h"
+#import "PMNewsDetailViewController.h"
 
 @interface MainSideViewController () {
     UIViewController *frontController;
@@ -80,8 +81,7 @@
                             UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
                             PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
                             [menuVC setSchoolData:school];
-                            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:menuVC];
-                            [ms presentViewController:nav animated:YES completion:nil];
+                            [((UINavigationController *)ms.contentViewController) pushViewController:menuVC animated:YES];
                         };
                     }
                     break;
@@ -92,6 +92,11 @@
                     [ms listSubviewsOfView:bFrontController.view];
                     CGRect frame = [Utils getNavigableContentFrame];
                     PMNewsView *nv = [[PMNewsView alloc] initWithFrame:frame];
+                    nv.newsSelected = ^(NSString *content){
+                        PMNewsDetailViewController *newsVC = [[PMNewsDetailViewController alloc] initWithNibName:nil bundle:nil];
+                        [newsVC setWebContent:content];
+                        [((UINavigationController *)ms.contentViewController) pushViewController:newsVC animated:YES];
+                    };
                     [bFrontController.view addSubview:nv];
                     break;
                 }
@@ -120,7 +125,7 @@
                 PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
                 UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:menuVC];
                 [menuVC setSchoolData:school];
-                [self presentViewController:nav animated:YES completion:nil];
+                [((UINavigationController *)self.contentViewController) pushViewController:menuVC animated:YES];
             };
         }
     }
