@@ -80,14 +80,7 @@
                                          self.dateButton.frame.size.height)];
     [self loadData];
     
-    UIButton* menuButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
-    [menuButton setBackgroundImage:[UIImage imageNamed:@"button-close.png"] forState:UIControlStateNormal];
-    [menuButton addTarget:self action:@selector(closeViewController) forControlEvents:UIControlEventTouchUpInside];
-    
-    UIBarButtonItem *menuItem = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-    self.navigationItem.rightBarButtonItem = menuItem;
     self.title = [self.schoolData objectForKey:@"name"];
-	
 }
 
 - (void)loadData
@@ -128,6 +121,21 @@
     self.schoolData = nil;
 }
 
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)dateButtonPressed:(id)sender
+{
+    if (datePicker == nil) {
+        datePicker = [[TDDatePickerController alloc] initWithNibName:@"TDDatePickerController" bundle:nil];
+        datePicker.delegate = self;
+    }
+    [self presentSemiModalViewController:datePicker];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return self.items.count;
@@ -165,26 +173,7 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
     [jsonRequest start];
-}
-
-- (void)closeViewController
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (IBAction)dateButtonPressed:(id)sender
-{
-    if (datePicker == nil) {
-        datePicker = [[TDDatePickerController alloc] initWithNibName:@"TDDatePickerController" bundle:nil];
-        datePicker.delegate = self;
-    }
-    [self presentSemiModalViewController:datePicker];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark Date Picker Delegate
