@@ -127,7 +127,7 @@
     if (self.contentViewController.view.tag == 0) {
         CGRect frame = [Utils getNavigableContentFrame];
         // L'utente loggato vede l'elenco delle sue scuole.
-        if ([self.userMode isEqualToString:LOGGEDUSER]) {
+        //if ([self.userMode isEqualToString:LOGGEDUSER]) {
             frontController.title = @"Tue Scuole";
             PMHomeView *hv = [[PMHomeView alloc] initWithFrame:frame];
             [frontController.view addSubview:hv];
@@ -137,9 +137,9 @@
                 [menuVC setSchoolData:school];
                 [((UINavigationController *)self.contentViewController) pushViewController:menuVC animated:YES];
             };
-        } else {
-            frontController.title = @"Seleziona una scuola di Milano";
-        }
+        //} else {
+        //    frontController.title = @"Seleziona una scuola di Milano";
+        //}
     }
 }
 
