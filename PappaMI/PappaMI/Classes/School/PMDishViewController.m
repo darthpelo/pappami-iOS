@@ -75,16 +75,14 @@
                                          self.statButton.frame.size.width,
                                          self.statButton.frame.size.height)];
     
-    self.veespoButton.backgroundColor = darkColor;
     self.veespoButton.layer.cornerRadius = 3.0f;
-    self.veespoButton.titleLabel.font = [UIFont fontWithName:boldFontName size:20.0f];
-    [self.veespoButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
-    [self.veespoButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     [self.veespoButton setFrame:CGRectMake(self.veespoButton.frame.origin.x,
                                          (self.compTableView.frame.origin.y + self.compTableView.frame.size.height) - 10,
                                          self.veespoButton.frame.size.width,
                                          self.veespoButton.frame.size.height)];
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:GUESTUSER])
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER])
+        self.veespoButton.enabled = YES;
+    else
         self.veespoButton.enabled = NO;
     
     int components = ((NSArray*)[self.dishData objectForKey:@"components"]).count;

@@ -229,10 +229,9 @@ static int delta = 70;
                                                                 NSHTTPCookie *cookie;
                                                                 NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
                                                                 for (cookie in [storage cookies])
-                                                                {
                                                                     [storage deleteCookie:cookie];
-                                                                }
-                                                                [[NSURLCache sharedURLCache] removeAllCachedResponses];                                                                
+                                                                [[NSURLCache sharedURLCache] removeAllCachedResponses];
+                                                                
                                                                 lc.usernameField.text = @"";
                                                                 lc.usernameField.placeholder = @"Indirizzo E-Mail";
                                                                 lc.passwordField.text = @"";
@@ -246,8 +245,12 @@ static int delta = 70;
                                                                 transition.delegate = lc;
                                                                 [lc.view.layer addAnimation:transition forKey:nil];
                                                                 [vc.view removeFromSuperview];
+                                                                
+                                                                // Remove data information on NSUserDefaults
                                                                 if (![JSON[@"type"] isEqualToString:@"O"])
                                                                     [[NSUserDefaults standardUserDefaults] removeObjectForKey:LOGGEDUSER];
+                                                                else
+                                                                    [[NSUserDefaults standardUserDefaults] removeObjectForKey:GUESTUSER];
                                                             };
                                                             
                                                             vc.view.frame = CGRectMake(0, 0, vc.view.frame.size.width, vc.view.frame.size.height);
@@ -303,6 +306,11 @@ static int delta = 70;
                                                         
                                                         // Logout function
                                                         self.mainSideViewController.closeViewController = ^{
+                                                            NSHTTPCookie *cookie;
+                                                            NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+                                                            for (cookie in [storage cookies])
+                                                                [storage deleteCookie:cookie];
+                                                            [[NSURLCache sharedURLCache] removeAllCachedResponses];
                                                             lc.usernameField.text = @"";
                                                             lc.usernameField.placeholder = @"Indirizzo E-Mail";
                                                             lc.passwordField.text = @"";
@@ -315,6 +323,7 @@ static int delta = 70;
                                                             transition.delegate = lc;
                                                             [lc.view.layer addAnimation:transition forKey:nil];
                                                             [vc.view removeFromSuperview];
+                                                            [[NSUserDefaults standardUserDefaults] removeObjectForKey:GUESTUSER];
                                                         };
                                                         vc.view.frame = CGRectMake(0, 0, vc.view.frame.size.width, vc.view.frame.size.height);
                                                         CGFloat yOffset = [vc isKindOfClass:[UINavigationController class]] ? -20 : 0;
@@ -336,9 +345,11 @@ static int delta = 70;
                                                                              [[NSNotificationCenter defaultCenter] removeObserver:self
                                                                                                                              name:UIKeyboardWillHideNotification
                                                                                                                            object:nil];
+                                                                             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                                                                          }];
                                                     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
                                                         PMNSLog("%@", error.debugDescription);
+                                                        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                                                     }];
     [jsonRequest start];
 }
