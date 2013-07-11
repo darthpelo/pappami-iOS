@@ -110,7 +110,7 @@
         [self dismissViewControllerAnimated:YES completion:nil];
     };
     [self presentViewController:veespo animated:YES completion:nil];
-    [veespo loadDataFor:@"tgt-dfc11f51-162d-14a7-9bb5-2995f87f41a7"
+    [veespo loadDataFor:[NSString stringWithFormat:@"tgt-pappa-mi-dish-%@", self.dishId]
                   title:self.dishData[@"dish"]
             detailsView:nil];
 }
