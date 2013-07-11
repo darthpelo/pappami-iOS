@@ -7,6 +7,8 @@
 
 #import "PMDishViewController.h"
 #import "Utils.h"
+#import "AFNetworking.h"
+#import "PMStatsViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation UIViewController (CustomFeatures)
@@ -117,7 +119,38 @@
 
 - (IBAction)statPressed:(id)sender
 {
-    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://sandbox.veespo.com/v1/average/target/tgt-pappa-mi-dish-%@", self.dishId]];
+    NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    AFJSONRequestOperation *jsonRequest =
+    [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+        NSDictionary *tags = [NSDictionary dictionaryWithDictionary:JSON[@"data"][@"avgS"]];
+        
+        NSURL *url = [NSURL URLWithString:@"http://sandbox.veespo.com/v1/tag-labels/category/ctg-f86fbf9e-b53b-e7a5-d75d-57139ea6541d?lang=it"];
+        request = [NSMutableURLRequest requestWithURL:url];
+        AFJSONRequestOperation *jsonRequest =
+        [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                            NSDictionary *labels = [NSDictionary dictionaryWithDictionary:JSON[@"data"]];
+                                                            NSMutableArray *list = [[NSMutableArray alloc] init];
+                                                            for (id key in [tags allKeys]) {
+                                                                NSString *label = labels[key];
+                                                                NSString *avg = tags[key];
+                                                                if (label && avg) {
+                                                                    NSDictionary* object = [NSDictionary dictionaryWithObjects:@[ label, avg ] forKeys:@[ @"name", @"avg" ]];
+                                                                    [list addObject:object];
+                                                                }
+                                                            }
+                                                            PMStatsViewController *stat = [[PMStatsViewController alloc] initWithNibName:nil bundle:nil];
+                                                            [stat setList:list];
+                                                            [self.navigationController pushViewController:stat animated:YES];
+                                                        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                            PMNSLog("failure");
+                                                        }];
+        [jsonRequest start];
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+        PMNSLog("failure");
+    }];
+    [jsonRequest start];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

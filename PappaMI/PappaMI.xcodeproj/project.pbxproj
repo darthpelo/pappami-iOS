@@ -29,6 +29,7 @@
 		BE8142BA178EE4B6005E75A9 /* valuta.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8142B9178EE4B6005E75A9 /* valuta.png */; };
 		BE8142BF178EEEF2005E75A9 /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BE8142BD178EEEF2005E75A9 /* Resources.bundle */; };
 		BE8142C0178EEEF2005E75A9 /* VeespoFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8142BE178EEEF2005E75A9 /* VeespoFramework.framework */; };
+		BE8142C3178F0C04005E75A9 /* PMStatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8142C2178F0C04005E75A9 /* PMStatsViewController.m */; };
 		BE8ED7D017863569006AA9A6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8ED7CF17863569006AA9A6 /* SystemConfiguration.framework */; };
 		BE8ED7D217863587006AA9A6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8ED7D117863587006AA9A6 /* CoreText.framework */; };
 		BEA567E21788511A0061AE11 /* arrow-back.png in Resources */ = {isa = PBXBuildFile; fileRef = BEA567E11788511A0061AE11 /* arrow-back.png */; };
@@ -138,6 +139,8 @@
 		BE8142B9178EE4B6005E75A9 /* valuta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = valuta.png; sourceTree = "<group>"; };
 		BE8142BD178EEEF2005E75A9 /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
 		BE8142BE178EEEF2005E75A9 /* VeespoFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VeespoFramework.framework; sourceTree = "<group>"; };
+		BE8142C1178F0C04005E75A9 /* PMStatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMStatsViewController.h; path = Classes/School/PMStatsViewController.h; sourceTree = "<group>"; };
+		BE8142C2178F0C04005E75A9 /* PMStatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PMStatsViewController.m; path = Classes/School/PMStatsViewController.m; sourceTree = "<group>"; };
 		BE8ED7CF17863569006AA9A6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BE8ED7D117863587006AA9A6 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		BEA567E11788511A0061AE11 /* arrow-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arrow-back.png"; path = "Resources/arrow-back.png"; sourceTree = "<group>"; };
@@ -432,6 +435,8 @@
 				BEB0CA83178569BF0070CF49 /* Cells */,
 				BEB6AD351787348F002433FE /* PMDishViewController.h */,
 				BEB6AD361787348F002433FE /* PMDishViewController.m */,
+				BE8142C1178F0C04005E75A9 /* PMStatsViewController.h */,
+				BE8142C2178F0C04005E75A9 /* PMStatsViewController.m */,
 			);
 			name = School;
 			sourceTree = "<group>";
@@ -716,6 +721,7 @@
 				BEB6AD371787348F002433FE /* PMDishViewController.m in Sources */,
 				BE8142AD178B6288005E75A9 /* PMNewsView.m in Sources */,
 				BE8142B6178D9A15005E75A9 /* PMNewsDetailViewController.m in Sources */,
+				BE8142C3178F0C04005E75A9 /* PMStatsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
