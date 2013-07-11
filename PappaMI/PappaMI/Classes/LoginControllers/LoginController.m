@@ -205,6 +205,15 @@ static int delta = 70;
                                                             else
                                                                 [[NSUserDefaults standardUserDefaults] setObject:JSON forKey:LOGGEDUSER];
                                                             
+                                                            [Veespo initUser:[NSString stringWithFormat:@"pappa-mi-user-%@",JSON[@"id"]]
+                                                                      apiKey:@""
+                                                                    userName:nil
+                                                                    language:@"it"
+                                                                 veespoGroup:nil
+                                                                  fileConfig:nil
+                                                                   urlConfig:nil
+                                                                  andTestUrl:YES];
+                                                            
                                                             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
                                                             self.mainSideViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainSideViewController"];
                                                             self.mainSideViewController.controllerId = @"SidebarController";
@@ -268,12 +277,23 @@ static int delta = 70;
 
 - (IBAction)anonymousPressed:(id)sender
 {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:
                   [NSString stringWithFormat:@"http://%@/api/user/current", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]]];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
                                                     success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
                                                         [[NSUserDefaults standardUserDefaults] setObject:JSON forKey:GUESTUSER];
+                                                        
+                                                        [Veespo initUser:[NSString stringWithFormat:@"pappa-mi-user-%@",JSON[@"id"]]
+                                                                  apiKey:@""
+                                                                userName:nil
+                                                                language:@"it"
+                                                             veespoGroup:nil
+                                                              fileConfig:nil
+                                                               urlConfig:nil
+                                                              andTestUrl:YES];
+                                                        
                                                         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
                                                         self.mainSideViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainSideViewController"];
                                                         self.mainSideViewController.controllerId = @"SidebarController";
