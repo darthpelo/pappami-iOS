@@ -11,10 +11,13 @@
 #import "MBProgressHUD.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface LoginController ()
+@interface LoginController () {
+    BOOL veespoTest;
+}
 
 @end
 
+static NSString *pappamiconfing = @"http://api.pappa-mi.it/api/config";
 static int delta = 70;
 
 @implementation LoginController
@@ -23,7 +26,7 @@ static int delta = 70;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        veespoTest = NO;
     }
     return self;
 }
@@ -119,12 +122,16 @@ static int delta = 70;
 - (void)viewWillAppear:(BOOL)animated
 {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSURL *url = [NSURL URLWithString:@"http://api.pappa-mi.it/api/config"];
+    NSURL *url = [NSURL URLWithString:pappamiconfing];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     AFJSONRequestOperation *operation =
     [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSDictionary *host = [NSDictionary dictionaryWithDictionary:JSON];
         [[NSUserDefaults standardUserDefaults] setObject:host[@"apihost"] forKey:@"apihost"];
+        if ([host[@"veespoproduction"] isEqualToString:@"NO"])
+            veespoTest = YES;
+        else if ([host[@"veespoproduction"] isEqualToString:@"YES"])
+            veespoTest = NO;
 //        [[NSUserDefaults standardUserDefaults] setObject:@"test-m.pappa-mi.it" forKey:@"apihost"];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
@@ -212,7 +219,7 @@ static int delta = 70;
                                                                  veespoGroup:nil
                                                                   fileConfig:nil
                                                                    urlConfig:nil
-                                                                  andTestUrl:YES];
+                                                                  andTestUrl:veespoTest];
                                                             
                                                             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
                                                             self.mainSideViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainSideViewController"];
@@ -295,7 +302,7 @@ static int delta = 70;
                                                              veespoGroup:nil
                                                               fileConfig:nil
                                                                urlConfig:nil
-                                                              andTestUrl:YES];
+                                                              andTestUrl:veespoTest];
                                                         
                                                         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
                                                         self.mainSideViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainSideViewController"];
