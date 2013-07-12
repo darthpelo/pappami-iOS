@@ -77,7 +77,7 @@ static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
                     ms.contentViewController.view.tag = 0;
                     [ms listSubviewsOfView:bFrontController.view];
                     CGRect frame = [Utils getNavigableContentFrame];
-//                    if ([ms.userMode isEqualToString:LOGGEDUSER]) {
+                    if ([ms.userMode isEqualToString:LOGGEDUSER]) {
                         PMHomeView *hv = [[PMHomeView alloc] initWithFrame:frame];
                         [bFrontController.view addSubview:hv];
                         bFrontController.title = @"Home";
@@ -87,7 +87,25 @@ static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
                             [menuVC setSchoolData:school];
                             [((UINavigationController *)ms.contentViewController) pushViewController:menuVC animated:YES];
                         };
-//                    }
+                    } else {
+                        NSURL *url = [NSURL URLWithString:schoolUrl];
+                        NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+                        AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                            PMSchoolsView *sv = [[PMSchoolsView alloc] initWithFrame:frame];
+                            sv.schoolsList = [NSArray arrayWithArray:JSON];
+                            sv.schoolSelected = ^(NSDictionary *school) {
+                                UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
+                                PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
+                                [menuVC setSchoolData:school];
+                                [((UINavigationController *)ms.contentViewController) pushViewController:menuVC animated:YES];
+                            };
+                            [bFrontController.view addSubview:sv];
+                        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                            PMNSLog("failure");
+                        }];
+                        
+                        [jsonRequest start];
+                    }
                     break;
                 }
                 case 2:{
@@ -136,7 +154,7 @@ static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (self.contentViewController.view.tag == 0) {
-        [self listSubviewsOfView:self.contentViewController.view];
+        [self listSubviewsOfView:frontController.view];
         CGRect frame = [Utils getNavigableContentFrame];
         // L'utente loggato vede l'elenco delle sue scuole.
         if ([self.userMode isEqualToString:LOGGEDUSER]) {
@@ -151,7 +169,6 @@ static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
             };
         } else {
            frontController.title = @"Home";
-            
             NSURL *url = [NSURL URLWithString:schoolUrl];
             NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
             AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
@@ -196,7 +213,7 @@ static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
     if ([subviews count] == 0) return;
     // Rimozione UIView per news e scuole 
     for (UIView *subview in subviews) {
-        if ([subview isKindOfClass:[PMHomeView class]] || [subview isKindOfClass:[PMNewsView class]]) {
+        if ([subview isKindOfClass:[PMHomeView class]] || [subview isKindOfClass:[PMNewsView class]] || [subview isKindOfClass:[PMSchoolsView class]]) {
             [subview removeFromSuperview];
         }
         // List the subviews of subview

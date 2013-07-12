@@ -86,12 +86,38 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PappaMI/Classes/SidebarControllers/Controllers/MainSideViewController.m"
-         timestampString = "395324805.045676"
+         timestampString = "395331202.706209"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "105"
-         endingLineNumber = "105"
+         startingLineNumber = "123"
+         endingLineNumber = "123"
          landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PappaMI/Classes/SidebarControllers/Controllers/MainSideViewController.m"
+         timestampString = "395331360.832524"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "156"
+         endingLineNumber = "156"
+         landmarkName = "-viewDidAppear:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PappaMI/Classes/SidebarControllers/Controllers/MainSideViewController.m"
+         timestampString = "395331533.880015"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "217"
+         endingLineNumber = "217"
+         landmarkName = "-listSubviewsOfView:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
