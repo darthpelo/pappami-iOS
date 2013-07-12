@@ -14,12 +14,17 @@
 #import "PMMenuViewController.h"
 #import "PMNewsView.h"
 #import "PMNewsDetailViewController.h"
+#import "MBProgressHUD.h"
+#import "PMSchoolsView.h"
+#import "AFNetworking.h"
 
 @interface MainSideViewController () {
     UIViewController *frontController;
 }
 
 @end
+
+static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
 
 @implementation MainSideViewController
 
@@ -68,14 +73,14 @@
         } else {
             switch (sectionId) {
                 case 1:{
-                    bFrontController.title = @"Scuole";
+                    bFrontController.title = @"Home";
                     ms.contentViewController.view.tag = 0;
                     [ms listSubviewsOfView:bFrontController.view];
                     CGRect frame = [Utils getNavigableContentFrame];
 //                    if ([ms.userMode isEqualToString:LOGGEDUSER]) {
                         PMHomeView *hv = [[PMHomeView alloc] initWithFrame:frame];
                         [bFrontController.view addSubview:hv];
-                        bFrontController.title = @"Scuole";
+                        bFrontController.title = @"Home";
                         hv.schoolSelected = ^(NSDictionary *school) {
                             UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
                             PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
@@ -96,11 +101,17 @@
                         [newsVC setWebContent:content];
                         [((UINavigationController *)ms.contentViewController) pushViewController:newsVC animated:YES];
                     };
+                    nv.showProgress = ^(BOOL flag){
+                        if(flag == YES)
+                            [MBProgressHUD showHUDAddedTo:ms.view animated:YES];
+                        else
+                            [MBProgressHUD hideAllHUDsForView:ms.view animated:YES];
+                    };
                     [bFrontController.view addSubview:nv];
                     break;
                 }
                 case 3:{
-                    bFrontController.title = @"News Dedicate";
+                    bFrontController.title = @"News Personalizzate";
                     ms.contentViewController.view.tag = 1;
                     [ms listSubviewsOfView:bFrontController.view];
                     CGRect frame = [Utils getNavigableContentFrame];
@@ -125,10 +136,11 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     if (self.contentViewController.view.tag == 0) {
+        [self listSubviewsOfView:self.contentViewController.view];
         CGRect frame = [Utils getNavigableContentFrame];
         // L'utente loggato vede l'elenco delle sue scuole.
-        //if ([self.userMode isEqualToString:LOGGEDUSER]) {
-            frontController.title = @"Tue Scuole";
+        if ([self.userMode isEqualToString:LOGGEDUSER]) {
+            frontController.title = @"Home";
             PMHomeView *hv = [[PMHomeView alloc] initWithFrame:frame];
             [frontController.view addSubview:hv];
             hv.schoolSelected = ^(NSDictionary *school) {
@@ -137,9 +149,27 @@
                 [menuVC setSchoolData:school];
                 [((UINavigationController *)self.contentViewController) pushViewController:menuVC animated:YES];
             };
-        //} else {
-        //    frontController.title = @"Seleziona una scuola di Milano";
-        //}
+        } else {
+           frontController.title = @"Home";
+            
+            NSURL *url = [NSURL URLWithString:schoolUrl];
+            NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+            AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                PMSchoolsView *sv = [[PMSchoolsView alloc] initWithFrame:frame];
+                sv.schoolsList = [NSArray arrayWithArray:JSON];
+                sv.schoolSelected = ^(NSDictionary *school) {
+                    UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
+                    PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
+                    [menuVC setSchoolData:school];
+                    [((UINavigationController *)self.contentViewController) pushViewController:menuVC animated:YES];
+                };
+                [frontController.view addSubview:sv];
+            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                PMNSLog("failure");
+            }];
+            
+            [jsonRequest start];
+        }
     }
 }
 
@@ -164,7 +194,7 @@
     
     // Return if there are no subviews
     if ([subviews count] == 0) return;
-    
+    // Rimozione UIView per news e scuole 
     for (UIView *subview in subviews) {
         if ([subview isKindOfClass:[PMHomeView class]] || [subview isKindOfClass:[PMNewsView class]]) {
             [subview removeFromSuperview];
