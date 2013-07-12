@@ -287,6 +287,11 @@ static int delta = 70;
 
 - (IBAction)anonymousPressed:(id)sender
 {
+    NSHTTPCookie *cookie;
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for (cookie in [storage cookies])
+        [storage deleteCookie:cookie];
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:
                   [NSString stringWithFormat:@"http://%@/api/user/current", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]]];
