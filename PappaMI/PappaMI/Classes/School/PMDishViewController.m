@@ -9,6 +9,7 @@
 #import "Utils.h"
 #import "AFNetworking.h"
 #import "PMStatsViewController.h"
+#import "MBProgressHUD.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation UIViewController (CustomFeatures)
@@ -82,10 +83,10 @@
                                          (self.compTableView.frame.origin.y + self.compTableView.frame.size.height) - 10,
                                          self.veespoButton.frame.size.width,
                                          self.veespoButton.frame.size.height)];
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER])
-        self.veespoButton.enabled = YES;
-    else
-        self.veespoButton.enabled = NO;
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER])
+//        self.veespoButton.enabled = YES;
+//    else
+//        self.veespoButton.enabled = NO;
     
     int components = ((NSArray*)[self.dishData objectForKey:@"components"]).count;
     if (components == 0) {
@@ -143,13 +144,17 @@
                                                             PMStatsViewController *stat = [[PMStatsViewController alloc] initWithNibName:nil bundle:nil];
                                                             [stat setList:list];
                                                             [self.navigationController pushViewController:stat animated:YES];
+                                                            [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
                                                             PMNSLog("failure");
+                                                            [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                         }];
         [jsonRequest start];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         PMNSLog("failure");
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [jsonRequest start];
 }
 

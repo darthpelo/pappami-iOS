@@ -20,18 +20,17 @@
             urlSrt = [NSString stringWithFormat:@"http://%@/api/node/all/stream/", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]];
         else
             urlSrt = [NSString stringWithFormat:@"http://%@/api/node/news/stream/", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]];
-        [self loadData];
         newsTableView = [[UITableView alloc] initWithFrame:frame];
         newsTableView.delegate = self;
         newsTableView.dataSource = self;
         [self addSubview:newsTableView];
+        [self loadData];
     }
     return self;
 }
 
 - (void)loadData
 {
-    [MBProgressHUD showHUDAddedTo:self animated:YES];
     NSURL *url = nil;
     if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER])
         url = [NSURL URLWithString:urlSrt];
@@ -43,12 +42,16 @@
      success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
          newsList = [NSMutableArray arrayWithArray:JSON[@"posts"]];
          [newsTableView reloadData];
-         [MBProgressHUD hideAllHUDsForView:self animated:YES];
+         if (self.showProgress)
+         self.showProgress(NO);
      } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
          PMNSLog("failure");
-         [MBProgressHUD hideAllHUDsForView:self animated:YES];
-     }];
+         if (self.showProgress)
+         self.showProgress(NO);
+    }];
     [jsonRequest start];
+    if (self.showProgress)
+    self.showProgress(YES);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

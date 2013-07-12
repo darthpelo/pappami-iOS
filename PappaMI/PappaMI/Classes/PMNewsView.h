@@ -15,6 +15,7 @@
 }
 
 @property (nonatomic, copy) void (^newsSelected)(NSString *content);
+@property (nonatomic, copy) void (^showProgress)(BOOL flag);
 
 - (id)initWithFrame:(CGRect)frame allnews:(BOOL)flag;
 

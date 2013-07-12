@@ -56,12 +56,16 @@
     self.profileLocationLabel.font = [UIFont fontWithName:boldFontName size:12.0f];
     self.profileLocationLabel.text = @"Milano, IT";
     
-    NSString *avatar = nil;
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER])
-        avatar = [NSString stringWithString:[[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER][@"avatar"]];
-    else
-        avatar = [NSString stringWithString:[[NSUserDefaults standardUserDefaults] objectForKey:GUESTUSER][@"avatar"]];
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"], avatar]];
+    // Avatar
+    NSURL *url = nil;
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER]) {
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER][@"avatar"]
+             rangeOfString:@"http://" options:NSCaseInsensitiveSearch].location == NSNotFound)
+            url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"], [NSString stringWithString:[[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER][@"avatar"]]]];
+        else
+            url = [NSURL URLWithString:[NSString stringWithString:[[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER][@"avatar"]]];
+    } else
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"], [NSString stringWithString:[[NSUserDefaults standardUserDefaults] objectForKey:GUESTUSER][@"avatar"]]]];
     [self.profileImageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"profile.jpg"]];
     self.profileImageView.clipsToBounds = YES;
     self.profileImageView.layer.borderWidth = 4.0f;
@@ -69,13 +73,13 @@
     self.profileImageView.layer.cornerRadius = 35.0f;
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER]) {
-        NSDictionary* object0 = [NSDictionary dictionaryWithObjects:@[ @"Scuole", @"1", @"account" ] forKeys:@[ @"title", @"id", @"icon" ]];
+        NSDictionary* object0 = [NSDictionary dictionaryWithObjects:@[ @"Home", @"1", @"account" ] forKeys:@[ @"title", @"id", @"icon" ]];
         NSDictionary* object1 = [NSDictionary dictionaryWithObjects:@[ @"News", @"2", @"envelope" ] forKeys:@[ @"title", @"id", @"icon" ]];
-        NSDictionary* object2 = [NSDictionary dictionaryWithObjects:@[ @"News dedicate", @"3", @"envelope" ] forKeys:@[ @"title", @"id", @"icon" ]];
+//        NSDictionary* object2 = [NSDictionary dictionaryWithObjects:@[ @"News Personalizzate", @"3", @"envelope" ] forKeys:@[ @"title", @"id", @"icon" ]];
         NSDictionary *object3 = [NSDictionary dictionaryWithObjects:@[ @"Logout", @"0", @"arrow" ] forKeys:@[ @"title", @"id", @"icon" ]];
-        self.items = @[object0, object1, object2, object3];
+        self.items = @[object0, object1, object3];
     } else {
-        NSDictionary* object0 = [NSDictionary dictionaryWithObjects:@[ @"Scuole", @"1", @"account" ] forKeys:@[ @"title", @"id", @"icon" ]];
+        NSDictionary* object0 = [NSDictionary dictionaryWithObjects:@[ @"Home", @"1", @"account" ] forKeys:@[ @"title", @"id", @"icon" ]];
         NSDictionary* object1 = [NSDictionary dictionaryWithObjects:@[ @"News", @"2", @"envelope" ] forKeys:@[ @"title", @"id", @"icon" ]];
         NSDictionary *object2 = [NSDictionary dictionaryWithObjects:@[ @"Logout", @"0", @"arrow" ] forKeys:@[ @"title", @"id", @"icon" ]];
         self.items = @[object0, object1, object2];

@@ -9,7 +9,7 @@
 
 @interface PMHomeView : UIView <UITableViewDelegate, UITableViewDataSource> {
     UITableView *homeTableView;
-    NSArray *personalSchollsList;
+    NSArray *personalSchoolsList;
 }
 
 @property (nonatomic, copy) void (^schoolSelected)(NSDictionary *school);

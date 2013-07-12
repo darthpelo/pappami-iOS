@@ -369,7 +369,7 @@ static int delta = 70;
 - (IBAction)singUpPressed:(id)sender
 {
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Attenzione!"
-                                                      message:@"Per il momento la registrazione a Pappa-MI è possibile solo tramite il nostro sito www.pappa-mi.it.\nDopo che ti sarai registrato, apri nuovamente l'app ed inserisci la tua e-mail e la tua password per cominciare ad utilizzare Pappa-MI!"
+                                                      message:@"Al momento la registrazione si può eseguire solo tramite il nostro sito www.pappa-mi.it.\nRegistrati utilizzando la tua mail e la tua password e non i sistemi alternativi (FaceBook, Twitter etc.) non ancora disponibili.\nConclusa la registrazione apri nuovamente l'app ed inserisci i tuoi dati per cominciare ad utilizzare Pappa-MI!"
                                                      delegate:nil
                                             cancelButtonTitle:@"OK"
                                             otherButtonTitles:nil];
