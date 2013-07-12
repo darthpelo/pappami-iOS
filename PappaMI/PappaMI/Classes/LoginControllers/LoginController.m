@@ -192,8 +192,8 @@ static int delta = 70;
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]]];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
 //    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-//                            @"test001@pappa-mi.it", @"email",
-//                            @"password01", @"password",
+//                            @"darthpelo@gmail.com", @"email",
+//                            @"password", @"password",
 //                            nil];
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             self.usernameField.text, @"email",
@@ -292,6 +292,8 @@ static int delta = 70;
     for (cookie in [storage cookies])
         [storage deleteCookie:cookie];
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER])
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:LOGGEDUSER];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:
                   [NSString stringWithFormat:@"http://%@/api/user/current", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]]];
