@@ -35,6 +35,7 @@
 		BE8C54DD17903B5500AB3075 /* VeespoFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8C54DB17903B5500AB3075 /* VeespoFramework.framework */; };
 		BE8ED7D017863569006AA9A6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8ED7CF17863569006AA9A6 /* SystemConfiguration.framework */; };
 		BE8ED7D217863587006AA9A6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8ED7D117863587006AA9A6 /* CoreText.framework */; };
+		BEA22DAF17918642007A2A4E /* PMHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA22DAE17918642007A2A4E /* PMHomeViewController.m */; };
 		BEA567E21788511A0061AE11 /* arrow-back.png in Resources */ = {isa = PBXBuildFile; fileRef = BEA567E11788511A0061AE11 /* arrow-back.png */; };
 		BEADD707177C3E4500B63A10 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BEADD6F5177C3E4500B63A10 /* AFHTTPClient.m */; };
 		BEADD708177C3E4500B63A10 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BEADD6F7177C3E4500B63A10 /* AFHTTPRequestOperation.m */; };
@@ -149,6 +150,8 @@
 		BE8C54DB17903B5500AB3075 /* VeespoFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VeespoFramework.framework; sourceTree = "<group>"; };
 		BE8ED7CF17863569006AA9A6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BE8ED7D117863587006AA9A6 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		BEA22DAD17918642007A2A4E /* PMHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMHomeViewController.h; path = Classes/School/PMHomeViewController.h; sourceTree = "<group>"; };
+		BEA22DAE17918642007A2A4E /* PMHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PMHomeViewController.m; path = Classes/School/PMHomeViewController.m; sourceTree = "<group>"; };
 		BEA567E11788511A0061AE11 /* arrow-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "arrow-back.png"; path = "Resources/arrow-back.png"; sourceTree = "<group>"; };
 		BEADD6F4177C3E4500B63A10 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		BEADD6F5177C3E4500B63A10 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
@@ -444,6 +447,8 @@
 				BE8142C2178F0C04005E75A9 /* PMStatsViewController.m */,
 				BE8C54CE1790277400AB3075 /* PMSchoolsView.h */,
 				BE8C54CF1790277400AB3075 /* PMSchoolsView.m */,
+				BEA22DAD17918642007A2A4E /* PMHomeViewController.h */,
+				BEA22DAE17918642007A2A4E /* PMHomeViewController.m */,
 			);
 			name = School;
 			sourceTree = "<group>";
@@ -733,6 +738,7 @@
 				BE8142B6178D9A15005E75A9 /* PMNewsDetailViewController.m in Sources */,
 				BE8142C3178F0C04005E75A9 /* PMStatsViewController.m in Sources */,
 				BE8C54D01790277400AB3075 /* PMSchoolsView.m in Sources */,
+				BEA22DAF17918642007A2A4E /* PMHomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

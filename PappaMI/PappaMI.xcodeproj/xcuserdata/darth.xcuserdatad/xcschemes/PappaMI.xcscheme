@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BE5F9AEE177B51F500B74182"
-               BuildableName = "PappaMI.app"
+               BuildableName = "PappaMi.app"
                BlueprintName = "PappaMI"
                ReferencedContainer = "container:PappaMI.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BE5F9AEE177B51F500B74182"
-            BuildableName = "PappaMI.app"
+            BuildableName = "PappaMi.app"
             BlueprintName = "PappaMI"
             ReferencedContainer = "container:PappaMI.xcodeproj">
          </BuildableReference>
@@ -52,7 +52,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BE5F9AEE177B51F500B74182"
-            BuildableName = "PappaMI.app"
+            BuildableName = "PappaMi.app"
             BlueprintName = "PappaMI"
             ReferencedContainer = "container:PappaMI.xcodeproj">
          </BuildableReference>
@@ -75,7 +75,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BE5F9AEE177B51F500B74182"
-            BuildableName = "PappaMI.app"
+            BuildableName = "PappaMi.app"
             BlueprintName = "PappaMI"
             ReferencedContainer = "container:PappaMI.xcodeproj">
          </BuildableReference>
