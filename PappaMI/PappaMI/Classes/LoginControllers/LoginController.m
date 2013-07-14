@@ -191,14 +191,17 @@ static int delta = 70;
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]]];
     AFHTTPClient *httpClient = [[AFHTTPClient alloc] initWithBaseURL:url];
-//    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-//                            @"darthpelo@gmail.com", @"email",
-//                            @"password", @"password",
-//                            nil];
+#ifdef DEVUSER
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            @"darthpelo@gmail.com", @"email",
+                            @"password", @"password",
+                            nil];
+#else
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             self.usernameField.text, @"email",
                             self.passwordField.text, @"password",
                             nil];
+#endif
     [httpClient postPath:@"/auth/password" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSURL *url = [NSURL URLWithString:
                       [NSString stringWithFormat:@"http://%@/api/user/current", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]]];
@@ -343,7 +346,7 @@ static int delta = 70;
                                                         CGFloat yOffset = [vc isKindOfClass:[UINavigationController class]] ? -20 : 0;
                                                         vc.view.frame = CGRectMake(320, yOffset, vc.view.frame.size.width, vc.view.frame.size.height);
                                                         [self.view addSubview:vc.view];
-                                                        
+                                                        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                                                         [UIView animateWithDuration:1.0
                                                                               delay:0.0
                                                                             options:UIViewAnimationOptionCurveEaseInOut
@@ -359,7 +362,6 @@ static int delta = 70;
                                                                              [[NSNotificationCenter defaultCenter] removeObserver:self
                                                                                                                              name:UIKeyboardWillHideNotification
                                                                                                                            object:nil];
-                                                                             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                                                                          }];
                                                     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
                                                         PMNSLog("%@", error.debugDescription);
