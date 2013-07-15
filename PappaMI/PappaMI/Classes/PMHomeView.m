@@ -21,11 +21,11 @@
         titolo.textAlignment = NSTextAlignmentCenter;
         titolo.text = @"Le scuole dei tuoi figli";
         [self addSubview:titolo];
-        CGRect tFrame = CGRectMake(frame.origin.x, titolo.frame.origin.y + titolo.frame.size.height + 10, frame.size.width, 100);
+        CGRect tFrame = CGRectMake(frame.origin.x, titolo.frame.origin.y + titolo.frame.size.height + 10, frame.size.width, frame.size.height - (titolo.frame.origin.y + titolo.frame.size.height));
         homeTableView = [[UITableView alloc] initWithFrame:tFrame];
         homeTableView.delegate = self;
         homeTableView.dataSource = self;
-        [homeTableView setBackgroundColor:[UIColor clearColor]];
+        [homeTableView setBackgroundColor:[UIColor whiteColor]];
         [self addSubview:homeTableView];
     }
     return self;

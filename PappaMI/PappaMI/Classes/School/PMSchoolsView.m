@@ -14,16 +14,16 @@
     self = [super initWithFrame:frame];
     if (self) {
         UILabel *titolo = [[UILabel alloc] initWithFrame:CGRectMake(20, 6, 280, 21)];
-        titolo.font = [UIFont fontWithName:@"Avenir-Black" size:20];
+        titolo.font = [UIFont fontWithName:@"Avenir-Black" size:18];
         [titolo setBackgroundColor:[UIColor clearColor]];
         titolo.textAlignment = NSTextAlignmentCenter;
         titolo.text = @"Seleziona una scuola di Milano";
         [self addSubview:titolo];
-        CGRect tFrame = CGRectMake(frame.origin.x, titolo.frame.origin.y + titolo.frame.size.height + 3, frame.size.width, frame.size.height - (titolo.frame.origin.y + titolo.frame.size.height) + 3);
+        CGRect tFrame = CGRectMake(frame.origin.x, titolo.frame.origin.y + titolo.frame.size.height + 10, frame.size.width, frame.size.height - (titolo.frame.origin.y + titolo.frame.size.height) + 3);
         homeTableView = [[UITableView alloc] initWithFrame:tFrame];
         homeTableView.delegate = self;
         homeTableView.dataSource = self;
-        [homeTableView setBackgroundColor:[UIColor clearColor]];
+        [homeTableView setBackgroundColor:[UIColor whiteColor]];
         [self addSubview:homeTableView];
     }
     return self;

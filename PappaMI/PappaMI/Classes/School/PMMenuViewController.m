@@ -62,8 +62,8 @@
     self.view.backgroundColor = UIColorFromRGB(0x00B2EE);
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    CGRect frame = [Utils getNavigableContentFrame];
-    [self.tableView setFrame:CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, 320, frame.size.height - self.tableView.frame.origin.y - 44)];
+//    CGRect frame = [Utils getNavigableContentFrame];
+//    [self.tableView setFrame:CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, 320, frame.size.height - self.tableView.frame.origin.y - 44)];
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat: @"yyyy-dd-MM"];
@@ -71,13 +71,13 @@
     self.label.text = [NSString stringWithFormat:@"Menù del %@", dateString];
     self.dateButton.backgroundColor = UIColorFromRGB(0x00688B);
     self.dateButton.layer.cornerRadius = 3.0f;
-    self.dateButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Black" size:18.0f];
+//    self.dateButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Black" size:18.0f];
     [self.dateButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.dateButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
-    [self.dateButton setFrame:CGRectMake(self.dateButton.frame.origin.x,
-                                         (self.tableView.frame.origin.y + self.tableView.frame.size.height) - 10,
-                                         self.dateButton.frame.size.width,
-                                         self.dateButton.frame.size.height)];
+//    [self.dateButton setFrame:CGRectMake(self.dateButton.frame.origin.x,
+//                                         (self.tableView.frame.origin.y + self.tableView.frame.size.height) - 10,
+//                                         self.dateButton.frame.size.width,
+//                                         self.dateButton.frame.size.height)];
     [self loadData];
     
     self.title = [self.schoolData objectForKey:@"name"];
@@ -99,8 +99,8 @@
     AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         self.items = [NSArray arrayWithArray:JSON];
         if (self.items.count == 0) {
-            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Attenzione!"
-                                                              message:@"I menù sono disponibili solo per i giorni feriali.\nNon ci sono menù per i giorni festivi."
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Avviso"
+                                                              message:@"I menù sono disponibili solo per i giorni feriali."
                                                              delegate:nil
                                                     cancelButtonTitle:@"OK"
                                                     otherButtonTitles:nil];
@@ -192,8 +192,8 @@
     AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         self.items = [NSArray arrayWithArray:JSON];
         if (self.items.count == 0) {
-            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Attenzione!"
-                                                              message:@"I menù sono disponibili solo per i giorni feriali.\nNon ci sono menù per i giorni festivi."
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Avviso"
+                                                              message:@"I menù sono disponibili solo per i giorni feriali."
                                                              delegate:nil
                                                     cancelButtonTitle:@"OK"
                                                     otherButtonTitles:nil];

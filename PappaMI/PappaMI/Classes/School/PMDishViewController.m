@@ -90,7 +90,7 @@
     
     int components = ((NSArray*)[self.dishData objectForKey:@"components"]).count;
     if (components == 0) {
-        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Attenzione!"
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Avviso"
                                                           message:@"Non sono disponibili gli ingredienti di questo piatto."
                                                          delegate:nil
                                                 cancelButtonTitle:@"OK"
