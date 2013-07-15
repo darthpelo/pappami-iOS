@@ -136,13 +136,19 @@
                                                             for (id key in [tags allKeys]) {
                                                                 NSString *label = labels[key];
                                                                 NSString *avg = tags[key];
+                                                                // Ignoro tag senza media
                                                                 if (label && avg) {
                                                                     NSDictionary* object = [NSDictionary dictionaryWithObjects:@[ label, avg ] forKeys:@[ @"name", @"avg" ]];
                                                                     [list addObject:object];
                                                                 }
                                                             }
+                                                            NSArray *sortedList = [list sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+                                                                NSNumber *num1 = [NSNumber numberWithFloat:[obj1[@"avg"] floatValue]];
+                                                                NSNumber *num2 = [NSNumber numberWithFloat:[obj2[@"avg"] floatValue]];
+                                                                return (NSComparisonResult)[num1 compare:num2];
+                                                            }];
                                                             PMStatsViewController *stat = [[PMStatsViewController alloc] initWithNibName:nil bundle:nil];
-                                                            [stat setList:list];
+                                                            [stat setList:[[sortedList reverseObjectEnumerator] allObjects]];
                                                             [self.navigationController pushViewController:stat animated:YES];
                                                             [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {

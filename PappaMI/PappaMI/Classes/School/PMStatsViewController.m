@@ -93,8 +93,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
+        [cell setUserInteractionEnabled:NO];
     }
-    
     cell.textLabel.text = [self.list objectAtIndex:indexPath.row][@"name"];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", [self.list objectAtIndex:indexPath.row][@"avg"]];
     return cell;
