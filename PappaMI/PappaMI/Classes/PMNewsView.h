@@ -9,13 +9,10 @@
 
 @interface PMNewsView : UIView <UITableViewDelegate, UITableViewDataSource> {
     UITableView *newsTableView;
-    NSMutableArray *newsList;
     NSString *urlSrt;
 }
 
 @property (nonatomic, copy) void (^newsSelected)(NSString *content);
-@property (nonatomic, copy) void (^showProgress)(BOOL flag);
-
-- (id)initWithFrame:(CGRect)frame allnews:(BOOL)flag;
+@property (nonatomic, strong) NSMutableArray *newsList;
 
 @end
