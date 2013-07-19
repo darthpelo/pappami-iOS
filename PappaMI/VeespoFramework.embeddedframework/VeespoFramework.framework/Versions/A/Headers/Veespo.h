@@ -22,7 +22,7 @@
  * flag - YES se si utilizzano i server di Test di Veespo
  *
  */
-+ (void)initUser:(NSString *)userId apiKey:(NSString *)apiKey userName:(NSString *)name language:(NSString *)lang veespoGroup:(NSString *)groupId fileConfig:(NSString *)filename urlConfig:(NSString *)URL andTestUrl:(BOOL)flag;
++ (void)initUser:(NSString *)userId apiKey:(NSString *)apiKey userName:(NSString *)name language:(NSString *)lang veespoGroup:(NSString *)groupId fileConfig:(NSString *)filename urlConfig:(NSString *)URL testUrl:(BOOL)test maskPastRate:(BOOL)mask;
 
 + (void)initUser:(NSString *)userId apiKey:(NSString *)apiKey userName:(NSString *)name language:(NSString *)lang veespoGroup:(NSString *)groupId fileConfig:(NSString *)filename urlConfig:(NSString *)URL test:(BOOL)test sandBox:(BOOL)sandBox;
 

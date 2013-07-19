@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		BE286A8F1784CD65001B9E8A /* PMHomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE286A8E1784CD65001B9E8A /* PMHomeView.m */; };
 		BE3C51F91780CD1500062143 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3C51F81780CD1500062143 /* QuartzCore.framework */; };
-		BE466FA51798142F007B2F62 /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BE466FA31798142F007B2F62 /* Resources.bundle */; };
-		BE466FA61798142F007B2F62 /* VeespoFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE466FA41798142F007B2F62 /* VeespoFramework.framework */; };
 		BE4BE2DF178E0FCB00A84B8F /* libCrittercism_v4_0_0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4BE2DE178E0FCB00A84B8F /* libCrittercism_v4_0_0.a */; };
 		BE5F9AF3177B51F500B74182 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5F9AF2177B51F500B74182 /* UIKit.framework */; };
 		BE5F9AF5177B51F500B74182 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5F9AF4177B51F500B74182 /* Foundation.framework */; };
@@ -104,14 +102,14 @@
 		BED0F314178C7D9200C984B4 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED0F313178C7D9200C984B4 /* NewRelicAgent.framework */; };
 		BED0F316178C7DA600C984B4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED0F315178C7DA600C984B4 /* CoreTelephony.framework */; };
 		BED0F318178C7DB200C984B4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BED0F317178C7DB100C984B4 /* libz.dylib */; };
+		BEE4780B17992D2000246B47 /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BEE4780917992D2000246B47 /* Resources.bundle */; };
+		BEE4780C17992D2000246B47 /* VeespoFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4780A17992D2000246B47 /* VeespoFramework.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BE286A8D1784CD65001B9E8A /* PMHomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMHomeView.h; path = Classes/PMHomeView.h; sourceTree = "<group>"; };
 		BE286A8E1784CD65001B9E8A /* PMHomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PMHomeView.m; path = Classes/PMHomeView.m; sourceTree = "<group>"; };
 		BE3C51F81780CD1500062143 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		BE466FA31798142F007B2F62 /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
-		BE466FA41798142F007B2F62 /* VeespoFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VeespoFramework.framework; sourceTree = "<group>"; };
 		BE49F14B178E02DC00C2C3AB /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		BE4BE2DC178E0FCB00A84B8F /* Crittercism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crittercism.h; sourceTree = "<group>"; };
 		BE4BE2DD178E0FCB00A84B8F /* CrittercismDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrittercismDelegate.h; sourceTree = "<group>"; };
@@ -244,6 +242,8 @@
 		BED0F313178C7D9200C984B4 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		BED0F315178C7DA600C984B4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		BED0F317178C7DB100C984B4 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		BEE4780917992D2000246B47 /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
+		BEE4780A17992D2000246B47 /* VeespoFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VeespoFramework.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,30 +261,13 @@
 				BE5F9AF7177B51F500B74182 /* CoreGraphics.framework in Frameworks */,
 				BED0F314178C7D9200C984B4 /* NewRelicAgent.framework in Frameworks */,
 				BE4BE2DF178E0FCB00A84B8F /* libCrittercism_v4_0_0.a in Frameworks */,
-				BE466FA61798142F007B2F62 /* VeespoFramework.framework in Frameworks */,
+				BEE4780C17992D2000246B47 /* VeespoFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BE466FA11798142F007B2F62 /* VeespoFramework.embeddedframework */ = {
-			isa = PBXGroup;
-			children = (
-				BE466FA21798142F007B2F62 /* Resources */,
-				BE466FA41798142F007B2F62 /* VeespoFramework.framework */,
-			);
-			path = VeespoFramework.embeddedframework;
-			sourceTree = "<group>";
-		};
-		BE466FA21798142F007B2F62 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				BE466FA31798142F007B2F62 /* Resources.bundle */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		BE4BE2DB178E0FCB00A84B8F /* CrittercismSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -298,7 +281,7 @@
 		BE5F9AE6177B51F500B74182 = {
 			isa = PBXGroup;
 			children = (
-				BE466FA11798142F007B2F62 /* VeespoFramework.embeddedframework */,
+				BEE4780717992D2000246B47 /* VeespoFramework.embeddedframework */,
 				BED0F30F178C76CA00C984B4 /* Icon.png */,
 				BE49F14B178E02DC00C2C3AB /* Icon@2x.png */,
 				BE5F9AF8177B51F500B74182 /* PappaMI */,
@@ -584,6 +567,23 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		BEE4780717992D2000246B47 /* VeespoFramework.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				BEE4780817992D2000246B47 /* Resources */,
+				BEE4780A17992D2000246B47 /* VeespoFramework.framework */,
+			);
+			path = VeespoFramework.embeddedframework;
+			sourceTree = "<group>";
+		};
+		BEE4780817992D2000246B47 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BEE4780917992D2000246B47 /* Resources.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -689,7 +689,7 @@
 				BE8C54D41790332300AB3075 /* Icon.png in Resources */,
 				BE8C54D51790332700AB3075 /* Icon@2x.png in Resources */,
 				BE8C54D7179037F600AB3075 /* logo_144.png in Resources */,
-				BE466FA51798142F007B2F62 /* Resources.bundle in Resources */,
+				BEE4780B17992D2000246B47 /* Resources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

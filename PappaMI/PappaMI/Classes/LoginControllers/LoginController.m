@@ -222,7 +222,8 @@ static int delta = 70;
                                                                  veespoGroup:nil
                                                                   fileConfig:nil
                                                                    urlConfig:nil
-                                                                  andTestUrl:veespoTest];
+                                                                  testUrl:veespoTest
+                                                             maskPastRate:YES];
                                                             
                                                             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
                                                             self.mainSideViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainSideViewController"];
@@ -312,7 +313,8 @@ static int delta = 70;
                                                              veespoGroup:nil
                                                               fileConfig:nil
                                                                urlConfig:nil
-                                                              andTestUrl:veespoTest];
+                                                              testUrl:veespoTest
+                                                         maskPastRate:YES];
                                                         
                                                         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
                                                         self.mainSideViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainSideViewController"];
