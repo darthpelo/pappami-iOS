@@ -63,14 +63,11 @@ static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
     frontController.title = @"Home";
     CGRect frame = [Utils getNavigableContentFrame];
     if ([self.userMode isEqualToString:LOGGEDUSER]) {
-        PMHomeView *hv = [[PMHomeView alloc] initWithFrame:frame];
-        [frontController.view addSubview:hv];
-        hv.schoolSelected = ^(NSDictionary *school) {
-            UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
-            PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
-            [menuVC setSchoolData:school];
-            [((UINavigationController *)self.contentViewController) pushViewController:menuVC animated:YES];
-        };
+        UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
+        PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
+        nav = [[UINavigationController alloc] initWithRootViewController:menuVC];
+        self.contentViewController = nav;
+        menuVC.navigationItem.leftBarButtonItem = menuItem;
     } else {
         [MBProgressHUD showHUDAddedTo:frontController.view animated:YES];
         NSURL *url = [NSURL URLWithString:schoolUrl];
@@ -84,7 +81,7 @@ static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
                                                             sv.schoolSelected = ^(NSDictionary *school) {
                                                                 UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
                                                                 PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
-                                                                [menuVC setSchoolData:school];
+//                                                                [menuVC setSchoolData:school];
                                                                 [((UINavigationController *)self.contentViewController) pushViewController:menuVC animated:YES];
                                                             };
                                                             [frontController.view addSubview:sv];
@@ -116,7 +113,7 @@ static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
                     hv.schoolSelected = ^(NSDictionary *school) {
                         UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
                         PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
-                        [menuVC setSchoolData:school];
+//                        [menuVC setSchoolData:school];
                         [((UINavigationController *)ms.contentViewController) pushViewController:menuVC animated:YES];
                     };
                 } else {
@@ -132,7 +129,7 @@ static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
                                                                         sv.schoolSelected = ^(NSDictionary *school) {
                                                                             UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
                                                                             PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
-                                                                            [menuVC setSchoolData:school];
+//                                                                            [menuVC setSchoolData:school];
                                                                             [((UINavigationController *)ms.contentViewController) pushViewController:menuVC animated:YES];
                                                                         };
                                                                         [bFrontController.view addSubview:sv];

@@ -120,13 +120,13 @@
 
 - (IBAction)statPressed:(id)sender
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://sandbox.veespo.com/v1/average/target/tgt-pappa-mi-dish-%@", self.dishId]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://production.veespo.com/v1/average/target/tgt-pappa-mi-dish-%@", self.dishId]];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     AFJSONRequestOperation *jsonRequest =
     [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSDictionary *tags = [NSDictionary dictionaryWithDictionary:JSON[@"data"][@"avgS"]];
         
-        NSURL *url = [NSURL URLWithString:@"http://sandbox.veespo.com/v1/tag-labels/category/ctg-f86fbf9e-b53b-e7a5-d75d-57139ea6541d?lang=it"];
+        NSURL *url = [NSURL URLWithString:@"http://production.veespo.com/v1/tag-labels/category/ctg-f86fbf9e-b53b-e7a5-d75d-57139ea6541d?lang=it"];
         request = [NSMutableURLRequest requestWithURL:url];
         AFJSONRequestOperation *jsonRequest =
         [AFJSONRequestOperation JSONRequestOperationWithRequest:request

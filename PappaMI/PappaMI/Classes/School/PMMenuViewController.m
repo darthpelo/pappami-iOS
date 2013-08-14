@@ -13,6 +13,7 @@
 #import "MBProgressHUD.h"
 #import <QuartzCore/QuartzCore.h>
 
+/*
 @implementation UIViewController (CustomFeatures)
 -(void)setNavigationBar{
     // Set the custom back button
@@ -36,6 +37,7 @@
     self.navigationItem.hidesBackButton = YES;
 }
 @end
+*/
 
 @interface PMMenuViewController ()
 
@@ -57,34 +59,37 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setNavigationBar];
+//    [self setNavigationBar];
     
     self.view.backgroundColor = UIColorFromRGB(0x00B2EE);
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-//    CGRect frame = [Utils getNavigableContentFrame];
-//    [self.tableView setFrame:CGRectMake(self.tableView.frame.origin.x, self.tableView.frame.origin.y, 320, frame.size.height - self.tableView.frame.origin.y - 44)];
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat: @"yyyy-dd-MM"];
     NSString *dateString = [dateFormat stringFromDate:[NSDate date]];
-    self.label.text = [NSString stringWithFormat:@"Menù del %@", dateString];
+    self.schoolButton.backgroundColor = UIColorFromRGB(0x00688B);
+    self.schoolButton.layer.cornerRadius = 3.0f;
+    [self.schoolButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.schoolButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
+    
     self.dateButton.backgroundColor = UIColorFromRGB(0x00688B);
     self.dateButton.layer.cornerRadius = 3.0f;
-//    self.dateButton.titleLabel.font = [UIFont fontWithName:@"Avenir-Black" size:18.0f];
     [self.dateButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.dateButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
-//    [self.dateButton setFrame:CGRectMake(self.dateButton.frame.origin.x,
-//                                         (self.tableView.frame.origin.y + self.tableView.frame.size.height) - 10,
-//                                         self.dateButton.frame.size.width,
-//                                         self.dateButton.frame.size.height)];
-    [self loadData];
+
+    schoolData = [NSDictionary dictionary];
+    [self loadDataAtIndex:0];
     
-    self.title = [self.schoolData objectForKey:@"name"];
+    self.title = [schoolData objectForKey:@"name"];
 }
 
-- (void)loadData
+- (void)loadDataAtIndex:(int)index
 {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER]) {
+        NSArray *tmp = [NSArray arrayWithArray:[[[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER] objectForKey:@"schools"]];
+        schoolData = [tmp objectAtIndex:index];
+    }
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat: @"yyyy-MM-dd"];
@@ -92,7 +97,7 @@
     
     NSString *api = [NSString stringWithFormat:@"http://%@/api/menu/%@/%@",
                      [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"],
-                     [self.schoolData objectForKey:@"id"],
+                     [schoolData objectForKey:@"id"],
                      dateString];
     NSURL *url = [NSURL URLWithString:api];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -115,11 +120,13 @@
     [jsonRequest start];
 }
 
+/*
 - (void)back
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
     self.schoolData = nil;
 }
+*/
 
 - (void)didReceiveMemoryWarning
 {
@@ -135,6 +142,35 @@
     }
     [self presentSemiModalViewController:datePicker];
 }
+
+- (IBAction)schoolButtonPressed:(id)sender
+{
+    NSMutableArray *personalSchoolsList = [NSMutableArray array];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER]) {
+        NSArray *tmp = [NSArray arrayWithArray:[[[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER] objectForKey:@"schools"]];
+        for (NSDictionary *dict in tmp) {
+            [personalSchoolsList addObject:[dict objectForKey:@"name"]];
+        }
+    } else {
+        NSArray *tmp = [NSArray arrayWithArray:[[[NSUserDefaults standardUserDefaults] objectForKey:GUESTUSER] objectForKey:@"schools"]];
+        for (NSDictionary *dict in tmp) {
+            [personalSchoolsList addObject:[dict objectForKey:@"name"]];
+        }
+    }
+    schoolPicker = [[YHCPickerView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) withNSArray:personalSchoolsList];
+    
+    schoolPicker.delegate = self;
+    [self.view addSubview:schoolPicker];
+    [schoolPicker showPicker];
+}
+
+-(void)selectedRow:(int)row withString:(NSString *)text{
+    [self loadDataAtIndex:row];
+    self.title = text;
+    schoolPicker = nil;
+}
+
+#pragma mark UITableViewDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
@@ -152,13 +188,12 @@
     return cell;
 }
 
-#pragma mark UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/dish/%@/%@",
                                        [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"],
                                        self.items[indexPath.row][@"id"],
-                                       [self.schoolData objectForKey:@"id"]]];
+                                       [schoolData objectForKey:@"id"]]];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [AFJSONRequestOperation addAcceptableContentTypes:[NSSet setWithObject:@"text/html"]];
     AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
@@ -185,7 +220,7 @@
     [dateFormat setDateFormat: @"yyyy-MM-dd"];
     NSString *api = [NSString stringWithFormat:@"http://%@/api/menu/%@/%@",
                      [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"],
-                     [self.schoolData objectForKey:@"id"],
+                     [schoolData objectForKey:@"id"],
                      [dateFormat stringFromDate:viewController.datePicker.date]];
     NSURL *url = [NSURL URLWithString:api];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
@@ -206,7 +241,6 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
     [jsonRequest start];
-    self.label.text = [NSString stringWithFormat:@"Menù del %@",[dateFormat stringFromDate:viewController.datePicker.date]];
 }
 
 -(void)datePickerClearDate:(TDDatePickerController*)viewController {

@@ -7,19 +7,22 @@
 
 #import <UIKit/UIKit.h>
 #import "TDDatePickerController.h"
+#import "YHCPickerView.h"
 
-@interface PMMenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface PMMenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, YHCPickerViewDelegate> {
     TDDatePickerController *datePicker;
+    YHCPickerView *schoolPicker;
+    NSDictionary *schoolData;
 }
 
 @property (nonatomic, weak) IBOutlet UITableView* tableView;
 
 @property (nonatomic, weak) IBOutlet UIButton *dateButton;
 
-@property (nonatomic, weak) IBOutlet UILabel *label;
-
-@property (nonatomic, strong) NSDictionary *schoolData;
+@property (nonatomic, weak) IBOutlet UIButton *schoolButton;
 
 - (IBAction)dateButtonPressed:(id)sender;
+
+- (IBAction)schoolButtonPressed:(id)sender;
 
 @end

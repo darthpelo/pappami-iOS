@@ -23,6 +23,7 @@
 		BE5F9B0F177B51F500B74182 /* PMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5F9B0E177B51F500B74182 /* PMViewController.m */; };
 		BE5F9B1A177B549C00B74182 /* BaseLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5F9B17177B549C00B74182 /* BaseLoginController.m */; };
 		BE5F9B1B177B549C00B74182 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE5F9B19177B549C00B74182 /* LoginController.m */; };
+		BE7C8F4717B437CE004787AC /* YHCPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7C8F4617B437CE004787AC /* YHCPickerView.m */; };
 		BE8142AD178B6288005E75A9 /* PMNewsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8142AC178B6288005E75A9 /* PMNewsView.m */; };
 		BE8142B6178D9A15005E75A9 /* PMNewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8142B5178D9A15005E75A9 /* PMNewsDetailViewController.m */; };
 		BE8142BA178EE4B6005E75A9 /* valuta.png in Resources */ = {isa = PBXBuildFile; fileRef = BE8142B9178EE4B6005E75A9 /* valuta.png */; };
@@ -132,6 +133,8 @@
 		BE5F9B17177B549C00B74182 /* BaseLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseLoginController.m; path = Classes/LoginControllers/BaseLoginController.m; sourceTree = "<group>"; };
 		BE5F9B18177B549C00B74182 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginController.h; path = Classes/LoginControllers/LoginController.h; sourceTree = "<group>"; };
 		BE5F9B19177B549C00B74182 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginController.m; path = Classes/LoginControllers/LoginController.m; sourceTree = "<group>"; };
+		BE7C8F4517B437CE004787AC /* YHCPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHCPickerView.h; sourceTree = "<group>"; };
+		BE7C8F4617B437CE004787AC /* YHCPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHCPickerView.m; sourceTree = "<group>"; };
 		BE8142AB178B6288005E75A9 /* PMNewsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMNewsView.h; path = Classes/PMNewsView.h; sourceTree = "<group>"; };
 		BE8142AC178B6288005E75A9 /* PMNewsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PMNewsView.m; path = Classes/PMNewsView.m; sourceTree = "<group>"; };
 		BE8142B4178D9A15005E75A9 /* PMNewsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMNewsDetailViewController.h; path = Classes/News/PMNewsDetailViewController.h; sourceTree = "<group>"; };
@@ -318,6 +321,7 @@
 		BE5F9AF8177B51F500B74182 /* PappaMI */ = {
 			isa = PBXGroup;
 			children = (
+				BE7C8F4417B437CE004787AC /* YHCPickerView */,
 				BEB0CA971785D4460070CF49 /* TDSemiModal */,
 				BEADD6F3177C3E4500B63A10 /* AFNetworking */,
 				BEC29D8A177DCED000036BD4 /* GHSidebarNav */,
@@ -366,6 +370,16 @@
 				BE5F9B19177B549C00B74182 /* LoginController.m */,
 			);
 			name = LoginControllers;
+			sourceTree = "<group>";
+		};
+		BE7C8F4417B437CE004787AC /* YHCPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				BE7C8F4517B437CE004787AC /* YHCPickerView.h */,
+				BE7C8F4617B437CE004787AC /* YHCPickerView.m */,
+			);
+			name = YHCPickerView;
+			path = Classes/YHCPickerView;
 			sourceTree = "<group>";
 		};
 		BE8142AA178B5E43005E75A9 /* News */ = {
@@ -733,6 +747,7 @@
 				BE8142B6178D9A15005E75A9 /* PMNewsDetailViewController.m in Sources */,
 				BE8142C3178F0C04005E75A9 /* PMStatsViewController.m in Sources */,
 				BE8C54D01790277400AB3075 /* PMSchoolsView.m in Sources */,
+				BE7C8F4717B437CE004787AC /* YHCPickerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
