@@ -18,13 +18,12 @@
 @end
 
 @implementation SidebarController
-@synthesize closeViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        sectionSelected = 0;
     }
     return self;
 }
@@ -124,8 +123,13 @@
 #pragma mark UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (self.closeViewController) {
-        NSDictionary* item = self.items[indexPath.row];
-        self.closeViewController([item[@"id"] integerValue]);
+        if (sectionSelected == indexPath.row)
+            self.closeViewController(-1);
+        else {
+            sectionSelected = indexPath.row;
+            NSDictionary* item = self.items[indexPath.row];
+            self.closeViewController([item[@"id"] integerValue]);
+        }
     }
 }
 

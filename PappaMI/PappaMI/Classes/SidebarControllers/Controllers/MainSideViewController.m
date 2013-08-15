@@ -56,7 +56,6 @@ static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
     frontController.navigationItem.leftBarButtonItem = menuItem;
     
     self.contentViewController = nav;
-    self.contentViewController.view.tag = 0;
     self.sidebarViewController = rearVC;
     
     // Inizializzazione Home
@@ -65,6 +64,7 @@ static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
     if ([self.userMode isEqualToString:LOGGEDUSER]) {
         UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
         PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
+        nav = nil;
         nav = [[UINavigationController alloc] initWithRootViewController:menuVC];
         self.contentViewController = nav;
         menuVC.navigationItem.leftBarButtonItem = menuItem;
@@ -97,25 +97,19 @@ static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
     // Gestione callback selezione elementi da menu sidebar
     __weak MainSideViewController *ms = self;
     __block UIViewController *bFrontController = frontController;
+    __block UINavigationController *bNav = nav;
     ((SidebarController *)self.sidebarViewController).closeViewController = ^(NSInteger sectionId){
         [ms revealToggle:nil];
         switch (sectionId) {
             case 1:{
-                if (ms.contentViewController.view.tag == 0) break;
-                bFrontController.title = @"Home";
-                ms.contentViewController.view.tag = 0;
                 [ms removeSubviewsOfView:bFrontController.view];
-                CGRect frame = [Utils getNavigableContentFrame];
                 if ([ms.userMode isEqualToString:LOGGEDUSER]) {
-                    PMHomeView *hv = [[PMHomeView alloc] initWithFrame:frame];
-                    [bFrontController.view addSubview:hv];
-                    bFrontController.title = @"Home";
-                    hv.schoolSelected = ^(NSDictionary *school) {
-                        UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
-                        PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
-//                        [menuVC setSchoolData:school];
-                        [((UINavigationController *)ms.contentViewController) pushViewController:menuVC animated:YES];
-                    };
+                    UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
+                    PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
+                    bNav =  nil;
+                    bNav = [[UINavigationController alloc] initWithRootViewController:menuVC];
+                    ms.contentViewController = bNav;
+                    menuVC.navigationItem.leftBarButtonItem = menuItem;
                 } else {
                     [MBProgressHUD showHUDAddedTo:bFrontController.view animated:YES];
                     NSURL *url = [NSURL URLWithString:schoolUrl];
@@ -143,9 +137,10 @@ static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
                 break;
             }
             case 2:{
-                if (ms.contentViewController.view.tag == 1) break;
+                bNav =  nil;
+                bNav = [[UINavigationController alloc] initWithRootViewController:bFrontController];
+                ms.contentViewController = bNav;
                 bFrontController.title = @"News";
-                ms.contentViewController.view.tag = 1;
                 [ms removeSubviewsOfView:bFrontController.view];
                 CGRect frame = [Utils getNavigableContentFrame];
                 [MBProgressHUD showHUDAddedTo:bFrontController.view animated:YES];

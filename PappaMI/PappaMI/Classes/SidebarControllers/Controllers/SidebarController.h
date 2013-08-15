@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SidebarController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface SidebarController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+    int sectionSelected;
+}
 
 @property (nonatomic, weak) IBOutlet UITableView* tableView;
 
