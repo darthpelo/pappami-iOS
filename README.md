@@ -8,7 +8,7 @@ This first version was produced in a short time, in order to participate in the 
 
 Authors
 --------
-[Alessio](mailto:roberto@veespo.com) developer
+[Alessio](mailto:roberto@veespo.com)
 
 ## Contact ##
 
