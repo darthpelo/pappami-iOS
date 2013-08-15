@@ -6,6 +6,21 @@ pappami-iOS
 I have developed this application for my friend Roberto Previtera, the creator of website [Pappa-Mi] (http://www.pappa-mi.it).
 This first version was produced in a short time, in order to participate in the contest [App4Mi] (http://www.app4mi.it/) made ​​by the city of Milan.
 
+Authors
+--------
+[Alessio](mailto:roberto@veespo.com) developer
+
+## Contact ##
+
+[Roberto Previtera](mailto:roberto.previtera@gmail.com)
+
+[Alessio](mailto:roberto@veespo.com)
+
+Thanks to
+---------
+
+Paco & Gaia
+
 License
 ---------
 
