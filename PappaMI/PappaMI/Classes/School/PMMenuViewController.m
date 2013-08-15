@@ -13,32 +13,6 @@
 #import "MBProgressHUD.h"
 #import <QuartzCore/QuartzCore.h>
 
-/*
-@implementation UIViewController (CustomFeatures)
--(void)setNavigationBar{
-    // Set the custom back button
-    UIImage *buttonImage = [UIImage imageNamed:@"arrow-back.png"];
-    
-    //create the button and assign the image
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setImage:buttonImage forState:UIControlStateNormal];
-    //    [button setImage:[UIImage imageNamed:@"selback.png"] forState:UIControlStateHighlighted];
-    button.adjustsImageWhenDisabled = NO;
-    
-    
-    //set the frame of the button to the size of the image (see note below)
-    button.frame = CGRectMake(0, 0, 38*0.4, 32*0.4);
-    
-    [button addTarget:self action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
-    
-    //create a UIBarButtonItem with the button as a custom view
-    UIBarButtonItem *customBarItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-    self.navigationItem.leftBarButtonItem = customBarItem;
-    self.navigationItem.hidesBackButton = YES;
-}
-@end
-*/
-
 @interface PMMenuViewController ()
 
 @property (nonatomic, strong) NSArray* items;
@@ -59,15 +33,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//    [self setNavigationBar];
     
     self.view.backgroundColor = UIColorFromRGB(0x00B2EE);
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat: @"yyyy-dd-MM"];
-    NSString *dateString = [dateFormat stringFromDate:[NSDate date]];
+    [dateFormat setDateFormat: @"dd-MM-yyyy"];
+    dateString = [dateFormat stringFromDate:[NSDate date]];
+    
     self.schoolButton.backgroundColor = UIColorFromRGB(0x00688B);
     self.schoolButton.layer.cornerRadius = 3.0f;
     [self.schoolButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -93,12 +67,12 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat: @"yyyy-MM-dd"];
-    NSString *dateString = [dateFormat stringFromDate:[NSDate date]];
+    NSString *date = [dateFormat stringFromDate:[NSDate date]];
     
     NSString *api = [NSString stringWithFormat:@"http://%@/api/menu/%@/%@",
                      [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"],
                      [schoolData objectForKey:@"id"],
-                     dateString];
+                     date];
     NSURL *url = [NSURL URLWithString:api];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
@@ -119,14 +93,6 @@
     }];
     [jsonRequest start];
 }
-
-/*
-- (void)back
-{
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    self.schoolData = nil;
-}
-*/
 
 - (void)didReceiveMemoryWarning
 {
@@ -172,12 +138,34 @@
 
 #pragma mark UITableViewDelegate
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     
     return self.items.count;
 }
 
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *customView = [[UIView alloc] initWithFrame:CGRectMake(10.0, 0.0, 320.0, 22.0)];
+    customView.backgroundColor = UIColorFromRGB(0x00B2EE);
+//    customView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"headerbackground.png"]];;
+    
+    UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    headerLabel.backgroundColor = [UIColor clearColor];
+    headerLabel.opaque = NO;
+    headerLabel.textColor = [UIColor whiteColor];
+    headerLabel.font = [UIFont fontWithName:@"Avenir Black" size:18];
+//    headerLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+//    headerLabel.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
+    headerLabel.frame = CGRectMake(11,-11, 298.0, 44.0);
+    headerLabel.textAlignment = UITextAlignmentCenter;
+    headerLabel.text = [NSString stringWithFormat:@"Menù del %@", dateString];
+    [customView addSubview:headerLabel];
+    return customView;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     
     PMMenuCell* cell = [tableView dequeueReusableCellWithIdentifier:@"MenuCell"];
     
@@ -188,7 +176,8 @@
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/dish/%@/%@",
                                        [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"],
@@ -222,6 +211,9 @@
                      [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"],
                      [schoolData objectForKey:@"id"],
                      [dateFormat stringFromDate:viewController.datePicker.date]];
+    [dateFormat setDateFormat:@"dd-MM-yyyy"];
+    dateString = [dateFormat stringFromDate:viewController.datePicker.date];
+    
     NSURL *url = [NSURL URLWithString:api];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {

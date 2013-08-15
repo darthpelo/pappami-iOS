@@ -264,7 +264,7 @@ static int delta = 70;
                                                                     [[NSUserDefaults standardUserDefaults] removeObjectForKey:GUESTUSER];
                                                             };
                                                             
-                                                            vc.view.frame = CGRectMake(0, 0, vc.view.frame.size.width, vc.view.frame.size.height);
+//                                                            vc.view.frame = CGRectMake(0, 0, vc.view.frame.size.width, vc.view.frame.size.height);
                                                             CGFloat yOffset = [vc isKindOfClass:[UINavigationController class]] ? -20 : 0;
                                                             vc.view.frame = CGRectMake(320, yOffset, vc.view.frame.size.width, vc.view.frame.size.height);
                                                             [self.view addSubview:vc.view];

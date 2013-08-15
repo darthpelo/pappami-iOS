@@ -13,6 +13,7 @@
     TDDatePickerController *datePicker;
     YHCPickerView *schoolPicker;
     NSDictionary *schoolData;
+    NSString *dateString;
 }
 
 @property (nonatomic, weak) IBOutlet UITableView* tableView;
