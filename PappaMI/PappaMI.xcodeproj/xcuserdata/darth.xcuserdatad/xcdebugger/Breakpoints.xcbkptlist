@@ -20,32 +20,6 @@
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "PappaMI/Classes/SidebarControllers/Controllers/SidebarController.m"
-         timestampString = "395316112.160523"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "102"
-         endingLineNumber = "102"
-         landmarkName = "-tableView:cellForRowAtIndexPath:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "PappaMI/Classes/LoginControllers/LoginController.m"
-         timestampString = "395426967.508011"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "284"
-         endingLineNumber = "284"
-         landmarkName = "-exec:block:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "PappaMI/Classes/LoginControllers/LoginController.m"
          timestampString = "395426967.508011"
          startingColumnNumber = "9223372036854775807"
@@ -60,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PappaMI/Classes/School/PMMenuViewController.m"
-         timestampString = "398191614.489987"
+         timestampString = "398253305.466762"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "201"
-         endingLineNumber = "201"
+         startingLineNumber = "190"
+         endingLineNumber = "190"
          landmarkName = "-tableView:didSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>

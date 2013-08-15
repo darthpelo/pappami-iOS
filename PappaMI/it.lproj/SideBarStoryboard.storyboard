@@ -267,60 +267,6 @@
     <resources>
         <image name="valuta.png" width="543" height="154"/>
     </resources>
-    <classes>
-        <class className="GHRevealViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GHRevealViewController.h"/>
-        </class>
-        <class className="MainSideViewController" superclassName="GHRevealViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainSideViewController.h"/>
-        </class>
-        <class className="PMDishViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PMDishViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="statPressed:"/>
-                <relationship kind="action" name="veespoPressed:"/>
-                <relationship kind="outlet" name="compTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="statButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="veespoButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="PMMenuCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PMMenuCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="PMMenuViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/PMMenuViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="dateButtonPressed:"/>
-                <relationship kind="action" name="schoolButtonPressed:"/>
-                <relationship kind="outlet" name="dateButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="schoolButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="SidebarCell" superclassName="UITableViewCell">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SidebarCell.h"/>
-            <relationships>
-                <relationship kind="outlet" name="bgView" candidateClass="UIView"/>
-                <relationship kind="outlet" name="bottomSeparator" candidateClass="UIView"/>
-                <relationship kind="outlet" name="countLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="iconImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="topSeparator" candidateClass="UIView"/>
-            </relationships>
-        </class>
-        <class className="SidebarController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/SidebarController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="profileImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="profileLocationLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="profileNameLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
