@@ -14,6 +14,7 @@
     YHCPickerView *schoolPicker;
     NSDictionary *schoolData;
     NSString *dateString;
+    NSArray *citySchools;
 }
 
 @property (nonatomic, weak) IBOutlet UITableView* tableView;

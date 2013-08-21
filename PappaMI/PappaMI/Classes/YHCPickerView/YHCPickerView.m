@@ -16,12 +16,12 @@
 
     self = [super initWithFrame:frame];
     if (self) {
-        
         self.arrRecords = arrValues;
     }
     return self;
 
 }
+
 -(void)showPicker{
 
     self.userInteractionEnabled = TRUE;

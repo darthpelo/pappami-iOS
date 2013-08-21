@@ -13,6 +13,8 @@
 #import "MBProgressHUD.h"
 #import <QuartzCore/QuartzCore.h>
 
+static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
+
 @interface PMMenuViewController ()
 
 @property (nonatomic, strong) NSArray* items;
@@ -33,7 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    citySchools = nil;
     self.view.backgroundColor = UIColorFromRGB(0x00B2EE);
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -60,39 +62,57 @@
 
 - (void)loadDataAtIndex:(int)index
 {
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER]) {
-        NSArray *tmp = [NSArray arrayWithArray:[[[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER] objectForKey:@"schools"]];
-        schoolData = [tmp objectAtIndex:index];
-    }
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat: @"yyyy-MM-dd"];
-    NSString *date = [dateFormat stringFromDate:[NSDate date]];
-    
-    NSString *api = [NSString stringWithFormat:@"http://%@/api/menu/%@/%@",
-                     [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"],
-                     [schoolData objectForKey:@"id"],
-                     date];
-    NSURL *url = [NSURL URLWithString:api];
-    NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-        self.items = [NSArray arrayWithArray:JSON];
-        if (self.items.count == 0) {
-            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Avviso"
-                                                              message:@"I menù sono disponibili solo per i giorni feriali."
-                                                             delegate:nil
-                                                    cancelButtonTitle:@"OK"
-                                                    otherButtonTitles:nil];
-            [message show];
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER]) {
+            NSArray *tmp = [NSArray arrayWithArray:[[[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER] objectForKey:@"schools"]];
+            schoolData = [tmp objectAtIndex:index];
+        } else {
+            if (citySchools) {
+                schoolData = [citySchools objectAtIndex:index];
+            } else {
+            NSArray *tmp = [NSArray arrayWithArray:[[[NSUserDefaults standardUserDefaults] objectForKey:GUESTUSER] objectForKey:@"schools"]];
+            schoolData = [tmp objectAtIndex:index];
+            NSURL *url = [NSURL URLWithString:schoolUrl];
+            NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+            AFJSONRequestOperation *jsonRequest =
+            [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                            success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                                citySchools = [NSArray arrayWithArray:JSON];
+                                                            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                                PMNSLog("failure");
+                                                            }];
+            
+            [jsonRequest start];
+            }
         }
-        [self.tableView reloadData];
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-        PMNSLog("failure");
-        [MBProgressHUD hideHUDForView:self.view animated:YES];
-    }];
-    [jsonRequest start];
-}
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setDateFormat: @"yyyy-MM-dd"];
+        NSString *date = [dateFormat stringFromDate:[NSDate date]];
+        
+        NSString *api = [NSString stringWithFormat:@"http://%@/api/menu/%@/%@",
+                         [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"],
+                         [schoolData objectForKey:@"id"],
+                         date];
+        NSURL *url = [NSURL URLWithString:api];
+        NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+            self.items = [NSArray arrayWithArray:JSON];
+            if (self.items.count == 0) {
+                UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Avviso"
+                                                                  message:@"I menù sono disponibili solo per i giorni feriali."
+                                                                 delegate:nil
+                                                        cancelButtonTitle:@"OK"
+                                                        otherButtonTitles:nil];
+                [message show];
+            }
+            [self.tableView reloadData];
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+            PMNSLog("failure");
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
+        }];
+        [jsonRequest start];
+    }
 
 - (void)didReceiveMemoryWarning
 {
@@ -118,9 +138,15 @@
             [personalSchoolsList addObject:[dict objectForKey:@"name"]];
         }
     } else {
-        NSArray *tmp = [NSArray arrayWithArray:[[[NSUserDefaults standardUserDefaults] objectForKey:GUESTUSER] objectForKey:@"schools"]];
-        for (NSDictionary *dict in tmp) {
-            [personalSchoolsList addObject:[dict objectForKey:@"name"]];
+        if (citySchools == nil) {
+            NSArray *tmp = [NSArray arrayWithArray:[[[NSUserDefaults standardUserDefaults] objectForKey:GUESTUSER] objectForKey:@"schools"]];
+            for (NSDictionary *dict in tmp) {
+                [personalSchoolsList addObject:[dict objectForKey:@"name"]];
+            }
+        } else {
+            for (NSDictionary *dict in citySchools) {
+                [personalSchoolsList addObject:[dict objectForKey:@"name"]];
+            }
         }
     }
     schoolPicker = [[YHCPickerView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) withNSArray:personalSchoolsList];
@@ -167,14 +193,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     
-    PMMenuCell* cell = [tableView dequeueReusableCellWithIdentifier:@"MenuCell"];
-    
-    NSDictionary* item = self.items[indexPath.row];
-    
-    cell.titleLabel.text = item[@"desc1"];
-    
-    return cell;
-}
+        PMMenuCell* cell = [tableView dequeueReusableCellWithIdentifier:@"MenuCell"];
+        
+        NSDictionary* item = self.items[indexPath.row];
+        
+        cell.titleLabel.text = item[@"desc1"];
+        
+        return cell;
+    }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

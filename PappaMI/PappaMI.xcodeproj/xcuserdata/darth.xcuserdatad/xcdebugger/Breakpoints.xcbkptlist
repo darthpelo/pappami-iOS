@@ -34,12 +34,12 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "PappaMI/Classes/School/PMMenuViewController.m"
-         timestampString = "398253305.466762"
+         timestampString = "398261685.727482"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "190"
-         endingLineNumber = "190"
-         landmarkName = "-tableView:didSelectRowAtIndexPath:"
+         startingLineNumber = "199"
+         endingLineNumber = "199"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -53,6 +53,45 @@
          startingLineNumber = "151"
          endingLineNumber = "151"
          landmarkName = "-statPressed:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PappaMI/Classes/School/PMMenuViewController.m"
+         timestampString = "398261597.736769"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "73"
+         endingLineNumber = "73"
+         landmarkName = "-loadDataAtIndex:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PappaMI/Classes/SidebarControllers/Controllers/MainSideViewController.m"
+         timestampString = "398263706.024452"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "112"
+         endingLineNumber = "112"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "PappaMI/Classes/School/PMMenuViewController.m"
+         timestampString = "398263395.580456"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "37"
+         endingLineNumber = "37"
+         landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

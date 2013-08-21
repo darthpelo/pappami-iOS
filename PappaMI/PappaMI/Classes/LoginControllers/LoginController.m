@@ -263,21 +263,20 @@ static int delta = 70;
                                                                 else
                                                                     [[NSUserDefaults standardUserDefaults] removeObjectForKey:GUESTUSER];
                                                             };
-                                                            
-//                                                            vc.view.frame = CGRectMake(0, 0, vc.view.frame.size.width, vc.view.frame.size.height);
+
                                                             CGFloat yOffset = [vc isKindOfClass:[UINavigationController class]] ? -20 : 0;
                                                             vc.view.frame = CGRectMake(320, yOffset, vc.view.frame.size.width, vc.view.frame.size.height);
                                                             [self.view addSubview:vc.view];
                                                             
-                                                            [UIView animateWithDuration:1.0
-                                                                                  delay:0.0
-                                                                                options:UIViewAnimationOptionCurveEaseInOut
-                                                                             animations:^{
-                                                                                 vc.view.frame = CGRectMake(0, yOffset, vc.view.frame.size.width, vc.view.frame.size.height);
-                                                                             }
-                                                                             completion:^(BOOL finished) {
-                                                                                 block(finished);
-                                                                             }];
+                                                                [UIView animateWithDuration:1.0
+                                                                                      delay:0.0
+                                                                                    options:UIViewAnimationOptionCurveEaseInOut
+                                                                                 animations:^{
+                                                                                     vc.view.frame = CGRectMake(0, yOffset, vc.view.frame.size.width, vc.view.frame.size.height);
+                                                                                 }
+                                                                                 completion:^(BOOL finished) {
+                                                                                     block(finished);
+                                                                                 }];
                                                         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
                                                             NSLog(@"Error: %@", error);
                                                             block(NO);

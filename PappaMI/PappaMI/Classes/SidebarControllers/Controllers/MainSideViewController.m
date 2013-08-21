@@ -61,37 +61,12 @@ static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
     // Inizializzazione Home
     frontController.title = @"Home";
     CGRect frame = [Utils getNavigableContentFrame];
-    if ([self.userMode isEqualToString:LOGGEDUSER]) {
-        UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
-        PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
-        nav = nil;
-        nav = [[UINavigationController alloc] initWithRootViewController:menuVC];
-        self.contentViewController = nav;
-        menuVC.navigationItem.leftBarButtonItem = menuItem;
-    } else {
-        [MBProgressHUD showHUDAddedTo:frontController.view animated:YES];
-        NSURL *url = [NSURL URLWithString:schoolUrl];
-        NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-        AFJSONRequestOperation *jsonRequest =
-        [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                            [MBProgressHUD hideAllHUDsForView:frontController.view animated:YES];
-                                                            PMSchoolsView *sv = [[PMSchoolsView alloc] initWithFrame:frame];
-                                                            sv.schoolsList = [NSArray arrayWithArray:JSON];
-                                                            sv.schoolSelected = ^(NSDictionary *school) {
-                                                                UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
-                                                                PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
-//                                                                [menuVC setSchoolData:school];
-                                                                [((UINavigationController *)self.contentViewController) pushViewController:menuVC animated:YES];
-                                                            };
-                                                            [frontController.view addSubview:sv];
-                                                        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-                                                            PMNSLog("failure");
-                                                            [MBProgressHUD hideAllHUDsForView:frontController.view animated:YES];
-                                                        }];
-        
-        [jsonRequest start];
-    }
+    UIStoryboard* sidebar = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
+    PMMenuViewController *menuVC = [sidebar instantiateViewControllerWithIdentifier:@"MenuViewController"];
+    nav = nil;
+    nav = [[UINavigationController alloc] initWithRootViewController:menuVC];
+    self.contentViewController = nav;
+    menuVC.navigationItem.leftBarButtonItem = menuItem;
     
     
     // Gestione callback selezione elementi da menu sidebar
@@ -103,37 +78,14 @@ static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
         switch (sectionId) {
             case 1:{
                 [ms removeSubviewsOfView:bFrontController.view];
-                if ([ms.userMode isEqualToString:LOGGEDUSER]) {
-                    UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
-                    PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
-                    bNav =  nil;
-                    bNav = [[UINavigationController alloc] initWithRootViewController:menuVC];
-                    ms.contentViewController = bNav;
-                    menuVC.navigationItem.leftBarButtonItem = menuItem;
-                } else {
-                    [MBProgressHUD showHUDAddedTo:bFrontController.view animated:YES];
-                    NSURL *url = [NSURL URLWithString:schoolUrl];
-                    NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-                    AFJSONRequestOperation *jsonRequest =
-                    [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                                        [MBProgressHUD hideAllHUDsForView:bFrontController.view animated:YES];
-                                                                        PMSchoolsView *sv = [[PMSchoolsView alloc] initWithFrame:frame];
-                                                                        sv.schoolsList = [NSArray arrayWithArray:JSON];
-                                                                        sv.schoolSelected = ^(NSDictionary *school) {
-                                                                            UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
-                                                                            PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
-//                                                                            [menuVC setSchoolData:school];
-                                                                            [((UINavigationController *)ms.contentViewController) pushViewController:menuVC animated:YES];
-                                                                        };
-                                                                        [bFrontController.view addSubview:sv];
-                                                                    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-                                                                        PMNSLog("failure");
-                                                                        [MBProgressHUD hideAllHUDsForView:bFrontController.view animated:YES];
-                                                                    }];
-                    
-                    [jsonRequest start];
-                }
+                
+                UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
+                PMMenuViewController *menuVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"MenuViewController"];
+                bNav =  nil;
+                bNav = [[UINavigationController alloc] initWithRootViewController:menuVC];
+                ms.contentViewController = bNav;
+                menuVC.navigationItem.leftBarButtonItem = menuItem;
+                
                 break;
             }
             case 2:{
