@@ -56,6 +56,9 @@
 {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER])
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:LOGGEDUSER];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:GUESTUSER])
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:GUESTUSER];
+    
     
     NSHTTPCookie *cookie;
     NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];

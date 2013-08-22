@@ -23,8 +23,6 @@
 
 @end
 
-static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
-
 @implementation MainSideViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
