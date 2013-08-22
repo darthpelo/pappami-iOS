@@ -70,19 +70,12 @@
     self.profileImageView.layer.borderWidth = 4.0f;
     self.profileImageView.layer.borderColor = [UIColor colorWithWhite:1.0f alpha:0.5f].CGColor;
     self.profileImageView.layer.cornerRadius = 35.0f;
-    
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER]) {
-        NSDictionary* object0 = [NSDictionary dictionaryWithObjects:@[ @"Home", @"1", @"account" ] forKeys:@[ @"title", @"id", @"icon" ]];
-        NSDictionary* object1 = [NSDictionary dictionaryWithObjects:@[ @"News", @"2", @"envelope" ] forKeys:@[ @"title", @"id", @"icon" ]];
-//        NSDictionary* object2 = [NSDictionary dictionaryWithObjects:@[ @"News Personalizzate", @"3", @"envelope" ] forKeys:@[ @"title", @"id", @"icon" ]];
-        NSDictionary *object3 = [NSDictionary dictionaryWithObjects:@[ @"Logout", @"0", @"arrow" ] forKeys:@[ @"title", @"id", @"icon" ]];
-        self.items = @[object0, object1, object3];
-    } else {
+
         NSDictionary* object0 = [NSDictionary dictionaryWithObjects:@[ @"Home", @"1", @"account" ] forKeys:@[ @"title", @"id", @"icon" ]];
         NSDictionary* object1 = [NSDictionary dictionaryWithObjects:@[ @"News", @"2", @"envelope" ] forKeys:@[ @"title", @"id", @"icon" ]];
         NSDictionary *object2 = [NSDictionary dictionaryWithObjects:@[ @"Logout", @"0", @"arrow" ] forKeys:@[ @"title", @"id", @"icon" ]];
-        self.items = @[object0, object1, object2];
-    }
+        NSDictionary *object3 = [NSDictionary dictionaryWithObjects:@[ @"Info", @"3", @"settings" ] forKeys:@[ @"title", @"id", @"icon" ]];
+        self.items = @[object0, object1, object3, object2];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

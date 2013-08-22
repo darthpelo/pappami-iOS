@@ -13,6 +13,7 @@
 #import "PMHomeView.h"
 #import "PMMenuViewController.h"
 #import "PMNewsView.h"
+#import "PMCredits.h"
 #import "PMNewsDetailViewController.h"
 #import "MBProgressHUD.h"
 #import "PMSchoolsView.h"
@@ -60,7 +61,6 @@ static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
     
     // Inizializzazione Home
     frontController.title = @"Home";
-    CGRect frame = [Utils getNavigableContentFrame];
     UIStoryboard* sidebar = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
     PMMenuViewController *menuVC = [sidebar instantiateViewControllerWithIdentifier:@"MenuViewController"];
     nav = nil;
@@ -117,6 +117,17 @@ static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
                 [jsonRequest start];
                 break;
             }
+            case 3:{
+                bNav =  nil;
+                bNav = [[UINavigationController alloc] initWithRootViewController:bFrontController];
+                ms.contentViewController = bNav;
+                bFrontController.title = @"Credits";
+                [ms removeSubviewsOfView:bFrontController.view];
+                CGRect frame = [Utils getNavigableContentFrame];
+                PMCredits *cv = [[PMCredits alloc] initWithFrame:frame];
+                [bFrontController.view addSubview:cv];
+                break;
+            }
             case 0:
                 if (ms.closeViewController)
                     ms.closeViewController();
@@ -152,7 +163,7 @@ static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
     if ([subviews count] == 0) return;
     // Rimozione UIView per news e scuole 
     for (UIView *subview in subviews) {
-        if ([subview isKindOfClass:[PMHomeView class]] || [subview isKindOfClass:[PMNewsView class]] || [subview isKindOfClass:[PMSchoolsView class]]) {
+        if ([subview isKindOfClass:[PMHomeView class]] || [subview isKindOfClass:[PMNewsView class]] || [subview isKindOfClass:[PMCredits class]]) {
             [subview removeFromSuperview];
         }
         // List the subviews of subview
