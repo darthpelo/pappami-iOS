@@ -1,7 +1,7 @@
 pappami-iOS
 ===========
 
-[Pappa-Mi] (http://www.pappa-mi.it) native [iOS application] (https://itunes.apple.com/it/app/pappami/id673122977?mt=8).
+[Pappa-Mi] (http://www.pappa-mi.it) native [iOS application] (https://itunes.apple.com/it/app/pappami/id673122977?mt=8). With this application parents can give opinions on the quality of the meals provided in school meals for their children.
 
 I have developed this application for my friend Roberto Previtera, the creator of website [Pappa-Mi] (http://www.pappa-mi.it).
 This first version was produced in a short time, in order to participate in the contest [App4Mi] (http://www.app4mi.it/) made ​​by the city of Milan.
