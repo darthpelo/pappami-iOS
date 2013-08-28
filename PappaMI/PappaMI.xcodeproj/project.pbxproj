@@ -64,6 +64,7 @@
 		BE8C54D51790332700AB3075 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE49F14B178E02DC00C2C3AB /* Icon@2x.png */; };
 		BE8ED7D017863569006AA9A6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8ED7CF17863569006AA9A6 /* SystemConfiguration.framework */; };
 		BE8ED7D217863587006AA9A6 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE8ED7D117863587006AA9A6 /* CoreText.framework */; };
+		BEAAC9FA17CE1F3500B076B1 /* Logo1-01.png in Resources */ = {isa = PBXBuildFile; fileRef = BEAAC9F917CE1F3500B076B1 /* Logo1-01.png */; };
 		BEADD707177C3E4500B63A10 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = BEADD6F5177C3E4500B63A10 /* AFHTTPClient.m */; };
 		BEADD708177C3E4500B63A10 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BEADD6F7177C3E4500B63A10 /* AFHTTPRequestOperation.m */; };
 		BEADD709177C3E4500B63A10 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BEADD6F9177C3E4500B63A10 /* AFImageRequestOperation.m */; };
@@ -175,6 +176,7 @@
 		BE8C54D31790279400AB3075 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BE8ED7CF17863569006AA9A6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BE8ED7D117863587006AA9A6 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		BEAAC9F917CE1F3500B076B1 /* Logo1-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Logo1-01.png"; path = "Resources/Logo1-01.png"; sourceTree = "<group>"; };
 		BEADD6F4177C3E4500B63A10 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		BEADD6F5177C3E4500B63A10 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		BEADD6F6177C3E4500B63A10 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -530,6 +532,7 @@
 		BEC29DE5177DE3B300036BD4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BEAAC9F917CE1F3500B076B1 /* Logo1-01.png */,
 				BE77603817C6B64E00558DC8 /* account.png */,
 				BE77603917C6B64E00558DC8 /* account@2x.png */,
 				BE77603A17C6B64E00558DC8 /* arrow-back.png */,
@@ -682,6 +685,7 @@
 				BE77607317C6B64E00558DC8 /* settings.png in Resources */,
 				BE77607417C6B64E00558DC8 /* settings@2x.png in Resources */,
 				BE77607517C6B64E00558DC8 /* valuta.png in Resources */,
+				BEAAC9FA17CE1F3500B076B1 /* Logo1-01.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -839,6 +843,7 @@
 		BE5F9B13177B51F500B74182 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alessio Roberto (C3T728249E)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/VeespoFramework.embeddedframework\"",
@@ -856,6 +861,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2E104974-F442-479D-B09F-27FD8A952095";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;

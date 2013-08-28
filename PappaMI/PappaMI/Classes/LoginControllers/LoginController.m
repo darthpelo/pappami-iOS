@@ -34,7 +34,7 @@ static int delta = 70;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     UIColor *mainColor = UIColorFromRGB(0x00B2EE);
     UIColor *darkColor = UIColorFromRGB(0x00688B);
     
@@ -53,10 +53,10 @@ static int delta = 70;
     self.usernameField.delegate = self;
     
     if (iP5) [self.usernameField setFrame:CGRectMake(self.usernameField.frame.origin.x,
-                                                   self.usernameField.frame.origin.y + delta,
-                                                   self.usernameField.frame.size.width,
-                                                   self.usernameField.frame.size.height)];
-
+                                                     self.usernameField.frame.origin.y + delta,
+                                                     self.usernameField.frame.size.width,
+                                                     self.usernameField.frame.size.height)];
+    
     self.passwordField.backgroundColor = [UIColor whiteColor];
     self.passwordField.layer.cornerRadius = 3.0f;
     self.passwordField.placeholder = @"Password";
@@ -89,9 +89,9 @@ static int delta = 70;
     [self.singUpButton setTitleColor:[UIColor colorWithWhite:1.0f alpha:0.5f] forState:UIControlStateHighlighted];
     
     if (iP5) [self.singUpButton setFrame:CGRectMake(self.singUpButton.frame.origin.x,
-                                                   self.singUpButton.frame.origin.y + delta,
-                                                   self.singUpButton.frame.size.width,
-                                                   self.singUpButton.frame.size.height)];
+                                                    self.singUpButton.frame.origin.y + delta,
+                                                    self.singUpButton.frame.size.width,
+                                                    self.singUpButton.frame.size.height)];
     
     self.anonymousButton.backgroundColor = [UIColor clearColor];
     self.anonymousButton.titleLabel.font = [UIFont fontWithName:fontName size:14.0f];
@@ -100,9 +100,9 @@ static int delta = 70;
     [self.anonymousButton setTitleColor:[UIColor colorWithWhite:1.0 alpha:0.5] forState:UIControlStateHighlighted];
     
     if (iP5) [self.anonymousButton setFrame:CGRectMake(self.anonymousButton.frame.origin.x,
-                                                   self.anonymousButton.frame.origin.y + delta,
-                                                   self.anonymousButton.frame.size.width,
-                                                   self.anonymousButton.frame.size.height)];
+                                                       self.anonymousButton.frame.origin.y + delta,
+                                                       self.anonymousButton.frame.size.width,
+                                                       self.anonymousButton.frame.size.height)];
     
     self.titleLabel.textColor =  [UIColor yellowColor];
     self.titleLabel.font =  [UIFont fontWithName:boldFontName size:24.0f];
@@ -113,9 +113,9 @@ static int delta = 70;
     self.subTitleLabel.text = @"Bentornato, esegui il login o registrati";
     
     if (iP5) [self.subTitleLabel setFrame:CGRectMake(self.subTitleLabel.frame.origin.x,
-                                                       self.subTitleLabel.frame.origin.y + 20,
-                                                       self.subTitleLabel.frame.size.width,
-                                                       self.subTitleLabel.frame.size.height)];
+                                                     self.subTitleLabel.frame.origin.y + 20,
+                                                     self.subTitleLabel.frame.size.width,
+                                                     self.subTitleLabel.frame.size.height)];
     
 }
 
@@ -132,7 +132,7 @@ static int delta = 70;
             veespoTest = YES;
         else if ([host[@"veespoproduction"] isEqualToString:@"YES"])
             veespoTest = NO;
-//        [[NSUserDefaults standardUserDefaults] setObject:@"test-m.pappa-mi.it" forKey:@"apihost"];
+        //        [[NSUserDefaults standardUserDefaults] setObject:@"test-m.pappa-mi.it" forKey:@"apihost"];
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
@@ -166,7 +166,7 @@ static int delta = 70;
                                                           object:nil];
             if (!responsedata) {
                 UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Attenzione!"
-                                                                  message:@"E' stato riscontrato un errore di comunicazione."
+                                                                  message:@"E' stato riscontrato un errore con il server."
                                                                  delegate:nil
                                                         cancelButtonTitle:@"OK"
                                                         otherButtonTitles:nil];
@@ -222,52 +222,53 @@ static int delta = 70;
                                                                  veespoGroup:nil
                                                                   fileConfig:nil
                                                                    urlConfig:nil
-                                                                  testUrl:veespoTest
-                                                             maskPastRate:YES];
+                                                                     testUrl:veespoTest
+                                                                maskPastRate:YES];
                                                             
                                                             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
                                                             self.mainSideViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainSideViewController"];
                                                             self.mainSideViewController.controllerId = @"SidebarController";
-                                                            if ([JSON[@"type"] isEqualToString:@"O"])
+                                                            if ([JSON[@"type"] isEqualToString:@"O"]) {
                                                                 self.mainSideViewController.userMode = GUESTUSER;
-                                                            else
+                                                                block(NO);
+                                                            } else {
                                                                 self.mainSideViewController.userMode = LOGGEDUSER;
-                                                            UIViewController *vc = self.mainSideViewController;
-                                                            __weak LoginController *lc = self;
-                                                            
-                                                            // Logout function
-                                                            self.mainSideViewController.closeViewController = ^{
-                                                                NSHTTPCookie *cookie;
-                                                                NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-                                                                for (cookie in [storage cookies])
-                                                                    [storage deleteCookie:cookie];
-                                                                [[NSURLCache sharedURLCache] removeAllCachedResponses];
+                                                                UIViewController *vc = self.mainSideViewController;
+                                                                __weak LoginController *lc = self;
                                                                 
-                                                                lc.usernameField.text = @"";
-                                                                lc.usernameField.placeholder = @"Indirizzo E-Mail";
-                                                                lc.passwordField.text = @"";
-                                                                lc.passwordField.placeholder = @"Password";
+                                                                // Logout function
+                                                                self.mainSideViewController.closeViewController = ^{
+                                                                    NSHTTPCookie *cookie;
+                                                                    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+                                                                    for (cookie in [storage cookies])
+                                                                        [storage deleteCookie:cookie];
+                                                                    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+                                                                    
+                                                                    lc.usernameField.text = @"";
+                                                                    lc.usernameField.placeholder = @"Indirizzo E-Mail";
+                                                                    lc.passwordField.text = @"";
+                                                                    lc.passwordField.placeholder = @"Password";
+                                                                    
+                                                                    CATransition *transition = [CATransition animation];
+                                                                    transition.duration = 0.75;
+                                                                    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+                                                                    transition.type = kCATransitionPush;
+                                                                    transition.subtype =kCATransitionFromLeft;
+                                                                    transition.delegate = lc;
+                                                                    [lc.view.layer addAnimation:transition forKey:nil];
+                                                                    [vc.view removeFromSuperview];
+                                                                    
+                                                                    // Remove data information on NSUserDefaults
+                                                                    if (![JSON[@"type"] isEqualToString:@"O"])
+                                                                        [[NSUserDefaults standardUserDefaults] removeObjectForKey:LOGGEDUSER];
+                                                                    else
+                                                                        [[NSUserDefaults standardUserDefaults] removeObjectForKey:GUESTUSER];
+                                                                };
                                                                 
-                                                                CATransition *transition = [CATransition animation];
-                                                                transition.duration = 0.75;
-                                                                transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-                                                                transition.type = kCATransitionPush;
-                                                                transition.subtype =kCATransitionFromLeft;
-                                                                transition.delegate = lc;
-                                                                [lc.view.layer addAnimation:transition forKey:nil];
-                                                                [vc.view removeFromSuperview];
+                                                                CGFloat yOffset = [vc isKindOfClass:[UINavigationController class]] ? -20 : 0;
+                                                                vc.view.frame = CGRectMake(320, yOffset, vc.view.frame.size.width, vc.view.frame.size.height);
+                                                                [self.view addSubview:vc.view];
                                                                 
-                                                                // Remove data information on NSUserDefaults
-                                                                if (![JSON[@"type"] isEqualToString:@"O"])
-                                                                    [[NSUserDefaults standardUserDefaults] removeObjectForKey:LOGGEDUSER];
-                                                                else
-                                                                    [[NSUserDefaults standardUserDefaults] removeObjectForKey:GUESTUSER];
-                                                            };
-
-                                                            CGFloat yOffset = [vc isKindOfClass:[UINavigationController class]] ? -20 : 0;
-                                                            vc.view.frame = CGRectMake(320, yOffset, vc.view.frame.size.width, vc.view.frame.size.height);
-                                                            [self.view addSubview:vc.view];
-                                                            
                                                                 [UIView animateWithDuration:1.0
                                                                                       delay:0.0
                                                                                     options:UIViewAnimationOptionCurveEaseInOut
@@ -277,6 +278,7 @@ static int delta = 70;
                                                                                  completion:^(BOOL finished) {
                                                                                      block(finished);
                                                                                  }];
+                                                            }
                                                         } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
                                                             NSLog(@"Error: %@", error);
                                                             block(NO);
@@ -302,72 +304,72 @@ static int delta = 70;
                   [NSString stringWithFormat:@"http://%@/api/user/current", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]]];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     AFJSONRequestOperation *jsonRequest = [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                        [[NSUserDefaults standardUserDefaults] setObject:JSON forKey:GUESTUSER];
-                                                        
-                                                        [Veespo initUser:[NSString stringWithFormat:@"pappa-mi-user-%@",JSON[@"id"]]
-                                                                  apiKey:@""
-                                                                userName:nil
-                                                                language:@"it"
-                                                             veespoGroup:nil
-                                                              fileConfig:nil
-                                                               urlConfig:nil
-                                                              testUrl:veespoTest
-                                                         maskPastRate:YES];
-                                                        
-                                                        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
-                                                        self.mainSideViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainSideViewController"];
-                                                        self.mainSideViewController.controllerId = @"SidebarController";
-                                                        self.mainSideViewController.userMode = GUESTUSER;
-                                                        UIViewController *vc = self.mainSideViewController;
-                                                        __weak LoginController *lc = self;
-                                                        
-                                                        // Logout function
-                                                        self.mainSideViewController.closeViewController = ^{
-                                                            NSHTTPCookie *cookie;
-                                                            NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-                                                            for (cookie in [storage cookies])
-                                                                [storage deleteCookie:cookie];
-                                                            [[NSURLCache sharedURLCache] removeAllCachedResponses];
-                                                            lc.usernameField.text = @"";
-                                                            lc.usernameField.placeholder = @"Indirizzo E-Mail";
-                                                            lc.passwordField.text = @"";
-                                                            lc.passwordField.placeholder = @"Password";
-                                                            CATransition *transition = [CATransition animation];
-                                                            transition.duration = 0.75;
-                                                            transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-                                                            transition.type = kCATransitionPush;
-                                                            transition.subtype =kCATransitionFromLeft;
-                                                            transition.delegate = lc;
-                                                            [lc.view.layer addAnimation:transition forKey:nil];
-                                                            [vc.view removeFromSuperview];
-                                                            [[NSUserDefaults standardUserDefaults] removeObjectForKey:GUESTUSER];
-                                                        };
-                                                        vc.view.frame = CGRectMake(0, 0, vc.view.frame.size.width, vc.view.frame.size.height);
-                                                        CGFloat yOffset = [vc isKindOfClass:[UINavigationController class]] ? -20 : 0;
-                                                        vc.view.frame = CGRectMake(320, yOffset, vc.view.frame.size.width, vc.view.frame.size.height);
-                                                        [self.view addSubview:vc.view];
-                                                        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                        [UIView animateWithDuration:1.0
-                                                                              delay:0.0
-                                                                            options:UIViewAnimationOptionCurveEaseInOut
-                                                                         animations:^{
-                                                                             vc.view.frame = CGRectMake(0, yOffset, vc.view.frame.size.width, vc.view.frame.size.height);
-                                                                         }
-                                                                         completion:^(BOOL finished) {
-                                                                             // unregister for keyboard notifications while not visible.
-                                                                             [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                                                                                             name:UIKeyboardWillShowNotification
-                                                                                                                           object:nil];
-                                                                             
-                                                                             [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                                                                                             name:UIKeyboardWillHideNotification
-                                                                                                                           object:nil];
-                                                                         }];
-                                                    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-                                                        PMNSLog("%@", error.debugDescription);
-                                                        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                    }];
+                                                                                          success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                                                              [[NSUserDefaults standardUserDefaults] setObject:JSON forKey:GUESTUSER];
+                                                                                              
+                                                                                              [Veespo initUser:[NSString stringWithFormat:@"pappa-mi-user-%@",JSON[@"id"]]
+                                                                                                        apiKey:@""
+                                                                                                      userName:nil
+                                                                                                      language:@"it"
+                                                                                                   veespoGroup:nil
+                                                                                                    fileConfig:nil
+                                                                                                     urlConfig:nil
+                                                                                                       testUrl:veespoTest
+                                                                                                  maskPastRate:YES];
+                                                                                              
+                                                                                              UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
+                                                                                              self.mainSideViewController = [storyboard instantiateViewControllerWithIdentifier:@"MainSideViewController"];
+                                                                                              self.mainSideViewController.controllerId = @"SidebarController";
+                                                                                              self.mainSideViewController.userMode = GUESTUSER;
+                                                                                              UIViewController *vc = self.mainSideViewController;
+                                                                                              __weak LoginController *lc = self;
+                                                                                              
+                                                                                              // Logout function
+                                                                                              self.mainSideViewController.closeViewController = ^{
+                                                                                                  NSHTTPCookie *cookie;
+                                                                                                  NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+                                                                                                  for (cookie in [storage cookies])
+                                                                                                      [storage deleteCookie:cookie];
+                                                                                                  [[NSURLCache sharedURLCache] removeAllCachedResponses];
+                                                                                                  lc.usernameField.text = @"";
+                                                                                                  lc.usernameField.placeholder = @"Indirizzo E-Mail";
+                                                                                                  lc.passwordField.text = @"";
+                                                                                                  lc.passwordField.placeholder = @"Password";
+                                                                                                  CATransition *transition = [CATransition animation];
+                                                                                                  transition.duration = 0.75;
+                                                                                                  transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+                                                                                                  transition.type = kCATransitionPush;
+                                                                                                  transition.subtype =kCATransitionFromLeft;
+                                                                                                  transition.delegate = lc;
+                                                                                                  [lc.view.layer addAnimation:transition forKey:nil];
+                                                                                                  [vc.view removeFromSuperview];
+                                                                                                  [[NSUserDefaults standardUserDefaults] removeObjectForKey:GUESTUSER];
+                                                                                              };
+                                                                                              vc.view.frame = CGRectMake(0, 0, vc.view.frame.size.width, vc.view.frame.size.height);
+                                                                                              CGFloat yOffset = [vc isKindOfClass:[UINavigationController class]] ? -20 : 0;
+                                                                                              vc.view.frame = CGRectMake(320, yOffset, vc.view.frame.size.width, vc.view.frame.size.height);
+                                                                                              [self.view addSubview:vc.view];
+                                                                                              [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                                                              [UIView animateWithDuration:1.0
+                                                                                                                    delay:0.0
+                                                                                                                  options:UIViewAnimationOptionCurveEaseInOut
+                                                                                                               animations:^{
+                                                                                                                   vc.view.frame = CGRectMake(0, yOffset, vc.view.frame.size.width, vc.view.frame.size.height);
+                                                                                                               }
+                                                                                                               completion:^(BOOL finished) {
+                                                                                                                   // unregister for keyboard notifications while not visible.
+                                                                                                                   [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                                                                                                                                   name:UIKeyboardWillShowNotification
+                                                                                                                                                                 object:nil];
+                                                                                                                   
+                                                                                                                   [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                                                                                                                                   name:UIKeyboardWillHideNotification
+                                                                                                                                                                 object:nil];
+                                                                                                               }];
+                                                                                          } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                                                              PMNSLog("%@", error.debugDescription);
+                                                                                              [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                                                          }];
     [jsonRequest start];
 }
 
