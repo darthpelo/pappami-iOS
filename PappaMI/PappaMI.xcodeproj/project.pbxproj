@@ -98,8 +98,6 @@
 		BED0F314178C7D9200C984B4 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED0F313178C7D9200C984B4 /* NewRelicAgent.framework */; };
 		BED0F316178C7DA600C984B4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED0F315178C7DA600C984B4 /* CoreTelephony.framework */; };
 		BED0F318178C7DB200C984B4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BED0F317178C7DB100C984B4 /* libz.dylib */; };
-		BEE4780B17992D2000246B47 /* Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = BEE4780917992D2000246B47 /* Resources.bundle */; };
-		BEE4780C17992D2000246B47 /* VeespoFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEE4780A17992D2000246B47 /* VeespoFramework.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -236,8 +234,6 @@
 		BED0F313178C7D9200C984B4 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		BED0F315178C7DA600C984B4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		BED0F317178C7DB100C984B4 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		BEE4780917992D2000246B47 /* Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Resources.bundle; sourceTree = "<group>"; };
-		BEE4780A17992D2000246B47 /* VeespoFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VeespoFramework.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,7 +251,6 @@
 				BE5F9AF7177B51F500B74182 /* CoreGraphics.framework in Frameworks */,
 				BED0F314178C7D9200C984B4 /* NewRelicAgent.framework in Frameworks */,
 				BE4BE2DF178E0FCB00A84B8F /* libCrittercism_v4_0_0.a in Frameworks */,
-				BEE4780C17992D2000246B47 /* VeespoFramework.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,7 +270,6 @@
 		BE5F9AE6177B51F500B74182 = {
 			isa = PBXGroup;
 			children = (
-				BEE4780717992D2000246B47 /* VeespoFramework.embeddedframework */,
 				BED0F30F178C76CA00C984B4 /* Icon.png */,
 				BE49F14B178E02DC00C2C3AB /* Icon@2x.png */,
 				BE5F9AF8177B51F500B74182 /* PappaMI */,
@@ -568,23 +562,6 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		BEE4780717992D2000246B47 /* VeespoFramework.embeddedframework */ = {
-			isa = PBXGroup;
-			children = (
-				BEE4780817992D2000246B47 /* Resources */,
-				BEE4780A17992D2000246B47 /* VeespoFramework.framework */,
-			);
-			path = VeespoFramework.embeddedframework;
-			sourceTree = "<group>";
-		};
-		BEE4780817992D2000246B47 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				BEE4780917992D2000246B47 /* Resources.bundle */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -653,7 +630,6 @@
 				BEB0CAA11785D4460070CF49 /* TDDatePickerController.xib in Resources */,
 				BE8C54D41790332300AB3075 /* Icon.png in Resources */,
 				BE8C54D51790332700AB3075 /* Icon@2x.png in Resources */,
-				BEE4780B17992D2000246B47 /* Resources.bundle in Resources */,
 				BE77605717C6B64E00558DC8 /* account.png in Resources */,
 				BE77605817C6B64E00558DC8 /* account@2x.png in Resources */,
 				BE77605917C6B64E00558DC8 /* arrow-back.png in Resources */,

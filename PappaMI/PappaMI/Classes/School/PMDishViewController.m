@@ -77,16 +77,14 @@
                                          (self.compTableView.frame.origin.y + self.compTableView.frame.size.height) - 10,
                                          self.statButton.frame.size.width,
                                          self.statButton.frame.size.height)];
+    self.statButton.enabled = NO;
     
     self.veespoButton.layer.cornerRadius = 3.0f;
     [self.veespoButton setFrame:CGRectMake(self.veespoButton.frame.origin.x,
                                          (self.compTableView.frame.origin.y + self.compTableView.frame.size.height) - 10,
                                          self.veespoButton.frame.size.width,
                                          self.veespoButton.frame.size.height)];
-//    if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER])
-//        self.veespoButton.enabled = YES;
-//    else
-//        self.veespoButton.enabled = NO;
+    self.veespoButton.enabled = NO;
     
     int components = ((NSArray*)[self.dishData objectForKey:@"components"]).count;
     if (components == 0) {
@@ -108,6 +106,7 @@
 
 - (IBAction)veespoPressed:(id)sender
 {
+    /*
     VEVeespoViewController *veespo = [[VEVeespoViewController alloc] init];
     veespo.closeVeespoViewController = ^(NSDictionary *data){
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -116,10 +115,12 @@
     [veespo loadDataFor:[NSString stringWithFormat:@"tgt-pappa-mi-dish-%@", self.dishId]
                   title:self.dishData[@"dish"]
             detailsView:nil];
+     */
 }
 
 - (IBAction)statPressed:(id)sender
 {
+    /*
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://production.veespo.com/v1/average/target/tgt-pappa-mi-dish-%@", self.dishId]];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     AFJSONRequestOperation *jsonRequest =
@@ -162,6 +163,7 @@
     }];
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [jsonRequest start];
+     */
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
