@@ -14,8 +14,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [NewRelicAgent startWithApplicationToken:@"AA81a1033ff6ed41d73d6697305c1a3731db9ec945"];
-    [Crittercism enableWithAppID:@"51ddd7b1c463c24d70000005"];
+    [NewRelicAgent startWithApplicationToken:@""];
+    [Crittercism enableWithAppID:@""];
     
     [NSUserDefaults resetStandardUserDefaults];
     NSString *dateKey = @"Data Key";

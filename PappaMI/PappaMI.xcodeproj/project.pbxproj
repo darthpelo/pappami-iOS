@@ -822,9 +822,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alessio Roberto (C3T728249E)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/VeespoFramework.embeddedframework\"",
-					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/VeespoFramework-eldtvhdwpsteoudgvebpfjvbcvhm/Build/Products/Debug-iphoneos/VeespoFramework.embeddedframework\"",
-					"\"/Users/darth/Library/Developer/Xcode/DerivedData/VeespoFramework-fglvnfywgppkkrfxaaqntqoodlqc/Build/Products/Debug-iphoneos/VeespoFramework.embeddedframework\"",
 					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -849,9 +846,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/VeespoFramework.embeddedframework\"",
-					"\"$(SRCROOT)/../../../../Library/Developer/Xcode/DerivedData/VeespoFramework-eldtvhdwpsteoudgvebpfjvbcvhm/Build/Products/Debug-iphoneos/VeespoFramework.embeddedframework\"",
-					"\"/Users/darth/Library/Developer/Xcode/DerivedData/VeespoFramework-fglvnfywgppkkrfxaaqntqoodlqc/Build/Products/Debug-iphoneos/VeespoFramework.embeddedframework\"",
 					"\"$(SRCROOT)\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
