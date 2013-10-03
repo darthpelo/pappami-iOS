@@ -8,7 +8,7 @@ To speed up as much as possible the development of this first version, I used th
 
 **All Pappa-Mi project is Open Source (web, iOS native app, mobile web app) so if you want help us, your welcome :-)**
 
-If you wont to user NewRelic and Crittercism frameworks, remeber to add your APIKEY and updtate *Framework Search Path* and *Library Search Path* in Build Settings.
+If you wont to user NewRelic and Crittercism frameworks, remeber to add your APIKEY and update *Framework Search Path* and *Library Search Path* in Build Settings.
 
 Update
 --------
