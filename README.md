@@ -2,10 +2,8 @@ pappami-iOS
 ===========
 
 [Pappa-Mi] (http://www.pappa-mi.it) native [iOS application] (https://itunes.apple.com/it/app/pappami/id673122977?mt=8). With this application parents can give opinions on the quality of the meals provided in school meals for their children.
-
 I have developed this application for my friend Roberto Previtera, the creator of website [Pappa-Mi] (http://www.pappa-mi.it).
 This first version was produced in a short time, in order to participate in the contest [App4Mi] (http://www.app4mi.it/) made ​​by the city of Milan.
-
 To speed up as much as possible the development of this first version, I used the [UI Templates] (http://www.appdesignvault.com/iphone-flat-ui-design-patterns/) by *App Design Vault*.
 
 **All Pappa-Mi project is Open Source (web, iOS native app, mobile web app) so if you want help us, your welcome :-)**
@@ -18,6 +16,7 @@ Update
 **Removed VeespoFramework: 
 The links between the project and framework created by Xcode are not reported correctly in git (local link). If a user clones the project fails to compile because of these errors. 
 As for the open source project, the presence of the framework is not critical, I decided to remove it from the master branch.**
+
 In you're interested about Veespo write to [me](mailto:robero@veespo.com).
 
 Authors
