@@ -13,7 +13,10 @@ To speed up as much as possible the development of this first version, I used th
 Update
 --------
 
-Removed VeespoFramework: The links between the project and framework created by Xcode are not reported correctly in git. If a user clones the project fails to compile because of these errors. As for the open source project, the presence of the framework is not critical, I decided to remove it from the master branch.
+**Removed VeespoFramework: 
+The links between the project and framework created by Xcode are not reported correctly in git (local link). If a user clones the project fails to compile because of these errors. 
+As for the open source project, the presence of the framework is not critical, I decided to remove it from the master branch.**
+In you're interested about Veespo write to [me](mailto:robero@veespo.com).
 
 Authors
 --------
