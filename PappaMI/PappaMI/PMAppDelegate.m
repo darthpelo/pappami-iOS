@@ -14,6 +14,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    /********************************************************/
+    /* Use your apikey for NewRelic and Crittercism.        */
+    /* Otherwise remove this framework                      */
+    /********************************************************/
     [NewRelicAgent startWithApplicationToken:@""];
     [Crittercism enableWithAppID:@""];
     
