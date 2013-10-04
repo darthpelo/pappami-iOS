@@ -8,15 +8,12 @@ To speed up as much as possible the development of this first version, I used th
 
 **All Pappa-Mi project is Open Source (web, iOS native app, mobile web app) so if you want help us, your welcome :-)**
 
-If you wont to user NewRelic and Crittercism frameworks, remeber to add your APIKEY and update *Framework Search Path* and *Library Search Path* in Build Settings.
+## Attention
 
-Update
---------
+- The project has not yet been tested with Xcode 5 and iOS 7.
+- If you wont to user NewRelic and Crittercism frameworks, remeber to add your APIKEY and update *Framework Search Path* and *Library Search Path* in Build Settings.
 
-The project has not yet been tested with Xcode 5 and iOS 7.
-
-Veespo Framework
---------
+### Veespo Framework
 
 Removed VeespoFramework: 
 The links between the project and framework created by Xcode are not reported correctly in git (local link). If a user clones the project fails to compile because of these errors. 
@@ -24,23 +21,21 @@ As for the open source project, the presence of the framework is not critical, I
 
 In you're interested about Veespo write to [me](mailto:robero@veespo.com).
 
-Authors
---------
+## Authors
+
 [Alessio](mailto:roberto@veespo.com)
 
-## Contact ##
+### Contact
 
 [Roberto Previtera](mailto:roberto.previtera@gmail.com)
 
 [Alessio](mailto:roberto@veespo.com)
 
-Thanks to
----------
+## Thanks to
 
 Paco & Gaia
 
-License
----------
+# License
 
 Copyright (c) 2013 Alessio Roberto
 
