@@ -13,9 +13,14 @@ If you wont to user NewRelic and Crittercism frameworks, remeber to add your API
 Update
 --------
 
-**Removed VeespoFramework: 
+The project has not yet been tested with Xcode 5 and iOS 7.
+
+Veespo Framework
+--------
+
+Removed VeespoFramework: 
 The links between the project and framework created by Xcode are not reported correctly in git (local link). If a user clones the project fails to compile because of these errors. 
-As for the open source project, the presence of the framework is not critical, I decided to remove it from the master branch.**
+As for the open source project, the presence of the framework is not critical, I decided to remove it from the master branch.
 
 In you're interested about Veespo write to [me](mailto:robero@veespo.com).
 
