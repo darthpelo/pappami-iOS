@@ -79,6 +79,7 @@
                                          self.statButton.frame.size.height)];
     self.statButton.enabled = NO;
     
+    // Mail me to more info about Veespo Framework roberto@veespo.com
     self.veespoButton.layer.cornerRadius = 3.0f;
     [self.veespoButton setFrame:CGRectMake(self.veespoButton.frame.origin.x,
                                          (self.compTableView.frame.origin.y + self.compTableView.frame.size.height) - 10,
@@ -106,6 +107,7 @@
 
 - (IBAction)veespoPressed:(id)sender
 {
+    // Mail me to more info about Veespo Framework roberto@veespo.com
     /*
     VEVeespoViewController *veespo = [[VEVeespoViewController alloc] init];
     veespo.closeVeespoViewController = ^(NSDictionary *data){
@@ -120,14 +122,15 @@
 
 - (IBAction)statPressed:(id)sender
 {
+    // Mail me to more info about Veespo Framework roberto@veespo.com
     /*
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://production.veespo.com/v1/average/target/tgt-pappa-mi-dish-%@", self.dishId]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"", self.dishId]];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     AFJSONRequestOperation *jsonRequest =
     [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSDictionary *tags = [NSDictionary dictionaryWithDictionary:JSON[@"data"][@"avgS"]];
         
-        NSURL *url = [NSURL URLWithString:@"http://production.veespo.com/v1/tag-labels/category/ctg-f86fbf9e-b53b-e7a5-d75d-57139ea6541d?lang=it"];
+        NSURL *url = [NSURL URLWithString:@""];
         request = [NSMutableURLRequest requestWithURL:url];
         AFJSONRequestOperation *jsonRequest =
         [AFJSONRequestOperation JSONRequestOperationWithRequest:request

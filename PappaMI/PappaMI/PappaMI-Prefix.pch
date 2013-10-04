@@ -11,6 +11,7 @@
 #ifdef __OBJC__
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
+// Mail me to more info about Veespo Framework roberto@veespo.com
 //#import <VeespoFramework/Veespo.h>
 //#import <VeespoFramework/VEVeespoViewController.h>
 
