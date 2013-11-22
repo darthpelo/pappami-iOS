@@ -19,7 +19,6 @@
     /* Use your apikey for NewRelic and Crittercism.        */
     /* Otherwise remove this framework                      */
     /********************************************************/
-    [NewRelicAgent startWithApplicationToken:@""];
     [Crittercism enableWithAppID:@""];
     
     [NSUserDefaults resetStandardUserDefaults];

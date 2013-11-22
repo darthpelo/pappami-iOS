@@ -95,7 +95,6 @@
 		BEC29D9C177DCED000036BD4 /* user.png in Resources */ = {isa = PBXBuildFile; fileRef = BEC29D95177DCED000036BD4 /* user.png */; };
 		BEC29D9F177DD05800036BD4 /* FlatTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC29D9E177DD05800036BD4 /* FlatTheme.m */; };
 		BEC29DA2177DD07600036BD4 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = BEC29DA1177DD07600036BD4 /* Utils.m */; };
-		BED0F314178C7D9200C984B4 /* NewRelicAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED0F313178C7D9200C984B4 /* NewRelicAgent.framework */; };
 		BED0F316178C7DA600C984B4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BED0F315178C7DA600C984B4 /* CoreTelephony.framework */; };
 		BED0F318178C7DB200C984B4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BED0F317178C7DB100C984B4 /* libz.dylib */; };
 /* End PBXBuildFile section */
@@ -231,7 +230,6 @@
 		BEC29DA0177DD07600036BD4 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utils.h; path = Classes/Utils.h; sourceTree = "<group>"; };
 		BEC29DA1177DD07600036BD4 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Utils.m; path = Classes/Utils.m; sourceTree = "<group>"; };
 		BED0F30F178C76CA00C984B4 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
-		BED0F313178C7D9200C984B4 /* NewRelicAgent.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = NewRelicAgent.framework; sourceTree = "<group>"; };
 		BED0F315178C7DA600C984B4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		BED0F317178C7DB100C984B4 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -249,7 +247,6 @@
 				BE5F9AF3177B51F500B74182 /* UIKit.framework in Frameworks */,
 				BE5F9AF5177B51F500B74182 /* Foundation.framework in Frameworks */,
 				BE5F9AF7177B51F500B74182 /* CoreGraphics.framework in Frameworks */,
-				BED0F314178C7D9200C984B4 /* NewRelicAgent.framework in Frameworks */,
 				BE4BE2DF178E0FCB00A84B8F /* libCrittercism_v4_0_0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,7 +287,6 @@
 			isa = PBXGroup;
 			children = (
 				BE4BE2DB178E0FCB00A84B8F /* CrittercismSDK */,
-				BED0F313178C7D9200C984B4 /* NewRelicAgent.framework */,
 				BED0F317178C7DB100C984B4 /* libz.dylib */,
 				BED0F315178C7DA600C984B4 /* CoreTelephony.framework */,
 				BE8ED7D117863587006AA9A6 /* CoreText.framework */,
@@ -819,7 +815,7 @@
 		BE5F9B13177B51F500B74182 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -843,7 +839,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
