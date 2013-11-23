@@ -83,11 +83,13 @@
                                          (self.compTableView.frame.origin.y + self.compTableView.frame.size.height) - 10,
                                          self.veespoButton.frame.size.width,
                                          self.veespoButton.frame.size.height)];
+    
     // Guest user can't give feedback on dishes
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER])
-        self.veespoButton.enabled = YES;
-    else
-        self.veespoButton.enabled = NO;
+    
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER])
+//        self.veespoButton.enabled = YES;
+//    else
+//        self.veespoButton.enabled = NO;
     
     int components = ((NSArray*)[self.dishData objectForKey:@"components"]).count;
     if (components == 0) {
@@ -113,7 +115,16 @@
     veespo.closeVeespoViewController = ^(NSDictionary *data){
         [self dismissViewControllerAnimated:YES completion:nil];
     };
-    [self presentViewController:veespo animated:YES completion:nil];
+    [self presentViewController:veespo animated:YES completion:^{
+        if (![[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER]) {
+            UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Avviso"
+                                                              message:@"In modalità Ospite, i voti non vengono raccolti a fini statistici, ma solo per mostrare la funzionalità di voto."
+                                                             delegate:nil
+                                                    cancelButtonTitle:@"OK"
+                                                    otherButtonTitles:nil];
+            [message show];
+        }
+    }];
     [veespo loadDataFor:[NSString stringWithFormat:@"tgt-pappa-mi-dish-%@", self.dishId]
                   title:self.dishData[@"dish"]
             detailsView:nil];
@@ -121,13 +132,13 @@
 
 - (IBAction)statPressed:(id)sender
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://legacy.veespo.com/v1/average/target/tgt-pappa-mi-dish-%@", self.dishId]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://legacy1.veespo.com/v1/average/target/tgt-pappa-mi-dish-%@", self.dishId]];
     NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     AFJSONRequestOperation *jsonRequest =
     [AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
         NSDictionary *tags = [NSDictionary dictionaryWithDictionary:JSON[@"data"][@"avgS"]];
         
-        NSURL *url = [NSURL URLWithString:@"http://legacy.veespo.com/v1/tag-labels/category/ctg-f86fbf9e-b53b-e7a5-d75d-57139ea6541d?lang=it"];
+        NSURL *url = [NSURL URLWithString:@"http://legacy1.veespo.com/v1/tag-labels/category/ctg-f86fbf9e-b53b-e7a5-d75d-57139ea6541d?lang=it"];
         request = [NSMutableURLRequest requestWithURL:url];
         AFJSONRequestOperation *jsonRequest =
         [AFJSONRequestOperation JSONRequestOperationWithRequest:request
