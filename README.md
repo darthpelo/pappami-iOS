@@ -21,6 +21,11 @@ As for the open source project, the presence of the framework is not critical, I
 
 In you're interested about Veespo write to [me](mailto:robero@veespo.com).
 
+## Screen shots
+# ![Screenshot](https://raw.github.com/darthpelo/pappami-iOS/master/Images/login.png)
+# ![Screenshot](https://raw.github.com/darthpelo/pappami-iOS/master/Images/menu.png)
+# ![Screenshot](https://raw.github.com/darthpelo/pappami-iOS/master/Images/list.png)
+
 ## Authors
 
 [Alessio](mailto:roberto@veespo.com)
