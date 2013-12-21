@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		BE286A8F1784CD65001B9E8A /* PMHomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE286A8E1784CD65001B9E8A /* PMHomeView.m */; };
 		BE3C51F91780CD1500062143 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE3C51F81780CD1500062143 /* QuartzCore.framework */; };
-		BE4BE2DF178E0FCB00A84B8F /* libCrittercism_v4_0_0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BE4BE2DE178E0FCB00A84B8F /* libCrittercism_v4_0_0.a */; };
 		BE5F9AF3177B51F500B74182 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5F9AF2177B51F500B74182 /* UIKit.framework */; };
 		BE5F9AF5177B51F500B74182 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5F9AF4177B51F500B74182 /* Foundation.framework */; };
 		BE5F9AF7177B51F500B74182 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE5F9AF6177B51F500B74182 /* CoreGraphics.framework */; };
@@ -104,9 +103,6 @@
 		BE286A8E1784CD65001B9E8A /* PMHomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PMHomeView.m; path = Classes/PMHomeView.m; sourceTree = "<group>"; };
 		BE3C51F81780CD1500062143 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		BE49F14B178E02DC00C2C3AB /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
-		BE4BE2DC178E0FCB00A84B8F /* Crittercism.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crittercism.h; sourceTree = "<group>"; };
-		BE4BE2DD178E0FCB00A84B8F /* CrittercismDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrittercismDelegate.h; sourceTree = "<group>"; };
-		BE4BE2DE178E0FCB00A84B8F /* libCrittercism_v4_0_0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCrittercism_v4_0_0.a; sourceTree = "<group>"; };
 		BE5F9AEF177B51F500B74182 /* PappaMI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PappaMI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE5F9AF2177B51F500B74182 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		BE5F9AF4177B51F500B74182 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -247,23 +243,12 @@
 				BE5F9AF3177B51F500B74182 /* UIKit.framework in Frameworks */,
 				BE5F9AF5177B51F500B74182 /* Foundation.framework in Frameworks */,
 				BE5F9AF7177B51F500B74182 /* CoreGraphics.framework in Frameworks */,
-				BE4BE2DF178E0FCB00A84B8F /* libCrittercism_v4_0_0.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		BE4BE2DB178E0FCB00A84B8F /* CrittercismSDK */ = {
-			isa = PBXGroup;
-			children = (
-				BE4BE2DC178E0FCB00A84B8F /* Crittercism.h */,
-				BE4BE2DD178E0FCB00A84B8F /* CrittercismDelegate.h */,
-				BE4BE2DE178E0FCB00A84B8F /* libCrittercism_v4_0_0.a */,
-			);
-			path = CrittercismSDK;
-			sourceTree = "<group>";
-		};
 		BE5F9AE6177B51F500B74182 = {
 			isa = PBXGroup;
 			children = (
@@ -286,7 +271,6 @@
 		BE5F9AF1177B51F500B74182 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BE4BE2DB178E0FCB00A84B8F /* CrittercismSDK */,
 				BED0F317178C7DB100C984B4 /* libz.dylib */,
 				BED0F315178C7DA600C984B4 /* CoreTelephony.framework */,
 				BE8ED7D117863587006AA9A6 /* CoreText.framework */,
@@ -815,19 +799,13 @@
 		BE5F9B13177B51F500B74182 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-				);
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alessio Roberto (C3T728249E)";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PappaMI/PappaMI-Prefix.pch";
 				INFOPLIST_FILE = "PappaMI/PappaMI-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/CrittercismSDK\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -839,22 +817,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Alessio Roberto";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-				);
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PappaMI/PappaMI-Prefix.pch";
 				INFOPLIST_FILE = "PappaMI/PappaMI-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/CrittercismSDK\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = PappaMi;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F74028C4-4545-4563-A049-D86FA2AFB166";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

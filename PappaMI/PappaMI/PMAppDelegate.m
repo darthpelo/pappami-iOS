@@ -6,20 +6,12 @@
 //
 
 #import "PMAppDelegate.h"
-#import <NewRelicAgent/NewRelicAgent.h>
-#import "Crittercism.h"
 
 @implementation PMAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    
-    /********************************************************/
-    /* Use your apikey for NewRelic and Crittercism.        */
-    /* Otherwise remove this framework                      */
-    /********************************************************/
-    [Crittercism enableWithAppID:@""];
     
     [NSUserDefaults resetStandardUserDefaults];
     NSString *dateKey = @"Data Key";
