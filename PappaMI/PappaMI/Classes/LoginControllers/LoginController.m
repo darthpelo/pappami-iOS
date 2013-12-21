@@ -98,6 +98,11 @@
         } else {
             [MBProgressHUD hideHUDForView:self.view animated:YES];
         }
+        
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER]) {
+#warning Veespo init
+            [self showSideBarController:LOGGEDUSER];
+        }
     }];
 }
 

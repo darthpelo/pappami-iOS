@@ -50,17 +50,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:LOGGEDUSER])
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:LOGGEDUSER];
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:GUESTUSER])
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:GUESTUSER];
-    
-    
-    NSHTTPCookie *cookie;
-    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
-    for (cookie in [storage cookies])
-        [storage deleteCookie:cookie];
-    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
 @end
