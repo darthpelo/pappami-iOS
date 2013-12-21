@@ -184,7 +184,7 @@ static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
 //    headerLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
 //    headerLabel.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5];
     headerLabel.frame = CGRectMake(11,-11, 298.0, 44.0);
-    headerLabel.textAlignment = UITextAlignmentCenter;
+    headerLabel.textAlignment = NSTextAlignmentCenter;
     headerLabel.text = [NSString stringWithFormat:@"Menù del %@", dateString];
     [customView addSubview:headerLabel];
     return customView;

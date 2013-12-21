@@ -78,6 +78,7 @@
 		BEB0CAA11785D4460070CF49 /* TDDatePickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEB0CA9A1785D4460070CF49 /* TDDatePickerController.xib */; };
 		BEB0CAA21785D4460070CF49 /* TDSemiModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0CA9D1785D4460070CF49 /* TDSemiModalViewController.m */; };
 		BEB0CAA31785D4460070CF49 /* UIViewController+TDSemiModalExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB0CA9F1785D4460070CF49 /* UIViewController+TDSemiModalExtension.m */; };
+		BEB1ACFF1865EFDD00F00E34 /* PMConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB1ACFE1865EFDD00F00E34 /* PMConnection.m */; };
 		BEB49B0117847FFB00274DC7 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB49B0017847FFB00274DC7 /* MBProgressHUD.m */; };
 		BEB6AD3117873023002433FE /* PMMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB6AD3017873023002433FE /* PMMenuViewController.m */; };
 		BEB6AD34178733F1002433FE /* PMMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB6AD33178733F1002433FE /* PMMenuCell.m */; };
@@ -197,6 +198,8 @@
 		BEB0CA9D1785D4460070CF49 /* TDSemiModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDSemiModalViewController.m; sourceTree = "<group>"; };
 		BEB0CA9E1785D4460070CF49 /* UIViewController+TDSemiModalExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TDSemiModalExtension.h"; sourceTree = "<group>"; };
 		BEB0CA9F1785D4460070CF49 /* UIViewController+TDSemiModalExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TDSemiModalExtension.m"; sourceTree = "<group>"; };
+		BEB1ACFD1865EFDD00F00E34 /* PMConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMConnection.h; path = Classes/Connection/PMConnection.h; sourceTree = "<group>"; };
+		BEB1ACFE1865EFDD00F00E34 /* PMConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PMConnection.m; path = Classes/Connection/PMConnection.m; sourceTree = "<group>"; };
 		BEB49AFF17847FFB00274DC7 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		BEB49B0017847FFB00274DC7 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		BEB6AD2F17873023002433FE /* PMMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMMenuViewController.h; path = Classes/School/PMMenuViewController.h; sourceTree = "<group>"; };
@@ -286,6 +289,7 @@
 		BE5F9AF8177B51F500B74182 /* PappaMI */ = {
 			isa = PBXGroup;
 			children = (
+				BEB1ACFC1865EF8C00F00E34 /* Connection */,
 				BE7C8F4417B437CE004787AC /* YHCPickerView */,
 				BEB0CA971785D4460070CF49 /* TDSemiModal */,
 				BEADD6F3177C3E4500B63A10 /* AFNetworking */,
@@ -435,6 +439,15 @@
 			);
 			name = TDSemiModal;
 			path = Classes/TDSemiModal;
+			sourceTree = "<group>";
+		};
+		BEB1ACFC1865EF8C00F00E34 /* Connection */ = {
+			isa = PBXGroup;
+			children = (
+				BEB1ACFD1865EFDD00F00E34 /* PMConnection.h */,
+				BEB1ACFE1865EFDD00F00E34 /* PMConnection.m */,
+			);
+			name = Connection;
 			sourceTree = "<group>";
 		};
 		BEB49AFE17847FFB00274DC7 /* MBProgressHUD */ = {
@@ -678,6 +691,7 @@
 				BEADD709177C3E4500B63A10 /* AFImageRequestOperation.m in Sources */,
 				BEADD70A177C3E4500B63A10 /* AFJSONRequestOperation.m in Sources */,
 				BEADD70B177C3E4500B63A10 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				BEB1ACFF1865EFDD00F00E34 /* PMConnection.m in Sources */,
 				BEADD70C177C3E4500B63A10 /* AFPropertyListRequestOperation.m in Sources */,
 				BEADD70D177C3E4500B63A10 /* AFURLConnectionOperation.m in Sources */,
 				BEADD70E177C3E4500B63A10 /* AFXMLRequestOperation.m in Sources */,
@@ -763,7 +777,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -788,7 +802,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F74028C4-4545-4563-A049-D86FA2AFB166";
 				SDKROOT = iphoneos;
@@ -804,7 +818,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PappaMI/PappaMI-Prefix.pch";
 				INFOPLIST_FILE = "PappaMI/PappaMI-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -822,7 +836,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PappaMI/PappaMI-Prefix.pch";
 				INFOPLIST_FILE = "PappaMI/PappaMI-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = PappaMi;
