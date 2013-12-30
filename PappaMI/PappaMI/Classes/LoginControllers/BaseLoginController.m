@@ -62,22 +62,22 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)sender
 {
-    if  (self.view.frame.origin.y == 0)
-    {
-        [self setViewMovedUp:YES];
-    }
+//    if  (self.view.frame.origin.y == 0)
+//    {
+//        [self setViewMovedUp:YES];
+//    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
-    if (self.view.frame.origin.y >= 0)
-    {
-        [self setViewMovedUp:YES];
-    }
-    else if (self.view.frame.origin.y < 0)
-    {
-        [self setViewMovedUp:NO];
-    }
+//    if (self.view.frame.origin.y >= 0)
+//    {
+//        [self setViewMovedUp:YES];
+//    }
+//    else if (self.view.frame.origin.y < 0)
+//    {
+//        [self setViewMovedUp:NO];
+//    }
     return YES;
 }
 

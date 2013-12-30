@@ -191,6 +191,9 @@
 
 - (IBAction)loginPressed:(id)sender
 {
+    [self.passwordField resignFirstResponder];
+    [self.usernameField resignFirstResponder];
+    
     if (![self.usernameField.text isEqualToString:@""] && ![self.passwordField.text isEqualToString:@""]) {
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         
