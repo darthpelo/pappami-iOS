@@ -11,7 +11,7 @@ To speed up as much as possible the development of this first version, I used th
 ## Attention
 
 - Use Xcode 5 to open the project.
-- Now the project support only iOS 7 and iOS 6.
+- Now the project support only iOS 7 and iOS 6.1.
 
 ### Veespo Framework
 
