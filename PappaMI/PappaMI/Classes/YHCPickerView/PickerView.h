@@ -6,15 +6,14 @@
 //  Copyright (c) 2012 Yashesh Chauhan. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@protocol PickerViewDelegate <NSObject>
 
-@protocol YHCPickerViewDelegate <NSObject>
-
--(void)selectedRow:(int)row withString:(NSString *)text;
+- (void)selectedRow:(int)row withString:(NSString *)text;
+- (void)pickerClosed;
 
 @end
 
-@interface YHCPickerView : UIView<UIActionSheetDelegate,UIPickerViewDataSource,UIPickerViewDelegate>{
+@interface PickerView : UIView <UIActionSheetDelegate,UIPickerViewDataSource,UIPickerViewDelegate>{
     
     UIPickerView *pickerView;
     UIToolbar *picketToolbar;
@@ -24,13 +23,13 @@
     NSMutableArray *copyListOfItems;
 	BOOL letUserSelectRow;
     
-    id <YHCPickerViewDelegate> delegate;
+    id <PickerViewDelegate> delegate;
     
 }
 
 
 @property (nonatomic, retain) NSArray *arrRecords;
-@property (nonatomic, retain) id <YHCPickerViewDelegate> delegate;
+@property (nonatomic, retain) id <PickerViewDelegate> delegate;
 
 - (id)initWithFrame:(CGRect)frame withNSArray:(NSArray *)arrValues;
 - (void)showPicker;

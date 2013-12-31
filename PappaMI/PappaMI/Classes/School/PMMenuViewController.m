@@ -149,7 +149,7 @@ static NSString *schoolUrl = @"http://api.pappa-mi.it/api/school/1364003/list";
             }
         }
     }
-    schoolPicker = [[YHCPickerView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) withNSArray:personalSchoolsList];
+    schoolPicker = [[PickerView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) withNSArray:personalSchoolsList];
     
     schoolPicker.delegate = self;
     [self.view addSubview:schoolPicker];

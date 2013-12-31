@@ -3,10 +3,10 @@
 //  PappaMI
 //
 //  Created by Alessio Roberto on 22/08/13.
-//  Copyright (c) 2013 Veespo Ltd. All rights reserved.
 //
 
 #import "PMCredits.h"
+#import "Utils.h"
 
 @implementation PMCredits
 
@@ -14,7 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, 320, 460)];
+        UIWebView *webView = [[UIWebView alloc] initWithFrame:[Utils getNavigableContentFrame]];
         [webView setBackgroundColor:[UIColor clearColor]];
         webView.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         webView.scalesPageToFit = NO;

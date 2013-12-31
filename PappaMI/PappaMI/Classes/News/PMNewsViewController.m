@@ -34,11 +34,13 @@
 	// Do any additional setup after loading the view.
     self.title = @"News";
     self.newsTableView.backgroundColor = UIColorFromRGB(0x00B2EE);
+    
+    [self getNewsList];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self getNewsList];
+    [super viewWillAppear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -99,6 +101,7 @@
     NSDictionary *item = [newsList objectAtIndex:indexPath.row];
     PMNewsDetailViewController *newsVC = [[PMNewsDetailViewController alloc] initWithNibName:nil bundle:nil];
     [newsVC setWebContent:item[@"content"]];
+    [newsVC setTitle:item[@"title"]];
     [self.navigationController pushViewController:newsVC animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

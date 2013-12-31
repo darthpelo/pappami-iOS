@@ -7,11 +7,11 @@
 
 #import <UIKit/UIKit.h>
 #import "TDDatePickerController.h"
-#import "YHCPickerView.h"
+#import "PickerView.h"
 
-@interface PMMenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, YHCPickerViewDelegate> {
+@interface PMMenuViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, PickerViewDelegate> {
     TDDatePickerController *datePicker;
-    YHCPickerView *schoolPicker;
+    PickerView *schoolPicker;
     NSDictionary *schoolData;
     NSString *dateString;
     NSArray *citySchools;

@@ -15,7 +15,11 @@
     [super viewDidLoad];
 
 	datePicker.date = [NSDate date];
-
+//    datePicker.minimumDate = [NSDate date];
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        datePicker.backgroundColor = [UIColor whiteColor];
+    }
 	// we need to set the subview dimensions or it will not always render correctly
 	// http://stackoverflow.com/questions/1088163
 	for (UIView* subview in datePicker.subviews) {
