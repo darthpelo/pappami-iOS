@@ -12,12 +12,9 @@
 #import "Utils.h"
 #import "PMHomeView.h"
 #import "PMMenuViewController.h"
-#import "PMNewsView.h"
 #import "PMCredits.h"
-#import "PMNewsDetailViewController.h"
-#import "MBProgressHUD.h"
+#import "PMNewsViewController.h"
 #import "PMSchoolsView.h"
-#import "AFNetworking.h"
 
 @interface MainSideViewController ()
 
@@ -88,32 +85,15 @@
                 break;
             }
             case 2:{
-                bNav =  nil;
-                bNav = [[UINavigationController alloc] initWithRootViewController:bFrontController];
-                ms.contentViewController = bNav;
-                bFrontController.title = @"News";
                 [ms removeSubviewsOfView:bFrontController.view];
-                CGRect frame = [Utils getNavigableContentFrame];
-                [MBProgressHUD showHUDAddedTo:bFrontController.view animated:YES];
-                NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/node/news/stream/", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]]];
-                NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-                AFJSONRequestOperation *jsonRequest =
-                [AFJSONRequestOperation JSONRequestOperationWithRequest:request
-                                                                success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
-                                                                    [MBProgressHUD hideAllHUDsForView:bFrontController.view animated:YES];
-                                                                    PMNewsView *nv = [[PMNewsView alloc] initWithFrame:frame];
-                                                                    nv.newsList = [NSMutableArray arrayWithArray:JSON[@"posts"]];
-                                                                    nv.newsSelected = ^(NSString *content){
-                                                                        PMNewsDetailViewController *newsVC = [[PMNewsDetailViewController alloc] initWithNibName:nil bundle:nil];
-                                                                        [newsVC setWebContent:content];
-                                                                        [((UINavigationController *)ms.contentViewController) pushViewController:newsVC animated:YES];
-                                                                    };
-                                                                    [bFrontController.view addSubview:nv];
-                                                                } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
-                                                                    PMNSLog("failure");
-                                                                    [MBProgressHUD hideAllHUDsForView:bFrontController.view animated:YES];
-                                                                }];
-                [jsonRequest start];
+                
+                UIStoryboard* sidebarStoryboard = [UIStoryboard storyboardWithName:@"SideBarStoryboard" bundle:nil];
+                PMNewsViewController *newsVC = [sidebarStoryboard instantiateViewControllerWithIdentifier:@"NewsViewController"];
+                bNav =  nil;
+                bNav = [[UINavigationController alloc] initWithRootViewController:newsVC];
+                ms.contentViewController = bNav;
+                newsVC.navigationItem.leftBarButtonItem = menuItem;
+
                 break;
             }
             case 3:{
@@ -162,7 +142,7 @@
     if ([subviews count] == 0) return;
     // Rimozione UIView per news e scuole 
     for (UIView *subview in subviews) {
-        if ([subview isKindOfClass:[PMHomeView class]] || [subview isKindOfClass:[PMNewsView class]] || [subview isKindOfClass:[PMCredits class]]) {
+        if ([subview isKindOfClass:[PMHomeView class]] || [subview isKindOfClass:[PMCredits class]]) {
             [subview removeFromSuperview];
         }
         // List the subviews of subview

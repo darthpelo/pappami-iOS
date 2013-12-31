@@ -25,8 +25,13 @@ const float kDefaultPadLandscapeKeyboardHeight  = 352.0f;
 }
 
 +(CGRect)getNavigableContentFrame {
-    CGRect frame = [UIScreen mainScreen].applicationFrame;
-    return CGRectMake(0, 0, frame.size.width, frame.size.height - kDefaultPortraitToolbarHeight);
+    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+        CGRect frame = [UIScreen mainScreen].applicationFrame;
+        return CGRectMake(0, 0, frame.size.width, frame.size.height - kDefaultPortraitToolbarHeight);
+    } else {
+        CGRect frame = [UIScreen mainScreen].bounds;
+        return CGRectMake(0, 0, frame.size.width, frame.size.height);
+    }
 }
 
 +(UIImage*)drawImageOfSize:(CGSize)size andColor:(UIColor*)color{

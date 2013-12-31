@@ -59,7 +59,9 @@
     UIColor *mainColor = UIColorFromRGB(0x00B2EE);
     UIColor *darkColor = UIColorFromRGB(0x00688B);
     
-	[self setNavigationBar];
+    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+        [self setNavigationBar];
+    }
     self.title = self.dishData[@"dish"];
     self.view.backgroundColor = mainColor;
     
@@ -203,6 +205,8 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    self.dishData = nil;
+    self.dishId = nil;
 }
 
 @end

@@ -7,8 +7,13 @@
 //
 
 #import "PMNewsViewController.h"
+#import "PMNewsDetailViewController.h"
+#import "AFNetworking.h"
+#import "MBProgressHUD.h"
 
-@interface PMNewsViewController ()
+@interface PMNewsViewController () {
+    NSMutableArray *newsList;
+}
 
 @end
 
@@ -27,6 +32,13 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.title = @"News";
+    self.newsTableView.backgroundColor = UIColorFromRGB(0x00B2EE);
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self getNewsList];
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,10 +47,29 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Download News
+- (void)getNewsList
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@/api/node/news/stream/", [[NSUserDefaults standardUserDefaults] objectForKey:@"apihost"]]];
+    NSURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    AFJSONRequestOperation *jsonRequest =
+    [AFJSONRequestOperation JSONRequestOperationWithRequest:request
+                                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) {
+                                                        newsList = [NSMutableArray arrayWithArray:JSON[@"posts"]];
+                                                        [self.newsTableView reloadData];
+                                                        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) {
+                                                        PMNSLog("failure");
+                                                        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                    }];
+    [jsonRequest start];
+}
+
 #pragma mark - TableView Datasource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.newsList.count;
+    return newsList.count;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -47,14 +78,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView_ cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView_ dequeueReusableCellWithIdentifier:@"Cell"];
+    UITableViewCell *cell = [tableView_ dequeueReusableCellWithIdentifier:@"NewsCell"];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"Cell"];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"NewsCell"];
     }
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-    NSDictionary *item = [self.newsList objectAtIndex:indexPath.row];
+
+    NSDictionary *item = [newsList objectAtIndex:indexPath.row];
     NSString* fontName = @"Avenir-Book";
     NSString* boldFontName = @"Avenir-Black";
+    
     cell.textLabel.text = item[@"title"];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", item[@"author"][@"name"],item[@"ext_date"]];
     cell.textLabel.font = [UIFont fontWithName:boldFontName size:14];
@@ -64,10 +96,10 @@
 
 #pragma mark - TableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.newsSelected) {
-        NSDictionary *item = [self.newsList objectAtIndex:indexPath.row];
-        self.newsSelected(item[@"content"]);
-    }
+    NSDictionary *item = [newsList objectAtIndex:indexPath.row];
+    PMNewsDetailViewController *newsVC = [[PMNewsDetailViewController alloc] initWithNibName:nil bundle:nil];
+    [newsVC setWebContent:item[@"content"]];
+    [self.navigationController pushViewController:newsVC animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

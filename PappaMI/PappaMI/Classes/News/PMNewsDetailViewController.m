@@ -9,6 +9,7 @@
 #import "Utils.h"
 
 @implementation UIViewController (CustomFeatures)
+
 -(void)setNavigationBar{
     // Set the custom back button
     UIImage *buttonImage = [UIImage imageNamed:@"arrow-back.png"];
@@ -51,11 +52,12 @@
 {
     [super viewDidLoad];
     
-    [self setNavigationBar];
+    if (SYSTEM_VERSION_LESS_THAN(@"7.0")) {
+        [self setNavigationBar];
+    }
+    self.view.backgroundColor = [UIColor whiteColor];
     
-    self.title = @"News";
-    
-	CGRect webFrame = [Utils getNavigableContentFrame];
+    CGRect webFrame = [Utils getNavigableContentFrame];
     UIWebView *webView = [[UIWebView alloc] initWithFrame:webFrame];
     [webView setBackgroundColor:[UIColor clearColor]];
     [webView loadHTMLString:self.webContent baseURL:nil];
