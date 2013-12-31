@@ -55,7 +55,6 @@
 		BE77607417C6B64E00558DC8 /* settings@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BE77605517C6B64E00558DC8 /* settings@2x.png */; };
 		BE77607517C6B64E00558DC8 /* valuta.png in Resources */ = {isa = PBXBuildFile; fileRef = BE77605617C6B64E00558DC8 /* valuta.png */; };
 		BE7C8F4717B437CE004787AC /* YHCPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7C8F4617B437CE004787AC /* YHCPickerView.m */; };
-		BE8142AD178B6288005E75A9 /* PMNewsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8142AC178B6288005E75A9 /* PMNewsView.m */; };
 		BE8142B6178D9A15005E75A9 /* PMNewsDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8142B5178D9A15005E75A9 /* PMNewsDetailViewController.m */; };
 		BE8142C3178F0C04005E75A9 /* PMStatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8142C2178F0C04005E75A9 /* PMStatsViewController.m */; };
 		BE8C54D01790277400AB3075 /* PMSchoolsView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE8C54CF1790277400AB3075 /* PMSchoolsView.m */; };
@@ -158,8 +157,6 @@
 		BE77605617C6B64E00558DC8 /* valuta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = valuta.png; path = Resources/valuta.png; sourceTree = "<group>"; };
 		BE7C8F4517B437CE004787AC /* YHCPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHCPickerView.h; sourceTree = "<group>"; };
 		BE7C8F4617B437CE004787AC /* YHCPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHCPickerView.m; sourceTree = "<group>"; };
-		BE8142AB178B6288005E75A9 /* PMNewsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMNewsView.h; path = Classes/PMNewsView.h; sourceTree = "<group>"; };
-		BE8142AC178B6288005E75A9 /* PMNewsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PMNewsView.m; path = Classes/PMNewsView.m; sourceTree = "<group>"; };
 		BE8142B4178D9A15005E75A9 /* PMNewsDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMNewsDetailViewController.h; path = Classes/News/PMNewsDetailViewController.h; sourceTree = "<group>"; };
 		BE8142B5178D9A15005E75A9 /* PMNewsDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PMNewsDetailViewController.m; path = Classes/News/PMNewsDetailViewController.m; sourceTree = "<group>"; };
 		BE8142C1178F0C04005E75A9 /* PMStatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PMStatsViewController.h; path = Classes/School/PMStatsViewController.h; sourceTree = "<group>"; };
@@ -359,8 +356,6 @@
 		BE8142AA178B5E43005E75A9 /* News */ = {
 			isa = PBXGroup;
 			children = (
-				BE8142AB178B6288005E75A9 /* PMNewsView.h */,
-				BE8142AC178B6288005E75A9 /* PMNewsView.m */,
 				BE8142B4178D9A15005E75A9 /* PMNewsDetailViewController.h */,
 				BE8142B5178D9A15005E75A9 /* PMNewsDetailViewController.m */,
 				BEA9367C1872206200E1CBA6 /* PMNewsViewController.h */,
@@ -717,7 +712,6 @@
 				BEB6AD3117873023002433FE /* PMMenuViewController.m in Sources */,
 				BEB6AD34178733F1002433FE /* PMMenuCell.m in Sources */,
 				BEB6AD371787348F002433FE /* PMDishViewController.m in Sources */,
-				BE8142AD178B6288005E75A9 /* PMNewsView.m in Sources */,
 				BE8142B6178D9A15005E75A9 /* PMNewsDetailViewController.m in Sources */,
 				BE8142C3178F0C04005E75A9 /* PMStatsViewController.m in Sources */,
 				BE8C54D01790277400AB3075 /* PMSchoolsView.m in Sources */,
