@@ -10,8 +10,8 @@ To speed up as much as possible the development of this first version, I used th
 
 ## Attention
 
-- The project has not yet been tested with Xcode 5 and iOS 7.
-- If you wont to user NewRelic and Crittercism frameworks, remeber to add your APIKEY and update *Framework Search Path* and *Library Search Path* in Build Settings.
+- Use Xcode 5 to open the project.
+- Now the project support only iOS 7 and iOS 6.
 
 ### Veespo Framework
 
