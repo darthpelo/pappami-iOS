@@ -25,6 +25,8 @@ In you're interested about Veespo write to [me](mailto:robero@veespo.com).
 # ![Screenshot](https://raw.github.com/darthpelo/pappami-iOS/master/Images/login.png)
 # ![Screenshot](https://raw.github.com/darthpelo/pappami-iOS/master/Images/menu.png)
 # ![Screenshot](https://raw.github.com/darthpelo/pappami-iOS/master/Images/list.png)
+# ![Screenshot](https://raw.github.com/darthpelo/pappami-iOS/master/Images/dish.png)
+# ![Screenshot](https://raw.github.com/darthpelo/pappami-iOS/master/Images/news.png)
 
 ## Authors
 
